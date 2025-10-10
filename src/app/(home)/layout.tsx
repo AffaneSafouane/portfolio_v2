@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Footer from '@/components/Footer';
+import HeaderHome from '@/components/HeaderHome';
 
 export const metadata: Metadata = {
   title: {
@@ -34,19 +34,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className='bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200'>
-        <div className='relative flex min-h-screen w-full flex-col'>
-          <main>{children}</main>
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <>
+      <HeaderHome />
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        {children}
+      </section>
+    </>
   )
 }
