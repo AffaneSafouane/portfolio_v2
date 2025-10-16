@@ -43,10 +43,10 @@ export default function HeaderHome() {
           <div className="flex items-center gap-4">
             <div className="w-8 h-8 text-primary">
               <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_6_330)">
-                  <path clip-rule="evenodd"
+                <g clipPath="url(#clip0_6_330)">
+                  <path clipRule="evenodd"
                     d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
-                    fill="currentColor" fill-rule="evenodd"></path>
+                    fill="currentColor" fillRule="evenodd"></path>
                 </g>
                 <defs>
                   <clipPath id="clip0_6_330">
@@ -69,7 +69,7 @@ export default function HeaderHome() {
           {/* Navigation Desktop - Structure sémantique avec <ul> <li> */}
           <nav className="hidden md:flex items-center gap-8">
             {/* Desktop Nav */}
-            <ul className="flex items-center list-none m-0 p-0">
+            <ul className="flex items-center list-none m-0 p-0 gap-8">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a

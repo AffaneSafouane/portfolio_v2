@@ -1,8 +1,8 @@
-import Layout from "./layout";
+import Link from "next/link";
 
 export default function Home() {
     return (
-        <Layout>
+        <>
             <section className="py-20 sm:py-24 lg:py-32" id="hero">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto text-center">
@@ -95,6 +95,7 @@ export default function Home() {
                                     creating, organizing, and tracking tasks.</p>
                             </div>
                         </div>
+                        <Link href="/about">View More</Link>
                     </div>
                 </section>
                 <section id="experience">
@@ -161,6 +162,6 @@ export default function Home() {
                     </form>
                 </section>
             </div>
-        </Layout>
+        </>
     );
 }

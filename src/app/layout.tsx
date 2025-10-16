@@ -1,5 +1,14 @@
 import type { Metadata } from 'next';
 import Footer from '@/components/Footer';
+import './globals.css';
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -14,14 +23,14 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: 'Portfolio',
-    // images: [
-    //   {
-    //     url: '/static/img/og-image.jpg',
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Portfolio'
-    //   }
-    // ]
+    images: [
+      {
+        url: '/static/img/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Portfolio'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
@@ -40,8 +49,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className='bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200'>
+    <html lang="en" className={`dark ${inter.className}`}>
+      {/* <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+          rel="stylesheet"
+        />
+      </head> */}
+      <body className='bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200'>
         <div className='relative flex min-h-screen w-full flex-col'>
           <main>{children}</main>
           <Footer />
