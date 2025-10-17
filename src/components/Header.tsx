@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
+import Image from 'next/image';
 
 const navLinks = [
-  { href: '/', label: 'Accueil' },
-  { href: '/projects', label: 'Projets' },
-  { href: '/internships', label: 'Stages' },
-  { href: '/tech-monitoring', label: 'Veille Technologique' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/experiences', label: 'Experiences' },
+  { href: '/tech-monitoring', label: 'Tech Monitoring' },
+  { href: '/about', label: 'About' },
 ];
 
 export default function Header() {
@@ -51,30 +52,20 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
-            <div className="w-8 h-8 text-primary">
-              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <g clipPath="url(#clip0_6_330)">
-                  <path clipRule="evenodd"
-                    d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
-                    fill="currentColor" fillRule="evenodd"></path>
-                </g>
-                <defs>
-                  <clipPath id="clip0_6_330">
-                    <rect fill="white" height="48" width="48"></rect>
-                  </clipPath>
-                </defs>
-              </svg>
-            </div>
             {/* Logo */}
-            <h2>
-              <Link
-                href="/"
-                className="text-xl font-bold text-gray-900 dark:text-white"
-                aria-label="Retour à l'accueil"
-              >
-                Portfolio
-              </Link>
-            </h2>
+            <Link href="/" aria-label="Back to homepage" className="flex items-center gap-2">
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/static/img/logo.png"
+                  alt="Logo"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 48px, 48px"
+                  priority
+                />
+              </div>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Portfolio</span>
+            </Link>
           </div>
           {/* Navigation Desktop - Structure sémantique avec <ul> <li> */}
           <nav className="hidden md:flex items-center gap-8">
@@ -85,8 +76,8 @@ export default function Header() {
                   <a
                     href={link.href}
                     className={`text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors ${isActive(link.href)
-                        ? 'bg-gray-700 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                      ? 'bg-gray-700 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
                       }`}
                     aria-current={isActive(link.href) ? 'page' : undefined}
                   >
@@ -138,8 +129,8 @@ export default function Header() {
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`block px-4 py-3 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500${isActive(link.href)
-                          ? 'bg-gray-700 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                        ? 'bg-gray-700 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white'
                         }`}
                       aria-current={isActive(link.href) ? 'page' : undefined}
                     >

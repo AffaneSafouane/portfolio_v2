@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
     return (
         <>
-            <section className="py-20 sm:py-24 lg:py-32" id="hero">
+            <section className="py-20 sm:py-24 lg:py-32">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto text-center">
                         <div className="flex flex-col gap-6">
@@ -12,23 +12,27 @@ export default function Home() {
                             <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">I&apos;m a passionate software and web
                                 developer with a focus on creating innovative and user-friendly applications. With a strong foundation
                                 in computer science and a keen eye for design, I strive to deliver high-quality solutions that meet and
-                                exceed client expectations.</p>
-                            <a className="inline-block w-fit bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 mx-auto"
-                                href="#projects">View Projects</a>
+                                exceed client expectations.
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-16">
-                <section id="about">
+                <section>
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">About Me</h2>
                     <p className="text-gray-600 dark:text-gray-400 max-w-3xl">I am a dedicated and results-oriented software and web
                         developer with over 5 years of experience in the industry. My expertise lies in developing robust and
                         scalable applications using modern technologies. I am proficient in various programming languages,
                         frameworks, and tools, and I am always eager to learn and adapt to new challenges. My goal is to leverage my
-                        skills and experience to contribute to the success of innovative projects and organizations.</p>
+                        skills and experience to contribute to the success of innovative projects and organizations.
+                    </p>
+                    <button
+                        className="inline-block w-fit bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all mt-6 duration-300 mx-auto">
+                        <Link href="/about">Learn More</Link>
+                    </button>
                 </section>
-                <section id="skills">
+                <section>
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Skills</h2>
                     <div className="flex flex-wrap gap-3">
                         <span
@@ -53,7 +57,7 @@ export default function Home() {
                             APIs</span>
                     </div>
                 </section>
-                <section id="projects">
+                <section>
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Projects</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div
@@ -65,8 +69,9 @@ export default function Home() {
                             </div>
                             <div className="p-6">
                                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">E-commerce Platform</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">A full-featured e-commerce platform with user
-                                    authentication, product management, and payment integration.</p>
+                                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">
+                                    A full-featured e-commerce platform with user authentication, product management, and payment integration.
+                                </p>
                             </div>
                         </div>
                         <div
@@ -95,10 +100,13 @@ export default function Home() {
                                     creating, organizing, and tracking tasks.</p>
                             </div>
                         </div>
-                        <Link href="/about">View More</Link>
+                        <button
+                            className="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300">
+                            <Link href="/projects">View Projects</Link>
+                        </button>
                     </div>
                 </section>
-                <section id="experience">
+                <section>
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Experience</h2>
                     <div className="relative border-l border-gray-200 dark:border-gray-700 ml-4">
                         <div className="mb-10 ml-8">
@@ -146,20 +154,10 @@ export default function Home() {
                                 2018</time>
                         </div>
                     </div>
-                </section>
-                <section id="contact">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Contact</h2>
-                    <form className="max-w-xl space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">Email</label>
-                            <input
-                                className="form-input w-full rounded-lg border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark focus:border-primary focus:ring-primary"
-                                id="email" name="email" placeholder="your.email@example.com" type="email" />
-                        </div>
-                        <button
-                            className="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300"
-                            type="submit">Send Message</button>
-                    </form>
+                    <button
+                        className="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 mt-6">
+                        <Link href="/experiences">View More</Link>
+                    </button>
                 </section>
             </div>
         </>

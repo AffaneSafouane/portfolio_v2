@@ -59,7 +59,7 @@ export default function Footer() {
                 </div>
 
                 {/* Copyright */}
-                <div className="text-center pt-6 border-t border-gray-200 dark:border-gray-800">
+                <div className="text-center pt-4 dark:border-gray-800">
                     <p>&copy; {currentYear} AFFANE Safouane</p>
                 </div>
             </div>
