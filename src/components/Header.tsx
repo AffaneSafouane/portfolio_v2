@@ -7,23 +7,21 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import Image from 'next/image';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/experiences', label: 'Experiences' },
-  { href: '/tech-monitoring', label: 'Tech Monitoring' },
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'Accueil' },
+  { href: '/projects', label: 'Projets' },
+  { href: '/experiences', label: 'Expériences' },
+  { href: '/tech-monitoring', label: 'Veille Technologique' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Fermer le menu mobile lors du changement de route
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  // Fermer le menu mobile avec la touche Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
@@ -35,7 +33,6 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [mobileMenuOpen]);
 
-  // Empêcher le scroll du body quand le menu mobile est ouvert
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -48,11 +45,10 @@ export default function Header() {
 
   return (
     <header
-      className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+      className="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-4">
-            {/* Logo */}
             <Link href="/" aria-label="Back to homepage" className="flex items-center gap-2">
               <div className="relative w-10 h-10">
                 <Image
@@ -67,9 +63,7 @@ export default function Header() {
               <span className="text-xl font-bold text-gray-900 dark:text-white">Portfolio</span>
             </Link>
           </div>
-          {/* Navigation Desktop - Structure sémantique avec <ul> <li> */}
           <nav className="hidden md:flex items-center gap-8">
-            {/* Desktop Nav */}
             <ul className="flex items-center list-none m-0 p-0 gap-8">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -88,7 +82,6 @@ export default function Header() {
             </ul>
           </nav>
 
-          {/* Bouton Menu Mobile */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -104,17 +97,14 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Navigation Mobile - Structure sémantique */}
         {mobileMenuOpen && (
           <>
-            {/* Overlay pour fermer le menu en cliquant à l'extérieur */}
             <div
               className="fixed inset-0 bg-black bg-opacity-50 md:hidden"
               onClick={() => setMobileMenuOpen(false)}
               aria-hidden="true"
             />
 
-            {/* Menu mobile */}
             <div
               id="mobile-menu"
               className="fixed top-16 left-0 right-0 bg-gray-800 border-t border-gray-700 md:hidden animate-slide-down shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto"
