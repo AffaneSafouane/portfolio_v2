@@ -7,7 +7,7 @@ export default function Contact() {
                     <p className="text-lg text-gray-600 dark:text-gray-400">
                         Je suis toujours ouvert à la discussion de nouveaux projets, d&apos;idées créatives ou d&apos;opportunités de contribuer à vos visions. N&apos;hésitez pas à me contacter !
                     </p>
-                    <form className="space-y-6 max-w-lg">²
+                    <form className="space-y-6 max-w-lg">
                         <div>
                             <label
                                 htmlFor="name"
