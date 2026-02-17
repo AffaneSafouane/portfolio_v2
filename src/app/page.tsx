@@ -15,7 +15,8 @@ export default function Home() {
                         </h1>
 
                         <p className="text-lg text-gray-200 max-w-3xl mx-auto">
-                            Je suis un développeur logiciel passionné, spécialisé dans le backend, avec une solide formation en informatique, d&apos;abord via un BTS SIO option SLAM, puis actuellement avec une licence professionnelle en projet web et mobile. Je conçois et développe des applications robustes et performantes, tout en portant une attention suffisante au design pour offrir des solutions de qualité qui répondent et dépassent les attentes des clients.
+                            Je suis un développeur logiciel passionné, spécialisé dans le backend, avec une solide formation en informatique, d&apos;abord via un BTS SIO option SLAM, puis actuellement avec une licence professionnelle en projet web et mobile. <br />
+                            Je conçois et développe des applications robustes et performantes, tout en portant une attention suffisante au design pour offrir des solutions de qualité qui répondent et dépassent les attentes des clients.
                         </p>
                         <button
                             className="inline-block w-fit bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all mt-6 duration-300 mx-auto">
@@ -28,7 +29,9 @@ export default function Home() {
                 <section id="about">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Qui suis je ?</h2>
                     <p className="text-gray-600 dark:text-gray-400 max-w-3xl">
-                        Je me présente je suis un étudiant en Licence Professionnelle projet Web et Mobile, à la Sorbonne Université, et je souhaite devenir développeur d&apos;application en freelance. Après avoir obtenu mon baccalauréat générale avec spécialité Mathématiques et Anglais, je pris la décision d&apos;effectuer une année de césure au Canada afin de pouvoir perfectionner mon anglais. C&apos;est durant ce voyage que mon intérêt pour l&apos;informatique a vraiment commencé. J&apos;ai alors décider d&apos;apprendre le html ainsi que le css et développer un site web en autodidacte. Suite à cela je me suis inscrit en BTS SIO afin de développer mes compétences et élargir mon champs d&apos;expertise. Mon intérêt pour l&apos;informatique vient de la liberté géographique offerte par le domaine ainsi que la demande importante dans le marché de l&apos;emploi.
+                        Je me présente je suis un étudiant en Licence Professionnelle projet Web et Mobile, à la Sorbonne Université, et je souhaite devenir développeur d&apos;application en freelance. <br /> 
+                        Après avoir obtenu mon baccalauréat générale avec spécialité Mathématiques et Anglais, je pris la décision d&apos;effectuer une année de césure au Canada afin de pouvoir perfectionner mon anglais. C&apos;est durant ce voyage que mon intérêt pour l&apos;informatique a vraiment commencé. J&apos;ai alors décider d&apos;apprendre le html ainsi que le css et développer un site web en autodidacte. Suite à cela je me suis inscrit en BTS SIO afin de développer mes compétences et élargir mon champs d&apos;expertise. <br />  
+                        Mon intérêt pour l&apos;informatique vient de la liberté géographique offerte par le domaine ainsi que la demande importante dans le marché de l&apos;emploi.
                     </p>
                     <a className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg text-base font-bold shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark mt-6"
                         href="/static/ressources/CV_AFFANE_Safouane.pdf" target="_blank">

@@ -28,11 +28,11 @@ export default function Projects() {
                                     authentication, product management, shopping cart, and payment integration.</p>
                                 <div className="mt-4">
                                     <span
-                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">React</span>
+                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Wordpress</span>
                                     <span
-                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Node.js</span>
+                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">Woocommerce</span>
                                     <span
-                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">MongoDB</span>
+                                        className="inline-block bg-primary/10 text-primary text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">MySQL</span>
                                 </div>
                                 <div className="mt-6 flex items-center gap-4">
                                     <a className="inline-flex items-center gap-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
@@ -60,7 +60,7 @@ export default function Projects() {
                                 </div>
                             </div>
                             <div className="p-8 flex-1">
-                                <a href="/static/ressources/README_CVVEN.pdf">
+                                <a href="/static/ressources/README_CVVEN.pdf" target="_blank">
                                     <h3 className="mt-1 block text-2xl leading-tight font-bold text-blue-400 hover:text-blue-500 hover:underline">
                                         CVVEN
                                     </h3>
@@ -107,9 +107,11 @@ export default function Projects() {
                                 </div>
                             </div>
                             <div className="p-8 flex-1">
-                                <h3 className="mt-1 block text-2xl leading-tight font-bold text-gray-900 dark:text-white">
-                                    Biblios
-                                </h3>
+                                <a href="/static/ressources/README_Biblios.pdf" target="_blank">
+                                    <h3 className="mt-1 block text-2xl leading-tight font-bold text-blue-400 hover:text-blue-500 hover:underline">
+                                        Biblios
+                                    </h3>
+                                </a>
                                 <p className="mt-2 text-gray-500 dark:text-gray-400">
                                     Conception et développement d&apos;une application web de gestion de bibliothèque, réalisée avec le framework Symfony 7. <br />
                                     L&apos;application permet la consultation du catalogue et l&apos;administration complète des ouvrages via une base de données PostgreSQL. <br />
