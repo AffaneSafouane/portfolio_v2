@@ -2,11 +2,10 @@
  * TypeScript type definitions
  */
 
-export interface Contact {
-  id: number;
+export interface ContactFormData {
   fullName: string;
   email: string;
-  subject?: string | null;
+  subject: string;
   message: string;
-  createdAt: Date;
+  captchaToken: string;
 }

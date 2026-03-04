@@ -23,7 +23,7 @@ export default function Footer() {
                                 className="flex items-center gap-2 text-primary hover:underline"
                             >
                                 <FaEnvelope className="text-gray-500 dark:text-gray-400" aria-hidden="true" />
-                                safoueneaffane@gmail.com
+                                process.en
                             </a>
                         </p>
                     </div>
