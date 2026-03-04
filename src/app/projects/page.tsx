@@ -133,7 +133,7 @@ export default function Projects() {
                                         Live Demo
                                     </a>
                                     <a className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                                        href="https://github.com/AffaneSafouane/biblios_v1.git" target="_blank">
+                                        href="https://github.com/AffaneSafouane/biblios.git" target="_blank">
                                         <Code />
                                         GitHub
                                     </a>
