@@ -1,0 +1,25 @@
+# Ticket 1 — Contact & Confidentialité : spécification
+
+## Point de départ et décision
+
+La route française `src/app/contact/page.tsx` est client et enveloppe `ContactFormComponent` dans `GoogleReCaptchaProvider`. Le navigateur envoie actuellement les cinq champs à un Worker externe ; le schéma Zod n'est pas appelé. Ce ticket intervient **avant l'i18n** : garder `/contact` et `src/app/layout.tsx`, ne créer aucun groupe `(fr)`/`(en)` et ne prévoir que la copy française. La version anglaise sera ajoutée au Ticket 5. La cible est une route API Next.js hébergée sur Vercel ; supprimer Worker et reCAPTCHA dans le même changement.
+
+## Contrat de validation et API
+
+`src/lib/validation.ts` exporte `contactFormSchema` pour `fullName` 2–70, `email` 5–254 et format email, `subject` 3–150 sans CR/LF, `message` 10–500 ; `contactRequestSchema` ajoute `captchaToken` non vide. Dériver `ContactFormData` et `ContactRequest` de Zod, supprimer le type concurrent de `src/types/index.ts`. Après suppression des espaces de bord, les valeurs vides ou seulement composées d'espaces sont rejetées. Les attributs HTML reflètent les mêmes bornes, notamment `maxLength={500}`. Le client utilise `contactFormSchema.safeParse`, mais le serveur valide toujours `contactRequestSchema`.
+
+`POST /api/contact` reçoit JSON, limite le corps à 16 KiB et retourne un contrat de codes indépendant de la langue : `200 {ok:true}`, sinon `{ok:false, code}` avec `invalid_request` (400), `captcha_invalid` (403), `captcha_unavailable` (503), `delivery_failed` (502), `server_unconfigured` (500). `src/app/api/contact/route.ts` s'exécute sous Node.js, vérifie `Content-Type`, taille, JSON et Zod, puis le token auprès de Cloudflare Siteverify. Vérifier `success` et le hostname prévu pour le domaine appelant. Aucun appel Resend si Siteverify échoue ou est indisponible. `src/lib/contact/sendEmail.ts` encapsule le SDK Resend : expéditeur d'un domaine vérifié `safouane-affane.fr`, destinataire fixe `contact@safouane-affane.fr`, `replyTo` de l'expéditeur, corps texte brut. Ne renvoyer au navigateur ni secret, ni message brut du fournisseur, ni contenu du formulaire.
+
+## Formulaire, confidentialité et téléphone
+
+`src/app/contact/page.tsx` devient un Server Component qui rend `src/components/TurnstileContact.tsx` client ; celui-ci charge le script officiel Turnstile et passe le token à `ContactFormComponent.tsx`. Le formulaire montre des états français accessibles (`role="status"`/`alert`), bloque les doubles envois, conserve les champs en échec et réinitialise le challenge après chaque tentative. Si la clé publique, le script ou le défi sont indisponibles, un message explicite apparaît et aucun POST n'est envoyé.
+
+Afficher sous le formulaire une information courte sur les données collectées, la finalité de réponse, l'anti-spam et l'alias de contact. La page RGPD complète sera créée au Ticket 4 ; ne pas lier vers une URL encore absente. Dans le Footer et les autres pages/composants, retirer toute adresse personnelle et tout numéro de téléphone personnel. `ContactEmailReveal.tsx` révèle l'alias professionnel et un `mailto:` après activation clavier/souris ; c'est une protection légère contre le scraping, pas une garantie absolue. L'audit préparatoire a détecté un téléphone dans `public/static/ressources/CV_AFFANE_Safouane.pdf`. Pour que le Ticket 1 n'expose plus ce numéro, retirer temporairement le lien CV **et le PDF de `public/`** ; le Ticket 4 publiera une version assainie après revue complète.
+
+## Configuration et tests
+
+Installer `resend`, désinstaller `react-google-recaptcha-v3`, mettre à jour `package-lock.json` et `.exemple.env`. `RESEND_API_KEY` et `TURNSTILE_SECRET_KEY` restent serveur ; `NEXT_PUBLIC_TURNSTILE_SITE_KEY` est publique. Le domaine d'envoi Resend et les hostnames local/Vercel doivent être configurés réellement. Ajouter Vitest (le dépôt n'a aucun runner) pour validation et route ; simuler Siteverify/Resend et prouver l'absence d'email en cas d'échec Turnstile. Essayer en navigateur avec clés de test : succès, refus, panne réseau, script indisponible et double clic. Vérifier le destinataire dans Resend, `npm run lint`, `npm run build`, TypeScript indépendant et vues mobile/desktop. Un build sans clés ne valide pas le formulaire. La notice du Ticket 1 est un premier niveau ; ne pas déployer cette migration seule en production avant que la page complète du Ticket 4 et les faits sur le responsable de traitement soient prêts.
+
+## Hypothèses et sources
+
+La future i18n traduira les codes d'erreur côté client sans modifier l'API. La conservation des messages, les transferts et les droits seront documentés intégralement au Ticket 4 ; la notice courte est déjà visible ici. [Cloudflare exige la validation serveur du jeton](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) ; l'envoi depuis un domaine propre suppose sa [vérification chez Resend](https://resend.com/docs/knowledge-base/how-do-I-create-an-email-address-or-sender-in-resend).

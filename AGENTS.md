@@ -62,23 +62,55 @@ Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, vei
 
 ## 7. Architecture cible et roadmap validées — non implémentées
 
-### Produit et design
+La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiches → Légal/PDF → i18n → Design → SEO/documentation. Les Tickets 1 à 4 modifient l'arborescence française actuelle `src/app/`. Le Ticket 5 déplace les pages françaises dans `src/app/(fr)/`, crée les pages anglaises dans `src/app/(en)/en/` et conserve l'API ainsi que `/feed.xml` à la racine de `src/app/`. Les specs et plans par ticket sont dans `docs/superpowers/` ; `docs/superpowers/plans/roadmap.md` donne les critères d'acceptation.
 
-- Direction « Clean Pixel Art » : accents arcade sur l'interface et mise en page moderne lisible pour les textes longs. **Tokens validés**, à créer dans le thème lors de la refonte : `--bg-console: #0F0F1B`, `--bg-surface: #18182B`, `--accent-red: #E4364B`, `--accent-cyan: #3EC8F5`, `--accent-gold: #F7D94C`, `--accent-green: #3B9F5B`, `--text-primary: #F4F4F8`.
-- Polices validées : `'Press Start 2P'` pour H1/H2, `'Silkscreen'` pour UI/boutons/navigation, `'VT323'` pour métadonnées ; `'Inter'` ou `'JetBrains Mono'` pour les textes longs. Ces polices pixel ne sont pas encore intégrées.
-- i18n complète FR/EN, avec accès direct à l'anglais par URL et sélecteur de langue ; projets séparés en catégories professionnelles et académiques/laboratoire (dont React Native/Java) ; veille consacrée aux LLM et aux workflows agentiques. Ces contenus et parcours ne sont pas encore implémentés.
+### Ticket 1 — Contact & Confidentialité (`ticket-1-contact`)
 
-### Migration du contact — ticket dédié juste après l'i18n
+- Migrer le contact français vers `src/app/api/contact/route.ts` sur Vercel. Supprimer l'appel au Worker `portfolio-contact.saf-account.workers.dev`, `react-google-recaptcha-v3` et `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`. Utiliser Resend vers `contact@safouane-affane.fr` et Cloudflare Turnstile vérifié **côté serveur avant** l'envoi.
+- `src/lib/validation.ts` est la source unique de validation du formulaire et de l'API : `fullName` 2–70, `email` 5–254, `subject` 3–150, `message` 10–500 caractères. Aligner les attributs HTML, notamment `maxLength={500}`. Mettre à jour `.exemple.env` avec `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY` côté serveur et `NEXT_PUBLIC_TURNSTILE_SITE_KEY` côté client ; aucun secret dans `NEXT_PUBLIC_*`.
+- Afficher une information courte sur l'usage des données sous le formulaire. Retirer les numéros personnels du HTML ; le CV PDF actuel contenant un numéro doit être dépublié dès ce ticket, puis assaini au Ticket 4. Rendre l'alias professionnel accessible aux visiteurs avec une protection légère contre le scraping. La page de confidentialité complète arrive au Ticket 4.
 
-- Supprimer l'appel au Cloudflare Worker `portfolio-contact.saf-account.workers.dev` et la dépendance `react-google-recaptcha-v3` lors de cette migration. Jusqu'à ce ticket, conserver le fonctionnement actuel décrit en section 4.
-- Cible : route API interne `src/app/api/contact/route.ts` hébergée sur Vercel, utilisant le SDK **Resend** pour l'email et **Cloudflare Turnstile** pour l'anti-spam. Vérifier le jeton Turnstile côté serveur avant tout envoi d'email. Variables requises : `RESEND_API_KEY` et `TURNSTILE_SECRET_KEY` côté serveur, `NEXT_PUBLIC_TURNSTILE_SITE_KEY` côté client. Mettre à jour `.exemple.env` dans le même ticket ; ne jamais exposer les deux secrets via `NEXT_PUBLIC_*`.
-- **Source unique de validation :** schéma Zod dans `src/lib/validation.ts`, utilisé pour le contrat du formulaire et validé dans la route API. Bornes retenues : `fullName` 2–70, `email` 5–254, `subject` 3–150, `message` **10–500 caractères**. Aligner le `maxLength` du champ message à 500 côté client et appliquer la même limite côté serveur.
+### Ticket 2 — Veille technologique & Flux RSS (`ticket-2-veille-rss`)
+
+- Remplacer la veille microservices de `src/app/tech-monitoring/page.tsx` par « LLMs & Développement Agentique » en français, avec sources primaires et explications durables.
+- Agréger des flux RSS externes **côté serveur**, avec `revalidate: 3600`, normalisation, déduplication, délais et repli si un flux échoue. Créer `src/app/feed.xml/route.ts` pour syndiquer la veille et préparer l'ajout du blog, sans déplacer l'agrégation dans le navigateur.
+
+### Ticket 3 — Projets & Pages détaillées (`ticket-3-projets`)
+
+- Réconcilier les cartes JSX et les tableaux non utilisés dans une seule source typée, avec catégories `professional` et `academic-lab`, projets React Native et Java après vérification factuelle, liens et médias absolus. Les projets mis en avant sur `/` et les cartes de `/projects` consomment cette même source.
+- Créer `src/app/projects/[slug]/page.tsx` pour chaque projet public, avec contexte, architecture, développement technique et apports. Les slugs sont stables, les pages pré-rendues et les projets non publiés exclus des listes et du sitemap futur.
+
+### Ticket 4 — Pages légales & Contrôle PDF (`ticket-4-legal`)
+
+- Créer les pages françaises `/mentions-legales` et `/confidentialite`, reliées dans `Footer` et depuis le formulaire. Suivre `.agents/skills/mentions-legales` et `.agents/skills/rgpd` pour identifier l'éditeur, l'hébergeur Vercel, le traitement du formulaire par Resend et Turnstile, les droits et transferts. Ne publier aucune identification inventée ou incomplète ; les faits légaux doivent être confirmés avant publication.
+- Auditer tous les PDF de `public/static/ressources/`, retirer téléphone et adresse personnelle sensible, puis remettre en ligne un CV assaini ou laisser le lien absent. Le Ticket 5 traduira ces pages sans changer leurs faits.
+
+### Ticket 5 — Internationalisation FR/EN (`ticket-5-internationalisation`)
+
+- Conserver les URL françaises, ajouter `/en`, `/en/projects`, `/en/projects/[slug]`, `/en/experiences`, `/en/tech-monitoring`, `/en/contact`, `/en/legal`, `/en/privacy` et un flux `/en/feed.xml`. Utiliser deux layouts racine pour `html lang="fr"` et `lang="en"`, des dictionnaires typés dans `src/lib/i18n/` et un sélecteur conservant la page et le slug du projet.
+- Traduire le contenu **final** des Tickets 1 à 4 : réponses du contact, veille et libellés RSS, fiches projets, expériences, navigation, Footer, mentions légales et confidentialité. Le contrat JSON de `/api/contact` reste indépendant de la langue.
+
+### Ticket 6 — Refonte « Clean Pixel Art » (`ticket-6-clean-pixel-art`)
+
+- Appliquer la direction 80/20 à toutes les routes FR/EN, y compris fiches projets et pages légales. Tokens exacts : `--bg-console: #0F0F1B`, `--bg-surface: #18182B`, `--accent-red: #E4364B`, `--accent-cyan: #3EC8F5`, `--accent-gold: #F7D94C`, `--accent-green: #3B9F5B`, `--text-primary: #F4F4F8`.
+- Polices : `'Press Start 2P'` pour H1/H2, `'Silkscreen'` pour UI/navigation, `'VT323'` pour métadonnées, `'Inter'` ou `'JetBrains Mono'` pour textes longs. Exécuter `.agents/skills/web-design-guidelines` après la refonte pour contrôler contrastes, clavier, cibles tactiles et accessibilité.
+
+### Ticket 7 — SEO & Documentation (`ticket-7-seo-docs`)
+
+- Finaliser métadonnées FR/EN, canonical/hreflang, `src/app/sitemap.ts` dynamique pour pages statiques et `/projects/[slug]` publics, `src/app/robots.ts`, JSON-LD `Person` et `README.md` fidèle au dépôt. Contrôler également l'accessibilité du flux `/feed.xml` et `/en/feed.xml` ; les URLs de feed ne remplacent pas les pages du sitemap.
+- Exécuter `.agents/skills/seo` sur les pages finales, y compris fiches projets et pages légales. `NEXT_PUBLIC_SITE_URL` doit être une URL publique HTTPS valide en production.
+
+### Phase 2 — Ticket 8 : Blog SEO MDX bilingue
+
+- Après lancement, créer des articles MDX dans `content/blog/fr` et `content/blog/en` sur le freelancing, le développement et l'e-commerce, avec `/blog/[slug]`, `/en/blog/[slug]`, métadonnées, JSON-LD `Article` et ajout automatique aux sitemaps et flux RSS de la Phase 1.
 
 ## 8. Règles de travail
 
-- Inspecter les fichiers et les intégrations concernées avant de créer ou modifier quoi que ce soit ; garder les changements limités au ticket actif et préserver les modifications préexistantes de l'utilisateur.
-- Pour tout ticket applicatif, exécuter `npm run lint` et `npm run build` avant de conclure ; exécuter `npx tsc --noEmit --incremental false` si un contrôle TypeScript indépendant est utile. Signaler les échecs avec leur sortie, sans les attribuer d'office au changement courant.
-- Pour une modification d'interface, vérifier réellement les vues mobile et desktop des routes concernées. Pour le contact, compléter le build par un essai navigateur avec les variables d'environnement appropriées et vérifier le service d'envoi utilisé (Worker actuel, puis route API/Resend/Turnstile après migration) : un build seul ne teste pas ce flux.
-- Utiliser `.agents/skills/vercel-react-best-practices` en continu lors du développement React/Next.js : éviter les barrel imports lourds et préserver les Server Components par défaut.
-- Après la refonte visuelle (Ticket 3), exécuter `.agents/skills/web-design-guidelines` pour vérifier les contrastes et l'accessibilité.
-- En fin de refonte, exécuter `.agents/skills/seo` pour contrôler notamment `hreflang`, `sitemap.xml`, `robots.txt` et les données structurées JSON-LD `Person`.
+- Inspecter les fichiers et intégrations concernés avant toute modification ; limiter les changements au ticket actif et préserver les modifications préexistantes de l'utilisateur. Exécuter les tickets dans l'ordre 1 → 7 ; ne pas supposer que l'i18n ou le thème existent pendant les Tickets 1 à 4.
+- Pour tout ticket applicatif, exécuter `npm run lint` et `npm run build` avant de conclure ; utiliser `npx tsc --noEmit --incremental false` si un contrôle TypeScript indépendant est utile. Signaler les échecs avec leur sortie, sans les attribuer d'office au changement courant.
+- Pour une modification d'interface, vérifier réellement les vues mobile et desktop des routes concernées. Pour le contact, compléter le build par un essai navigateur avec les variables appropriées et vérifier Resend/Turnstile. Pour le RSS, contrôler un flux valide, un flux indisponible et `/feed.xml`. Pour les projets, contrôler des slugs valides/invalides, liens et médias sur les routes imbriquées.
+- Utiliser `.agents/skills/vercel-react-best-practices` en continu lors du développement React/Next.js : éviter les barrel imports lourds, garder l'agrégation RSS côté serveur et préserver les Server Components par défaut.
+- Au Ticket 4, appliquer `.agents/skills/mentions-legales` et `.agents/skills/rgpd`, puis contrôler les PDF publiés. Au Ticket 6, exécuter `.agents/skills/web-design-guidelines`. Au Ticket 7, exécuter `.agents/skills/seo` pour vérifier notamment `hreflang`, `sitemap.xml`, `robots.txt` et JSON-LD `Person`.
+
+**Contrôle Git et déploiement :** 
+L'agent est autorisé à exécuter git add et git commit localement sur la branche feat/portfolio-v3 à chaque étape validée, mais il lui est strictement interdit d'exécuter git push, de fusionner vers main ou de déclencher un déploiement Vercel. Le push et la mise en production restent exclusivement réservés à l'utilisateur.
