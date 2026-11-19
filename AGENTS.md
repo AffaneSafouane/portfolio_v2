@@ -80,5 +80,5 @@ Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, vei
 - Pour tout ticket applicatif, exécuter `npm run lint` et `npm run build` avant de conclure ; exécuter `npx tsc --noEmit --incremental false` si un contrôle TypeScript indépendant est utile. Signaler les échecs avec leur sortie, sans les attribuer d'office au changement courant.
 - Pour une modification d'interface, vérifier réellement les vues mobile et desktop des routes concernées. Pour le contact, compléter le build par un essai navigateur avec les variables d'environnement appropriées et vérifier le service d'envoi utilisé (Worker actuel, puis route API/Resend/Turnstile après migration) : un build seul ne teste pas ce flux.
 - Utiliser `.agents/skills/vercel-react-best-practices` en continu lors du développement React/Next.js : éviter les barrel imports lourds et préserver les Server Components par défaut.
-- Après la refonte visuelle (Ticket 2), exécuter `.agents/skills/web-design-guidelines` pour vérifier les contrastes et l'accessibilité.
+- Après la refonte visuelle (Ticket 3), exécuter `.agents/skills/web-design-guidelines` pour vérifier les contrastes et l'accessibilité.
 - En fin de refonte, exécuter `.agents/skills/seo` pour contrôler notamment `hreflang`, `sitemap.xml`, `robots.txt` et les données structurées JSON-LD `Person`.
