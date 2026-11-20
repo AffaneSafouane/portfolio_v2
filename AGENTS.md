@@ -112,5 +112,8 @@ La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiche
 - Utiliser `.agents/skills/vercel-react-best-practices` en continu lors du développement React/Next.js : éviter les barrel imports lourds, garder l'agrégation RSS côté serveur et préserver les Server Components par défaut.
 - Au Ticket 4, appliquer `.agents/skills/mentions-legales` et `.agents/skills/rgpd`, puis contrôler les PDF publiés. Au Ticket 6, exécuter `.agents/skills/web-design-guidelines`. Au Ticket 7, exécuter `.agents/skills/seo` pour vérifier notamment `hreflang`, `sitemap.xml`, `robots.txt` et JSON-LD `Person`.
 
-**Contrôle Git et déploiement :** 
+**Contrôle Git et déploiement** 
 L'agent est autorisé à exécuter git add et git commit localement sur la branche feat/portfolio-v3 à chaque étape validée, mais il lui est strictement interdit d'exécuter git push, de fusionner vers main ou de déclencher un déploiement Vercel. Le push et la mise en production restent exclusivement réservés à l'utilisateur.
+
+**Protection des fichiers d'environnement** 
+Il est strictement interdit à l'agent de créer, modifier, écraser ou supprimer .env, .env.local ou tout fichier .env.* (à l'exception de .exemple.env).
