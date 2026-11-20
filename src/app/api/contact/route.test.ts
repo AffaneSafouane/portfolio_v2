@@ -7,12 +7,14 @@ vi.mock('../../../lib/contact/sendEmail', () => ({ sendContactEmail: vi.fn() }))
 const upstash = vi.hoisted(() => ({
   limit: vi.fn(),
   set: vi.fn(),
+  del: vi.fn(),
   redisConstructor: vi.fn(),
   ratelimitConstructor: vi.fn(),
   slidingWindow: vi.fn(),
 }));
 vi.mock('@upstash/redis', () => ({ Redis: class {
   set = upstash.set;
+  del = upstash.del;
   constructor(options: unknown) { upstash.redisConstructor(options); }
 } }));
 vi.mock('@upstash/ratelimit', () => ({ Ratelimit: class {
@@ -34,8 +36,10 @@ beforeEach(() => {
   for (const mock of Object.values(upstash)) mock.mockReset();
   upstash.limit.mockResolvedValue({ success: true });
   upstash.set.mockResolvedValue('OK');
+  upstash.del.mockResolvedValue(1);
   upstash.slidingWindow.mockReturnValue('sliding-window');
   vi.spyOn(console, 'warn').mockImplementation(() => {});
+  vi.spyOn(console, 'error').mockImplementation(() => {});
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ success: true, hostname: 'safouane-affane.fr' }) }));
 });
 afterEach(() => {
@@ -85,8 +89,45 @@ describe('POST /api/contact', () => {
     expect(sendContactEmail).not.toHaveBeenCalled();
   });
   it('reports email provider failure', async () => {
-    vi.mocked(sendContactEmail).mockRejectedValue(new Error('provider down'));
+    vi.mocked(sendContactEmail).mockRejectedValue(Object.assign(new Error('Domain not verified'), { statusCode: 403 }));
     await expectResponse(await post(), 502, 'delivery_failed');
+    expect(console.error).toHaveBeenCalledWith('Contact delivery failed', { statusCode: 403, message: 'Domain not verified' });
+  });
+
+  it('releases its deduplication claim after a delivery failure so the same message can be retried', async () => {
+    let claimed = false;
+    upstash.set.mockImplementation(async () => {
+      if (claimed) return null;
+      claimed = true;
+      return 'OK';
+    });
+    upstash.del.mockImplementation(async () => { claimed = false; return 1; });
+    vi.mocked(sendContactEmail).mockRejectedValueOnce(new Error('provider down')).mockResolvedValueOnce(undefined);
+    const hash = createHash('sha256').update('alice@example.com:Bonjour, un projet web.').digest('hex');
+    const key = `portfolio:contact:dedup:${hash}`;
+
+    await expectResponse(await post(), 502, 'delivery_failed');
+    expect(upstash.del).toHaveBeenCalledOnce();
+    expect(upstash.del).toHaveBeenCalledWith(key);
+    expect(console.error).toHaveBeenCalledWith('Contact delivery failed', expect.objectContaining({ statusCode: null, message: 'provider down' }));
+
+    await expectResponse(await post(), 200);
+    expect(upstash.set).toHaveBeenCalledTimes(2);
+    expect(sendContactEmail).toHaveBeenCalledTimes(2);
+  });
+
+  it('still returns 502 when Redis deletion fails during rollback', async () => {
+    vi.mocked(sendContactEmail).mockRejectedValue(new Error('provider down'));
+    upstash.del.mockRejectedValue(new Error('Redis unavailable'));
+    await expectResponse(await post(), 502, 'delivery_failed');
+    expect(upstash.del).toHaveBeenCalledOnce();
+    expect(console.warn).toHaveBeenCalled();
+  });
+
+  it('does not log the Resend API key when a delivery error contains it', async () => {
+    vi.mocked(sendContactEmail).mockRejectedValue(new Error(`Invalid key ${process.env.RESEND_API_KEY}`));
+    await expectResponse(await post(), 502, 'delivery_failed');
+    expect(JSON.stringify(vi.mocked(console.error).mock.calls)).not.toContain(process.env.RESEND_API_KEY);
   });
   it('requires server secrets', async () => {
     delete process.env.TURNSTILE_SECRET_KEY;
@@ -146,6 +187,7 @@ describe('POST /api/contact', () => {
     const hash = createHash('sha256').update('alice@example.com:Bonjour, un projet web.').digest('hex');
     await expectResponse(await post(submitted), 429, 'duplicate_message', 'Ce message a déjà été envoyé. Patientez quelques minutes avant de réessayer.');
     expect(upstash.set).toHaveBeenCalledWith(`portfolio:contact:dedup:${hash}`, '1', { nx: true, ex: 300 });
+    expect(upstash.del).not.toHaveBeenCalled();
     expect(sendContactEmail).not.toHaveBeenCalled();
   });
 

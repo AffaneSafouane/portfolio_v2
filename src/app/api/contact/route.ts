@@ -93,6 +93,7 @@ export async function POST(request: Request): Promise<Response> {
     return error('captcha_invalid', 403);
   }
 
+  let dedupClaim: { redis: Redis; key: string } | null = null;
   const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!redisUrl || !redisToken) {
@@ -116,10 +117,12 @@ export async function POST(request: Request): Promise<Response> {
       const dedupHash = createHash('sha256')
         .update(`${parsed.data.email.trim().toLowerCase()}:${parsed.data.message.trim()}`)
         .digest('hex');
-      const dedupResult = await redis.set(`portfolio:contact:dedup:${dedupHash}`, '1', { nx: true, ex: 300 });
+      const dedupKey = `portfolio:contact:dedup:${dedupHash}`;
+      const dedupResult = await redis.set(dedupKey, '1', { nx: true, ex: 300 });
       if (dedupResult === null) {
         return error('duplicate_message', 429, 'Ce message a déjà été envoyé. Patientez quelques minutes avant de réessayer.');
       }
+      dedupClaim = { redis, key: dedupKey };
     } catch {
       console.warn('Contact form: Upstash Redis is unavailable; continuing without rate limiting.');
     }
@@ -128,7 +131,22 @@ export async function POST(request: Request): Promise<Response> {
   try {
     await sendContactEmail(parsed.data);
     return Response.json({ ok: true });
-  } catch {
+  } catch (cause) {
+    const statusCode = cause instanceof Error && 'statusCode' in cause && typeof cause.statusCode === 'number'
+      ? cause.statusCode
+      : null;
+    let message = cause instanceof Error ? cause.message : 'Unknown delivery error';
+    for (const secretValue of [process.env.RESEND_API_KEY, process.env.TURNSTILE_SECRET_KEY, process.env.UPSTASH_REDIS_REST_TOKEN]) {
+      if (secretValue) message = message.replaceAll(secretValue, '[REDACTED]');
+    }
+    console.error('Contact delivery failed', { statusCode, message: message.slice(0, 500) });
+    if (dedupClaim) {
+      try {
+        await dedupClaim.redis.del(dedupClaim.key);
+      } catch {
+        console.warn('Contact form: deduplication rollback failed.');
+      }
+    }
     return error('delivery_failed', 502);
   }
 }

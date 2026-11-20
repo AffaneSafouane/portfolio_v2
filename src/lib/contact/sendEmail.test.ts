@@ -33,7 +33,11 @@ describe('sendContactEmail', () => {
     expect(send).toHaveBeenCalledWith(expect.objectContaining({ to: 'contact@safouane-affane.fr' }));
   });
   it('rejects a provider error', async () => {
-    send.mockResolvedValue({ data: null, error: { message: 'rejected' } });
-    await expect(sendContactEmail(data)).rejects.toThrow();
+    send.mockResolvedValue({ data: null, error: { message: 'Domain not verified', statusCode: 403, name: 'validation_error' } });
+    await expect(sendContactEmail(data)).rejects.toMatchObject({ message: 'Domain not verified', statusCode: 403 });
+  });
+  it('wraps a transport exception without leaking its raw message', async () => {
+    send.mockRejectedValue(new Error('network failed with private request details'));
+    await expect(sendContactEmail(data)).rejects.toMatchObject({ message: 'Resend request failed', statusCode: null });
   });
 });
