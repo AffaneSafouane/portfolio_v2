@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import ContactFormComponent from './ContactFormComponent';
 
@@ -26,7 +26,17 @@ export default function TurnstileContact({ siteKey }: { siteKey: string }) {
   const [challengeError, setChallengeError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!scriptReady || !siteKey || !containerRef.current || !window.turnstile || widgetId.current) return;
+    if (!siteKey || scriptReady) return;
+    const timeout = window.setTimeout(() => setChallengeError('Le contrôle anti-spam est indisponible. Réessayez plus tard.'), 10000);
+    return () => window.clearTimeout(timeout);
+  }, [siteKey, scriptReady]);
+
+  useEffect(() => {
+    if (!scriptReady || !siteKey || !containerRef.current || widgetId.current) return;
+    if (!window.turnstile) {
+      setChallengeError('Le contrôle anti-spam est indisponible. Réessayez plus tard.');
+      return;
+    }
     try {
       widgetId.current = window.turnstile.render(containerRef.current, {
         sitekey: siteKey,

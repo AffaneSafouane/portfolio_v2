@@ -1,4 +1,5 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import ContactEmailReveal from './ContactEmailReveal';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -17,15 +18,7 @@ export default function Footer() {
                     {/* Column 2 */}
                     <div>
                         <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Contact</h5>
-                        <p className="flex items-center gap-2">
-                            <a
-                                href="mailto:safoueneaffane@gmail.com"
-                                className="flex items-center gap-2 text-primary hover:underline"
-                            >
-                                <FaEnvelope className="text-gray-500 dark:text-gray-400" aria-hidden="true" />
-                                safoueneaffane@gmail.com
-                            </a>
-                        </p>
+                        <ContactEmailReveal />
                     </div>
 
                     {/* Column 3 */}

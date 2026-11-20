@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Download } from "lucide-react";
 
 export default function Home() {
     return (
@@ -31,11 +30,6 @@ export default function Home() {
                         Après avoir obtenu mon baccalauréat générale avec spécialité Mathématiques et Anglais, je pris la décision d&apos;effectuer une année de césure au Canada afin de pouvoir perfectionner mon anglais. C&apos;est durant ce voyage que mon intérêt pour l&apos;informatique a vraiment commencé. J&apos;ai alors décider d&apos;apprendre le html ainsi que le css et développer un site web en autodidacte. Suite à cela je me suis inscrit en BTS SIO option SLAM afin de développer mes compétences et élargir mon champs d&apos;expertise. <br />  
                         Mon intérêt pour l&apos;informatique vient de la liberté géographique offerte par le domaine ainsi que la demande importante dans le marché de l&apos;emploi.
                     </p>
-                    <a className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg text-base font-bold shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark mt-6"
-                        href="/static/ressources/CV_AFFANE_Safouane.pdf" target="_blank">
-                        <Download />
-                        <span>Télécharger CV</span>
-                    </a>
                 </section>
                 <section id="skills">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Compétences</h2>
