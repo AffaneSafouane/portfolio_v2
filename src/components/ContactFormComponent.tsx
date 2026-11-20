@@ -3,13 +3,15 @@
 import React, { useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { contactFormSchema, type ContactRequest } from '../lib/validation';
 
-type ErrorCode = 'invalid_request' | 'captcha_invalid' | 'captcha_unavailable' | 'delivery_failed' | 'server_unconfigured';
+type ErrorCode = 'invalid_request' | 'captcha_invalid' | 'captcha_unavailable' | 'delivery_failed' | 'server_unconfigured' | 'rate_limited' | 'duplicate_message';
 const errorMessages: Record<ErrorCode, string> = {
   invalid_request: 'Vérifiez les champs du formulaire, puis réessayez.',
   captcha_invalid: 'Le contrôle anti-spam a échoué. Réessayez.',
   captcha_unavailable: 'Le contrôle anti-spam est indisponible. Réessayez plus tard.',
   delivery_failed: 'Impossible d’envoyer le message pour le moment. Réessayez plus tard.',
   server_unconfigured: 'Le formulaire est temporairement indisponible.',
+  rate_limited: 'Trop de messages ont été envoyés. Réessayez dans quelques minutes.',
+  duplicate_message: 'Ce message a déjà été envoyé. Patientez quelques minutes avant de réessayer.',
 };
 
 interface Props {

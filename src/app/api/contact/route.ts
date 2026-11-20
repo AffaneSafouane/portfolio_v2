@@ -1,13 +1,16 @@
+import { createHash } from 'node:crypto';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 import { contactRequestSchema } from '../../../lib/validation';
 import { sendContactEmail } from '../../../lib/contact/sendEmail';
 
 export const runtime = 'nodejs';
 
 const MAX_BODY_BYTES = 16 * 1024;
-type ErrorCode = 'invalid_request' | 'captcha_invalid' | 'captcha_unavailable' | 'delivery_failed' | 'server_unconfigured';
+type ErrorCode = 'invalid_request' | 'captcha_invalid' | 'captcha_unavailable' | 'delivery_failed' | 'server_unconfigured' | 'rate_limited' | 'duplicate_message';
 
-function error(code: ErrorCode, status: number): Response {
-  return Response.json({ ok: false, code }, { status });
+function error(code: ErrorCode, status: number, message?: string): Response {
+  return Response.json({ ok: false, code, ...(message ? { message } : {}) }, { status });
 }
 
 async function readBoundedBody(request: Request): Promise<string | null> {
@@ -75,8 +78,51 @@ export async function POST(request: Request): Promise<Response> {
   } catch {
     return error('captcha_unavailable', 503);
   }
-  if (verification.success !== true || verification.hostname?.toLowerCase() !== new URL(request.url).hostname.toLowerCase()) {
+
+  const isDevTestKey =
+    process.env.NODE_ENV !== 'production' &&
+    process.env.TURNSTILE_SECRET_KEY === '1x0000000000000000000000000000000AA';
+
+  const expectedHostname = new URL(request.url).hostname.toLowerCase();
+  const returnedHostname = verification.hostname?.toLowerCase();
+  const isHostnameValid =
+    returnedHostname === expectedHostname ||
+    (isDevTestKey && returnedHostname === 'example.com');
+
+  if (verification.success !== true || !isHostnameValid) {
     return error('captcha_invalid', 403);
+  }
+
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!redisUrl || !redisToken) {
+    console.warn('Contact form: Upstash Redis is not configured; continuing without rate limiting.');
+  } else {
+    try {
+      const redis = new Redis({ url: redisUrl, token: redisToken });
+      const ratelimit = new Ratelimit({
+        redis,
+        limiter: Ratelimit.slidingWindow(3, '10 m'),
+        prefix: 'portfolio:contact:ratelimit',
+      });
+      const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+        || request.headers.get('x-real-ip')?.trim()
+        || 'anonymous';
+      const { success } = await ratelimit.limit(ip);
+      if (!success) {
+        return error('rate_limited', 429, 'Trop de messages ont été envoyés. Réessayez dans quelques minutes.');
+      }
+
+      const dedupHash = createHash('sha256')
+        .update(`${parsed.data.email.trim().toLowerCase()}:${parsed.data.message.trim()}`)
+        .digest('hex');
+      const dedupResult = await redis.set(`portfolio:contact:dedup:${dedupHash}`, '1', { nx: true, ex: 300 });
+      if (dedupResult === null) {
+        return error('duplicate_message', 429, 'Ce message a déjà été envoyé. Patientez quelques minutes avant de réessayer.');
+      }
+    } catch {
+      console.warn('Contact form: Upstash Redis is unavailable; continuing without rate limiting.');
+    }
   }
 
   try {

@@ -56,4 +56,15 @@ describe('ContactFormComponent', () => {
     await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/envoyer/i));
     expect((screen.getByLabelText('Message *') as HTMLTextAreaElement).value).toBe('Bonjour, un projet web.');
   });
+
+  it.each([
+    ['rate_limited', /trop de messages/i],
+    ['duplicate_message', /déjà été envoyé/i],
+  ])('shows a clear French message for %s', async (code, expectedMessage) => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, json: async () => ({ ok: false, code }) }));
+    render(<ContactFormComponent captchaToken="token" onResetCaptcha={vi.fn()} />);
+    fill();
+    submit();
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(expectedMessage));
+  });
 });
