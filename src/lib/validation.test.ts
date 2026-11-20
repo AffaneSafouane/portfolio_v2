@@ -37,8 +37,9 @@ describe('contactFormSchema', () => {
   });
 
   it('trims surrounding spaces', () => {
-    const result = contactFormSchema.safeParse({ ...valid, fullName: '  Al  ' });
+    const result = contactFormSchema.safeParse({ ...valid, fullName: '  Al  ', email: '  alice@example.com  ' });
     expect(result.success && result.data.fullName).toBe('Al');
+    expect(result.success && result.data.email).toBe('alice@example.com');
   });
 });
 
