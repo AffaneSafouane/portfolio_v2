@@ -1,15 +1,5 @@
-"use client";
+import TurnstileContact from '@/components/TurnstileContact';
 
-import ContactFormComponent from '@/components/ContactFormComponent';
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-
-export default function ContactForm() {
-    return (
-        <GoogleReCaptchaProvider
-            reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-            language='fr'
-        >
-            <ContactFormComponent />
-        </GoogleReCaptchaProvider>
-    )
+export default function ContactPage() {
+  return <TurnstileContact siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ''} />;
 }
