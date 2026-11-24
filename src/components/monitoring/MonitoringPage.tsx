@@ -72,7 +72,7 @@ export function MonitoringPage({ items }: { items: readonly MonitoringItem[] }) 
           <h2 id="references-title" className="text-2xl font-bold text-white sm:text-3xl">Bibliographie</h2>
           <p className="text-gray-300">Les documentations et publications primaires étayent les explications. Les autres ressources servent à découvrir des sujets à recouper.</p>
           <ul className="space-y-3">
-            {monitoringReferences.map((reference) => <li key={reference.url} className="min-w-0"><a className={linkClass} href={reference.url} target="_blank" rel="noopener noreferrer">{reference.name}</a><span className="ml-2 text-sm text-gray-400">— {reference.kind}</span></li>)}
+            {monitoringReferences.map((reference) => <li key={reference.url} className="min-w-0"><a className={linkClass} href={reference.url} target="_blank" rel="noopener noreferrer">{reference.name}</a><span className="ml-2 text-sm text-gray-400">- {reference.kind}</span></li>)}
           </ul>
         </section>
       </div>

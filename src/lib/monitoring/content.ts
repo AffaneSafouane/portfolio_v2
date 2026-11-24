@@ -24,18 +24,18 @@ export const monitoringSections = [
     paragraphs: [
       'Le développement agentique peut accélérer le prototypage, générer le code structurel d’une fonctionnalité, proposer des tests et aider à explorer une base de code existante. En réduisant le temps consacré à ces premières étapes, il laisse davantage de place à la conception et aux choix techniques.',
       'La vitesse de génération devient un piège sans garde-fous : des changements mal compris peuvent multiplier les duplications, dégrader la maintenabilité ou introduire des erreurs subtiles. Une sortie plausible et un build réussi ne prouvent pas que le comportement est correct.',
-      'Ces gains de productivité reposent sur un cadrage en amont — spécifications précises, tâches bornées et permissions adaptées — puis sur une vérification systématique en aval : tests déterministes, typage strict, linter et relecture humaine du code et du comportement. La confidentialité et le coût des outils restent également à prendre en compte.',
+      'Ces gains de productivité reposent sur un cadrage en amont - spécifications précises, tâches bornées et permissions adaptées - puis sur une vérification systématique en aval : tests déterministes, typage strict, linter et relecture humaine du code et du comportement. La confidentialité et le coût des outils restent également à prendre en compte.',
     ],
   },
 ] as const;
 
 export const monitoringReferences = [
-  { name: 'Google Codelabs — Spec-Driven Development', url: 'https://codelabs.developers.google.com/sdd-agy-cli?hl=fr', kind: 'Référence primaire' },
+  { name: 'Google Codelabs - Spec-Driven Development', url: 'https://codelabs.developers.google.com/sdd-agy-cli?hl=fr', kind: 'Référence primaire' },
   { name: 'Catalogue Google Codelabs', url: 'https://codelabs.developers.google.com/', kind: 'Ressource complémentaire' },
   { name: 'GitHub Spec Kit', url: 'https://github.github.com/spec-kit/', kind: 'Référence primaire' },
-  { name: 'Anthropic — Agent Skills', url: 'https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills', kind: 'Référence primaire' },
-  { name: 'Martin Fowler — Agentic Engineering', url: 'https://www.martinfowler.com/bliki/AgenticEngineering.html', kind: 'Référence primaire' },
-  { name: 'Martin Fowler — Maintainability sensors for coding agents', url: 'https://martinfowler.com/articles/sensors-for-coding-agents.html', kind: 'Référence primaire' },
+  { name: 'Anthropic - Agent Skills', url: 'https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills', kind: 'Référence primaire' },
+  { name: 'Martin Fowler - Agentic Engineering', url: 'https://www.martinfowler.com/bliki/AgenticEngineering.html', kind: 'Référence primaire' },
+  { name: 'Martin Fowler - Maintainability sensors for coding agents', url: 'https://martinfowler.com/articles/sensors-for-coding-agents.html', kind: 'Référence primaire' },
   { name: 'Kimi AI Resources', url: 'https://www.kimi.ai/fr/resources/', kind: 'Ressource complémentaire' },
   { name: 'Superhuman AI Archive', url: 'https://www.superhuman.ai/archive', kind: 'Ressource complémentaire' },
   { name: 'Archives Sloth Bytes', url: 'https://www.slothbytes.dev/archive', kind: 'Ressource complémentaire' },
