@@ -12,6 +12,34 @@ afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 it('parses RSS title, date, source and language', () => {
   const [item] = parseMonitoringFeed(rss(rssItem('Tests de régression', 'https://example.com/story')), monitoringSources[0]);
   expect(item).toMatchObject({ title: 'Tests de régression', url: 'https://example.com/story', sourceId: 'sloth-bytes', language: 'EN', publishedAt: '2026-11-23T12:00:00.000Z' });
+  expect(item.imageUrl).toBeNull();
+});
+
+it('reads a secure thumbnail from an Atom YouTube media group', () => {
+  const xml = atom('Coding agents', 'https://www.youtube.com/watch?v=abc123')
+    .replace('</entry>', '<media:group><media:thumbnail url="https://i.ytimg.com/vi/abc123/hqdefault.jpg" /></media:group></entry>');
+  expect(parseMonitoringFeed(xml, monitoringSources[1])[0]?.imageUrl)
+    .toBe('https://i.ytimg.com/vi/abc123/hqdefault.jpg');
+});
+
+it.each([
+  ['media:content', '<media:content url="https://example.com/cover.jpg" type="image/jpeg" />'],
+  ['enclosure', '<enclosure url="https://example.com/cover.jpg" type="image/jpeg" />'],
+])('reads a secure image from RSS %s', (_kind, tag) => {
+  const xml = rss(rssItem('Tests de régression', 'https://example.com/story').replace('</item>', `${tag}</item>`));
+  expect(parseMonitoringFeed(xml, monitoringSources[0])[0]?.imageUrl).toBe('https://example.com/cover.jpg');
+});
+
+it('rejects an HTTP thumbnail and keeps a secure alternate image', () => {
+  const xml = rss(rssItem('Tests de régression', 'https://example.com/story').replace('</item>',
+    '<media:thumbnail url="http://example.com/insecure.jpg" /><enclosure url="https://example.com/secure.jpg" type="image/jpeg" /></item>'));
+  expect(parseMonitoringFeed(xml, monitoringSources[0])[0]?.imageUrl).toBe('https://example.com/secure.jpg');
+});
+
+it('requires the literal HTTPS URL form for image media', () => {
+  const xml = rss(rssItem('Tests de régression', 'https://example.com/story').replace('</item>',
+    '<media:thumbnail url="https:/example.com/not-strict.jpg" /></item>'));
+  expect(parseMonitoringFeed(xml, monitoringSources[0])[0]?.imageUrl).toBeNull();
 });
 
 it('preserves functional YouTube parameters and removes known tracking parameters', () => {

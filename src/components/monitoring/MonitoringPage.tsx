@@ -43,6 +43,15 @@ export function MonitoringPage({ items }: { items: readonly MonitoringItem[] }) 
               {items.map((item) => {
                 const source = monitoringSources.find((candidate) => candidate.id === item.sourceId);
                 return <li key={item.id} className="min-w-0 rounded-xl border border-gray-700 bg-gray-800/40 p-5">
+                  <div className="mb-4 aspect-video overflow-hidden rounded-lg border border-gray-700 bg-gray-900">
+                    {item.imageUrl ? (
+                      // RSS images have arbitrary external hosts; keep the URL validated by the server parser.
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={item.imageUrl} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" className="h-full w-full object-cover" />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 px-4 text-center text-sm font-semibold tracking-wide text-gray-300" aria-hidden="true">{source?.name ?? item.sourceId}</div>
+                    )}
+                  </div>
                   <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-gray-300"><span>{source?.name ?? item.sourceId}</span><LanguageBadge language={item.language} /></div>
                   <h3 className="text-lg font-semibold leading-snug"><a className={linkClass} href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a></h3>
                   <p className="mt-3 text-sm text-gray-400"><time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time></p>

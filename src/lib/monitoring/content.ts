@@ -22,8 +22,9 @@ export const monitoringSections = [
     id: 'interet-et-enjeux',
     title: 'Intérêt et enjeux pour le logiciel et le web',
     paragraphs: [
-      'Un besoin clair et des changements vérifiables peuvent aider à améliorer la qualité, la fiabilité et la vitesse de développement. Le résultat reste à évaluer : une sortie plausible peut être erronée et des tests incomplets peuvent laisser passer un défaut. Un build réussi ne prouve pas à lui seul la qualité de la fonctionnalité.',
-      'La revue humaine doit examiner le comportement et le code. Les permissions d’accès, la confidentialité des données, le coût des outils, la coordination entre intervenants et la maintenance du logiciel font aussi partie de la décision.',
+      'Le développement agentique peut accélérer le prototypage, générer le code structurel d’une fonctionnalité, proposer des tests et aider à explorer une base de code existante. En réduisant le temps consacré à ces premières étapes, il laisse davantage de place à la conception et aux choix techniques.',
+      'La vitesse de génération devient un piège sans garde-fous : des changements mal compris peuvent multiplier les duplications, dégrader la maintenabilité ou introduire des erreurs subtiles. Une sortie plausible et un build réussi ne prouvent pas que le comportement est correct.',
+      'Ces gains de productivité reposent sur un cadrage en amont — spécifications précises, tâches bornées et permissions adaptées — puis sur une vérification systématique en aval : tests déterministes, typage strict, linter et relecture humaine du code et du comportement. La confidentialité et le coût des outils restent également à prendre en compte.',
     ],
   },
 ] as const;

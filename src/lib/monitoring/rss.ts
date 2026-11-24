@@ -9,6 +9,7 @@ export type MonitoringItem = Readonly<{
   sourceId: MonitoringSourceId;
   language: MonitoringLanguage;
   publishedAt: string;
+  imageUrl: string | null;
 }>;
 
 const MAX_BODY_BYTES = 1024 * 1024;
@@ -44,6 +45,34 @@ function articleUrl(raw: string): string | null {
   }
 }
 
+function imageUrl(entry: Record<string, unknown>): string | null {
+  const group = record(entry['media:group']);
+  const media = [
+    { nodes: entry['media:thumbnail'], imageOnly: false },
+    { nodes: group['media:thumbnail'], imageOnly: false },
+    { nodes: entry['media:content'], imageOnly: true },
+    { nodes: group['media:content'], imageOnly: true },
+    { nodes: entry.enclosure, imageOnly: true },
+  ];
+  for (const { nodes, imageOnly } of media) {
+    for (const node of entries(nodes)) {
+      const attributes = record(node);
+      const type = text(attributes['@_type']).toLowerCase();
+      const medium = text(attributes['@_medium']).toLowerCase();
+      if (imageOnly && ((type && !type.startsWith('image/')) || (medium && medium !== 'image'))) continue;
+      const raw = text(attributes['@_url']);
+      if (!raw.startsWith('https://')) continue;
+      try {
+        const parsed = new URL(raw);
+        if (parsed.protocol === 'https:') return parsed.toString();
+      } catch {
+        // Ignore malformed third-party media URLs.
+      }
+    }
+  }
+  return null;
+}
+
 function validDate(raw: string, timestamp: number): boolean {
   if (!Number.isFinite(timestamp)) return false;
   const isoDay = /^(\d{4})-(\d{2})-(\d{2})T/.exec(raw);
@@ -73,7 +102,7 @@ export function parseMonitoringFeed(xml: string, source: MonitoringSource): read
     if (!title || !url || !rawDate || !validDate(rawDate, date)) continue;
     const summary = text(entry.description ?? entry.summary ?? entry['content:encoded'] ?? entry.content);
     if (!isRelevantMonitoringItem(title, summary)) continue;
-    result.push({ id: url, title, url, sourceId: source.id, language: source.language, publishedAt: new Date(date).toISOString() });
+    result.push({ id: url, title, url, sourceId: source.id, language: source.language, publishedAt: new Date(date).toISOString(), imageUrl: imageUrl(entry) });
   }
   return result;
 }

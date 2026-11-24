@@ -9,6 +9,7 @@ const article = {
   sourceId: 'sloth-bytes' as const,
   language: 'EN' as const,
   publishedAt: '2026-11-23T12:00:00.000Z',
+  imageUrl: 'https://example.com/cover.jpg',
 };
 
 it('keeps a local editorial entry when external feeds are empty', () => {
@@ -27,6 +28,7 @@ it('escapes XML, attributes external items and never republishes article bodies'
   expect(xml).toContain('<source url="https://rss.beehiiv.com/feeds/wnEIOSd99q.xml">Sloth Bytes</source>');
   expect(xml).toContain('<category>EN</category>');
   expect(xml).not.toContain('<description>Tests &');
+  expect(xml).not.toContain('cover.jpg');
   const parsed = new XMLParser({ ignoreAttributes: false }).parse(xml);
   const items = parsed.rss.channel.item;
   expect(items).toHaveLength(2);
