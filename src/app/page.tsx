@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { ProjectCard } from "../components/projects/ProjectCard";
+import { getFeaturedProjects } from "../lib/projects/catalog";
+import { getProjectContent } from "../lib/projects/content";
 
 export default function Home() {
     return (
@@ -56,49 +59,13 @@ export default function Home() {
                 <section id="projects">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Projets</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* <div
-                            className="bg-white dark:bg-gray-800/20 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-                            <div className="w-full h-48 bg-cover bg-center"
-                                style={{
-                                    backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdOGaxmyztQYrvVk-fyOvb_SVEweQoXKwZ8Nq2ZQtH28qeCWjgTu8iOSgG5h1CLs6Hin-JZ8wBSFr7qBfE_4B1t1SKCHx6WkqpQFsVbraDJLnEFYNN2D5TMbaLOXcD6C0qnhPlZ1O4-dSqnuCJULJsoVyxsjNg8ZmBO1QW1MhpI9XMICWqCa_02cvZAqIf9bp0X0dyzyO2yFP96jq3EMY6ky43PFUM97cMIbdxi9MNXDmjpo7fFIojTiia5zUXeCIOsTdwBxiTi88z")`
-                                }}>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">DTCompagnie</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">
-                                    A full-featured e-commerce platform with user authentication, product management, and payment integration, all made via Wordpress.
-                                </p>
-                            </div>
-                        </div> */}
-                        <div
-                            className="bg-white dark:bg-gray-800/20 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-                            <div className="w-full h-48 bg-cover bg-center"
-                                style={{
-                                    backgroundImage: `url("static/img/cvven.png")`
-                                }}>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">CVVEN</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">Projet en groupe de création de site web de réservations et gestion de vacances, en php, avec le framework CodeIgniter 4.</p>
-                            </div>
-                        </div>
-                        <div
-                            className="bg-white dark:bg-gray-800/20 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-                            <div className="w-full h-48 bg-cover bg-center"
-                                style={{
-                                    backgroundImage: `url("static/img/biblios.png")`
-                                }}>
-                            </div>
-                            <div className="p-6">
-                                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Biblios</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mt-2 text-sm">Site permettant de gérer et consulter une bibliothéque, développer à l&apos;aide du framework Symfony 7.</p>
-                            </div>
-                        </div>
+                        {getFeaturedProjects().map((project) => (
+                            <ProjectCard key={project.id} project={project} content={getProjectContent(project.id)} />
+                        ))}
                     </div>
-                    <button
-                        className="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 mt-6">
-                        <Link href="/projects">Voir Projets</Link>
-                    </button>
+                    <Link href="/projects" className="inline-block bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors mt-6">
+                        Voir tous les projets
+                    </Link>
                 </section>
                 <section id="experiences">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Expériences</h2>
