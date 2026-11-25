@@ -37,6 +37,7 @@ export const gestimmo = {
         { kind: 'paragraph', text: 'Le modèle distingue User, compte technique, et Owner, entité juridique active. Property, Tenant et Lease sont rattachés au bailleur. Receipt représente un terme mensuel et garde des snapshots financiers ; Payment conserve l’encaissement, PaymentAllocation sa répartition entre termes. Cette séparation permet à un versement de couvrir plusieurs mois ou à un mois de recevoir plusieurs versements.' },
         { kind: 'paragraph', text: 'Les Server Actions sont organisées par domaine et passent par un garde d’authentification et d’appartenance. Les calculs de prorata, de chevauchement de baux, de statuts, d’allocation et de montants vivent dans une couche métier distincte. L’écriture d’un paiement et de ses allocations s’effectue dans une transaction Prisma Serializable. Les PDF sont créés en mémoire puis téléversés vers R2 ; leurs liens de téléchargement sont temporaires.' },
         { kind: 'media', media: { placement: 'Fiche de bail sur la base seed, avec noms, adresses et montants fictifs.', shape: 'landscape', src: '/static/img/projects/gestimmo/fiche-bail.webp', alt: 'Fiche de bail GestImmo avec des données fictives' } },
+        { kind: 'media', media: { placement: 'Aperçu d’une quittance de loyer et d’un reçu de paiement partiel générés depuis un terme ventilé, avec données seed fictives.', shape: 'landscape', src: '/static/img/projects/gestimmo/quittance-recu.webp', alt: 'Quittance de loyer et reçu de paiement partiel GestImmo avec des données fictives' } },
       ],
     },
     {

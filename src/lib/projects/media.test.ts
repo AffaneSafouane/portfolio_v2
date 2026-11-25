@@ -25,10 +25,10 @@ it('retourne seulement une image réellement présente dans public', () => {
   });
 });
 
-it('déclare les treize chemins de capture sous public/static/img/projects', () => {
+it('déclare les quatorze chemins de capture sous public/static/img/projects', () => {
   const expected: Record<string, string[]> = {
     'le-28': ['accueil.webp', 'admin-commandes.webp', 'alerte-commande.webp', 'exports-menu.webp'],
-    gestimmo: ['tableau-de-bord.webp', 'fiche-bail.webp', 'ventilation-paiement.webp'],
+    gestimmo: ['tableau-de-bord.webp', 'fiche-bail.webp', 'quittance-recu.webp', 'ventilation-paiement.webp'],
     'dt-compagnie': ['accueil.webp', 'configurateur-textile.webp', 'livraison.webp'],
     rave: ['accueil.webp'],
     'galerie-photo': ['accueil.webp'],
