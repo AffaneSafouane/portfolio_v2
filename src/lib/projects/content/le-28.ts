@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const le28 = {
-  title: 'Le 28 — Click & Collect et commande traiteur',
+  title: 'Le 28 - Click & Collect et commande traiteur',
   summary: 'Projet client pour un restaurant, commencé en équipe puis repris et enrichi en solo. La plateforme réunit commande en ligne, retrait, paiement et outils de gestion pour le restaurateur.',
   lead: 'Une application en production pour un restaurant de Villejuif : les clients commandent ou demandent une prestation traiteur, tandis que l’équipe suit les produits, les stocks et les commandes.',
   sections: [
@@ -70,7 +70,7 @@ export const le28 = {
         { kind: 'subheading', text: 'Ce que j’ai acquis' },
         { kind: 'paragraph', text: 'Ce projet m’a appris à travailler dans une équipe sur un produit livré à un client, puis à reprendre en autonomie un code que je ne connaissais pas entièrement. J’ai renforcé ma pratique des revues, de la CI et des tests E2E, ainsi que le diagnostic d’incidents de paiement, d’alertes et de rendu en production. La reprise a également demandé de documenter les décisions pour assurer la continuité du projet.' },
         { kind: 'subheading', text: 'Ce que j’améliorerais' },
-        { kind: 'paragraph', text: 'Je traiterais plus tôt les cas de paiement asynchrone — rejouement, échec réseau et remboursement concurrent — et les contraintes de rendu des menus selon la taille et les polices. Je maintiendrais aussi le document de conception à jour à chaque évolution importante. Les tests automatisés de Web Push ne remplacent pas une vérification sur l’appareil iOS du restaurateur.' },
+        { kind: 'paragraph', text: 'Je traiterais plus tôt les cas de paiement asynchrone - rejouement, échec réseau et remboursement concurrent - et les contraintes de rendu des menus selon la taille et les polices. Je maintiendrais aussi le document de conception à jour à chaque évolution importante. Les tests automatisés de Web Push ne remplacent pas une vérification sur l’appareil iOS du restaurateur.' },
       ],
     },
   ],

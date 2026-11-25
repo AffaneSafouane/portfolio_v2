@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const rave = {
-  title: 'RAVE — transformation audio sur mobile',
+  title: 'RAVE - Transformation audio sur mobile',
   summary: 'Application React Native développée seul dans le cadre d’un projet de formation : elle enregistre ou importe un son, l’envoie à un serveur RAVE externe, puis permet d’écouter le résultat.',
   lead: 'Une interface mobile pour choisir une source audio et un modèle, lancer un traitement sur un serveur local et comparer l’original au rendu transformé.',
   sections: [
@@ -28,7 +28,7 @@ export const rave = {
       id: 'architecture',
       title: 'Architecture',
       blocks: [
-        { kind: 'paragraph', text: 'React Native, Expo et TypeScript forment le client. Trois onglets — Home, Record et Rave — séparent la connexion au serveur, l’enregistrement et la transformation. Redux Toolkit et Redux Persist conservent l’hôte, les modèles, la sélection et la liste des enregistrements dans AsyncStorage. Les clips sont copiés dans le répertoire documentaire ; les services isolent les appels HTTP et les opérations de fichiers.' },
+        { kind: 'paragraph', text: 'React Native, Expo et TypeScript forment le client. Trois onglets - Home, Record et Rave - séparent la connexion au serveur, l’enregistrement et la transformation. Redux Toolkit et Redux Persist conservent l’hôte, les modèles, la sélection et la liste des enregistrements dans AsyncStorage. Les clips sont copiés dans le répertoire documentaire ; les services isolent les appels HTTP et les opérations de fichiers.' },
         { kind: 'paragraph', text: 'Le client appelle GET / pour vérifier le serveur, GET /getmodels et /selectModel pour le modèle, POST /upload pour le fichier, puis GET /download jusqu’à la disponibilité du rendu. Les instances Audio.Sound restent gérées dans les écrans et sont libérées lors d’un changement de piste ou de la fermeture.' },
       ],
     },

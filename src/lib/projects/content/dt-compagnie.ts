@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const dtCompagnie = {
-  title: 'DT Compagnie — e-commerce textile et configurateur DTF',
+  title: 'DT Compagnie - E-commerce textile et configurateur DTF',
   summary: 'Plateforme WooCommerce développée en entreprise pendant ma Licence Professionnelle. J’ai repris un existant, intégré la personnalisation textile et automatisé des règles de production et de livraison.',
   lead: 'Une boutique de textiles personnalisés et de planches DTF qui transforme une demande de devis manuelle en parcours de commande et de production.',
   sections: [

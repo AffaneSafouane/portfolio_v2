@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const itunesExplorer = {
-  title: 'iTunes Explorer — recherche et collection musicale',
+  title: 'iTunes Explorer - Recherche et collection musicale',
   summary: 'Application React Native développée seul dans le cadre d’un projet de formation : rechercher des morceaux via l’API iTunes, garder des favoris et attribuer des notes indépendantes.',
   lead: 'Une application mobile de découverte musicale qui combine une API publique, une recherche filtrée et une petite collection enregistrée localement.',
   sections: [

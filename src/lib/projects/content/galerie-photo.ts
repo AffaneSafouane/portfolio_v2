@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const galeriePhoto = {
-  title: 'Galerie Photo — capture et dossiers mobiles',
+  title: 'Galerie Photo - Capture et dossiers mobiles',
   summary: 'Application React Native développée seul dans le cadre d’un projet de formation : une galerie avec prise de vue, dossiers imbriqués et consultation en plein écran.',
   lead: 'Une petite application de capture photo dont le défi principal est de garder une arborescence de dossiers cohérente quand on déplace ou supprime ses éléments.',
   sections: [

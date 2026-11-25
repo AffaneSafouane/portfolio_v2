@@ -6,7 +6,7 @@ export const projects: readonly Project[] = [
     featuredOrder: 1, themeId: 'menu',
     technologies: ['Next.js', 'PostgreSQL', 'Stripe'],
     cover: { placement: 'Page d’accueil du restaurant Le 28, avec accès à la commande en ligne et au service traiteur.', shape: 'landscape', src: '/static/img/projects/le28/homepage.webp', alt: 'Page d’accueil du restaurant Le 28 avec son personnage panda' },
-    links: { site: null, source: null, document: null },
+    links: { site: "https://www.28saveurs.com/", source: null, document: null },
   },
   {
     id: 'gestimmo', slug: 'gestimmo', platform: 'web', visibility: 'public', order: 2,
@@ -19,26 +19,26 @@ export const projects: readonly Project[] = [
     id: 'dt-compagnie', slug: 'dt-compagnie', platform: 'web', visibility: 'public', order: 3,
     themeId: 'textile', technologies: ['WordPress', 'WooCommerce', 'PHP'],
     cover: { placement: 'Accueil de DT Compagnie présentant l’impression textile personnalisée et les familles de produits.', shape: 'landscape', src: '/static/img/projects/dtco/homepage.webp', alt: 'Page d’accueil de DT Compagnie et son catalogue textile' },
-    links: { site: null, source: null, document: null },
+    links: { site: "https://dtcompagnie.fr/", source: null, document: null },
   },
   {
     id: 'rave', slug: 'rave', platform: 'mobile', visibility: 'public', order: 4,
     featuredOrder: 3, themeId: 'equalizer',
     technologies: ['React Native', 'Expo', 'Redux'],
     cover: { placement: 'Écran RAVE de sélection du modèle et de la source sonore avant transformation.', shape: 'portrait', src: '/static/img/projects/rave/audio-conversion.webp', alt: 'Écran de transfert de timbre RAVE avec modèles et sources audio' },
-    links: { site: null, source: null, document: null },
+    links: { site: null, source: "https://github.com/AffaneSafouane/react-rave-app.git", document: null },
   },
   {
     id: 'galerie-photo', slug: 'galerie-photo', platform: 'mobile', visibility: 'public', order: 5,
     themeId: 'camera', technologies: ['React Native', 'Expo', 'Redux Toolkit'],
     cover: { placement: 'Galerie Photo montrant un dossier et des images de démonstration.', shape: 'portrait', src: '/static/img/projects/photo-gallery/gallery.webp', alt: 'Galerie mobile avec dossier et deux photos de démonstration' },
-    links: { site: null, source: null, document: null },
+    links: { site: null, source: "https://github.com/AffaneSafouane/react-photo-app.git", document: null },
   },
   {
     id: 'itunes-explorer', slug: 'itunes-explorer', platform: 'mobile', visibility: 'public', order: 6,
     themeId: 'disc', technologies: ['React Native', 'Expo', 'AsyncStorage'],
     cover: { placement: 'Recherche iTunes Explorer par artiste avec liste de morceaux et pochettes.', shape: 'portrait', src: '/static/img/projects/itunes-explorer/homepage.webp', alt: 'Résultats de recherche musicale par artiste dans iTunes Explorer' },
-    links: { site: null, source: null, document: null },
+    links: { site: null, source: "https://github.com/AffaneSafouane/iTunes-search.git", document: null },
   },
 ];
 

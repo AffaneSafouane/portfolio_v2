@@ -1,7 +1,7 @@
 import type { ProjectContent } from '../types';
 
 export const gestimmo = {
-  title: 'GestImmo — gestion locative pour bailleurs',
+  title: 'GestImmo - Gestion locative pour bailleurs',
   summary: 'Application de gestion locative conçue seul pour un client pendant un stage. Elle centralise biens, baux, règlements et documents, avec un moteur d’imputation des paiements.',
   lead: 'Un outil pour remplacer le suivi manuel des loyers, proratas et impayés par une vision cohérente des biens, des baux et des encaissements.',
   sections: [
