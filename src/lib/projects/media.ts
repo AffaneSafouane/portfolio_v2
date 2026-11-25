@@ -2,7 +2,7 @@ import { statSync } from 'node:fs';
 import path from 'node:path';
 import type { ProjectMedia } from './types';
 
-type AvailableProjectMedia = ProjectMedia & { src: `/static/img/${string}`; alt: string };
+export type AvailableProjectMedia = ProjectMedia & { src: `/static/img/${string}`; alt: string };
 
 export function getAvailableProjectMedia(media?: ProjectMedia): AvailableProjectMedia | null {
   const alt = media?.alt?.trim();

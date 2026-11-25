@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { getAvailableProjectMedia } from '../../lib/projects/media';
 import type { Project, ProjectBlock, ProjectContent } from '../../lib/projects/types';
 import { ProjectFigure } from './ProjectFigure';
 
@@ -21,7 +20,6 @@ function ContentBlock({ block }: { block: ProjectBlock }) {
 }
 
 export function ProjectCaseStudy({ project, content }: { project: Project; content: ProjectContent }) {
-  const cover = getAvailableProjectMedia(project.cover);
   const links = [
     { label: 'Voir le site', href: project.links?.site },
     { label: 'Voir le code', href: project.links?.source },
@@ -50,7 +48,7 @@ export function ProjectCaseStudy({ project, content }: { project: Project; conte
               {links.map((link) => <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline underline-offset-4 hover:text-blue-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{link.label}</a>)}
             </div>
           ) : null}
-          {cover ? <div className="pt-4"><ProjectFigure media={cover} /></div> : null}
+          {project.cover ? <ProjectFigure media={project.cover} /> : null}
         </header>
 
         <nav aria-label="Sommaire du projet" className="my-10 rounded-xl border border-gray-700 bg-gray-800/40 p-5 sm:p-6">

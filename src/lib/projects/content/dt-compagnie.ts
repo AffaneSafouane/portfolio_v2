@@ -32,7 +32,7 @@ export const dtCompagnie = {
         { kind: 'paragraph', text: 'Le socle associe WordPress, WooCommerce, PHP et JavaScript à Roots Bedrock. Bedrock sépare le cœur WordPress du contenu applicatif et rend la configuration et les dépendances Composer plus prévisibles. Un thème enfant Astra regroupe le code métier par domaines : personnalisation Lumise, livraison, validation B2B, interface WooCommerce et recherche. Des correctifs d’extensions sont distribués avec composer-patches plutôt que modifiés uniquement à la main.' },
         { kind: 'paragraph', text: 'L’environnement local Docker Compose réunit l’application, MariaDB, Redis, phpMyAdmin et Stripe CLI pour les webhooks. Lumise gère les zones de marquage et l’export ; Build a Gang Sheet compose les planches DTF ; Stripe encaisse les paiements. Des scripts Python et PHP automatisent l’import d’images fournisseurs, les variations et les métadonnées nécessaires au configurateur.' },
         { kind: 'paragraph', text: 'Le moteur de livraison combine volume des textiles, longueur linéaire des planches DTF et tare de l’emballage. Des règles écartent les transporteurs incompatibles avec un poids ou une dimension. Le parcours B2B valide les identifiants professionnels et transmet les informations utiles aux factures PDF.' },
-        { kind: 'media', media: { placement: 'Capture du configurateur textile avec une variation et ses zones de marquage, sans commande client réelle.', shape: 'landscape' } },
+        { kind: 'media', media: { placement: 'Capture du configurateur textile avec une variation et ses zones de marquage, sans commande client réelle.', shape: 'landscape', src: '/static/img/projects/dt-compagnie/configurateur-textile.webp', alt: 'Configurateur textile de DT Compagnie' } },
       ],
     },
     {
@@ -52,7 +52,7 @@ export const dtCompagnie = {
         { kind: 'paragraph', text: 'J’ai aussi étendu le configurateur à cinq faces et corrigé un export Fabric.js qui rognait les faces cachées : les masques sont suspendus pour la capture puis rétablis dans un bloc de nettoyage. Pour les emails de commande, un contrôle de la transparence des PNG écarte les faces non personnalisées tout en conservant les bons indices entre captures et fichiers.' },
         { kind: 'subheading', text: 'Choisir un emballage et un transporteur compatibles' },
         { kind: 'paragraph', text: 'Un tarif fondé sur le poids seul sous-estimait les commandes volumineuses et les longues planches DTF. L’algorithme additionne volumes textiles et longueurs de planches, distingue les petites commandes DTF à plat des colis mixtes et choisit un emballage par paliers. Il ajoute la tare avant de filtrer Mondial Relay, Chronopost, Lettre Verte et Colissimo selon leurs limites de poids et de dimensions.' },
-        { kind: 'media', media: { placement: 'Vue de configuration ou de résultat de livraison pour une commande fictive textile + DTF.', shape: 'landscape' } },
+        { kind: 'media', media: { placement: 'Vue de configuration ou de résultat de livraison pour une commande fictive textile + DTF.', shape: 'landscape', src: '/static/img/projects/dt-compagnie/livraison.webp', alt: 'Choix de livraison pour une commande fictive DT Compagnie' } },
       ],
     },
     {
