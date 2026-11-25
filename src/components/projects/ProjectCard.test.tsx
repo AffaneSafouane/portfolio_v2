@@ -13,6 +13,8 @@ it('rend une carte lisible sans cadre vide quand la couverture manque', () => {
   expect(html).toContain('Web');
   expect(html).toContain('Next.js');
   expect(html).not.toContain('<img');
+  expect(html).not.toContain('<figure');
+  expect(html).not.toContain('max-h-64');
   expect(html).not.toContain('Accueil ou menu public');
   expect(html).not.toContain('Académique');
 });
