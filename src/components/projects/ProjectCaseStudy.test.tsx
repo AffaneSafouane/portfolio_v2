@@ -6,7 +6,7 @@ import { ProjectCaseStudy } from './ProjectCaseStudy';
 
 afterEach(() => vi.unstubAllEnvs());
 
-it('offre les six rubriques et leurs ancres sans révéler les notes de capture', () => {
+it('offre les six rubriques, les ancres et les captures sans révéler les notes de préparation', () => {
   vi.stubEnv('NODE_ENV', 'production');
   const project = getProjectBySlug('gestimmo')!;
   const html = renderToStaticMarkup(<ProjectCaseStudy project={project} content={getProjectContent(project.id)} />);
@@ -18,20 +18,20 @@ it('offre les six rubriques et leurs ancres sans révéler les notes de capture'
   }
   expect(html).toContain('GestImmo');
   expect(html).toContain('Bilan : acquis et recul critique');
-  expect(html).not.toContain('Tableau de bord de GestImmo avec les données seed');
-  expect(html).not.toContain('Vue de ventilation d’un paiement');
-  expect(html).not.toContain('<img');
+  expect(html).not.toContain('Tableau de bord GestImmo avec loyers, biens et alertes alimentés par les données seed.');
+  expect(html).not.toContain('Formulaire d’enregistrement d’un paiement avec option d’imputation prioritaire');
+  expect(html.match(/<img /g)).toHaveLength(4);
 });
 
-it('montre les emplacements de toutes les captures web en développement', () => {
+it('affiche toutes les captures disponibles du 28 en développement', () => {
   vi.stubEnv('NODE_ENV', 'development');
   const project = getProjectBySlug('le-28')!;
   const html = renderToStaticMarkup(<ProjectCaseStudy project={project} content={getProjectContent(project.id)} />);
-  for (const filename of ['accueil.webp', 'admin-commandes.webp', 'alerte-commande.webp', 'exports-menu.webp']) {
-    expect(html).toContain(`public/static/img/projects/le-28/${filename}`);
+  for (const filename of ['homepage.webp', 'orders-admin.webp', 'admin-notif.webp', 'menu-export-square.webp', 'orders-portrait.webp']) {
+    expect(html).toContain(`le28%2F${filename}`);
   }
-  expect(html).toContain('Paysage');
-  expect(html).not.toContain('<img');
+  expect(html.match(/<img /g)).toHaveLength(5);
+  expect(html).not.toContain('Capture à ajouter');
 });
 
 it('garde les liens facultatifs absents du rendu', () => {

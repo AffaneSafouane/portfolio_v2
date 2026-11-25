@@ -9,7 +9,10 @@ afterEach(() => vi.unstubAllEnvs());
 
 it('rend une carte lisible sans cadre vide quand la couverture manque', () => {
   vi.stubEnv('NODE_ENV', 'production');
-  const project = getProjectBySlug('le-28')!;
+  const project = {
+    ...getProjectBySlug('le-28')!,
+    cover: { placement: 'Capture attendue', shape: 'landscape' as const, src: '/static/img/projects/le28/absente.webp' as const, alt: 'Capture absente' },
+  };
   const html = renderToStaticMarkup(<ProjectCard project={project} content={getProjectContent(project.id)} />);
   expect(html).toContain('href="/projects/le-28"');
   expect(html).toContain('Le 28');
@@ -18,7 +21,7 @@ it('rend une carte lisible sans cadre vide quand la couverture manque', () => {
   expect(html).not.toContain('<img');
   expect(html).not.toContain('<figure');
   expect(html).not.toContain('max-h-64');
-  expect(html).not.toContain('Accueil ou menu public');
+  expect(html).not.toContain('Capture attendue');
   expect(html).not.toContain('Académique');
 });
 
@@ -31,12 +34,24 @@ it('omet totalement la figure avant dépôt du fichier', () => {
 
 it('montre en développement le chemin, la prise de vue et le format prévus', () => {
   vi.stubEnv('NODE_ENV', 'development');
-  const project = getProjectBySlug('rave')!;
+  const project = {
+    ...getProjectBySlug('rave')!,
+    cover: { placement: 'Capture du transfert audio à ajouter.', shape: 'portrait' as const, src: '/static/img/projects/rave/absente.webp' as const, alt: 'Capture absente' },
+  };
   const html = renderToStaticMarkup(<ProjectCard project={project} content={getProjectContent(project.id)} />);
-  expect(html).toContain('public/static/img/projects/rave/accueil.webp');
-  expect(html).toContain('Écran principal de transformation audio de RAVE.');
+  expect(html).toContain('public/static/img/projects/rave/absente.webp');
+  expect(html).toContain('Capture du transfert audio à ajouter.');
   expect(html).toContain('Portrait');
   expect(html).not.toContain('<img');
+});
+
+it('affiche la vraie couverture WebP lorsque le fichier est présent', () => {
+  vi.stubEnv('NODE_ENV', 'production');
+  const project = getProjectBySlug('le-28')!;
+  const html = renderToStaticMarkup(<ProjectCard project={project} content={getProjectContent(project.id)} />);
+  expect(html).toContain('alt="Page d’accueil du restaurant Le 28 avec son personnage panda"');
+  expect(html).toContain('le28%2Fhomepage.webp');
+  expect(html).not.toContain('Capture à ajouter');
 });
 
 it('conserve entièrement le cadre portrait quand un fichier existe', () => {

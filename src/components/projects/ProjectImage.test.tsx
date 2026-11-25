@@ -21,11 +21,11 @@ it('retire la figure entière si une image existante échoue au chargement', () 
 it('indique le fichier et la capture attendue si une image échoue en développement', () => {
   vi.stubEnv('NODE_ENV', 'development');
   const { container } = render(<ProjectImage media={{
-    src: '/static/img/projects/rave/accueil.webp', alt: 'Écran RAVE', placement: 'Écran principal de transformation audio.', shape: 'portrait',
+    src: '/static/img/projects/rave/audio-conversion.webp', alt: 'Écran RAVE', placement: 'Écran principal de transformation audio.', shape: 'portrait',
   }} />);
   fireEvent.error(screen.getByAltText('Écran RAVE'));
   expect(container.querySelector('img')).toBeNull();
-  expect(container.textContent).toContain('public/static/img/projects/rave/accueil.webp');
+  expect(container.textContent).toContain('public/static/img/projects/rave/audio-conversion.webp');
   expect(container.textContent).toContain('Écran principal de transformation audio.');
   expect(container.textContent).toContain('Portrait');
 });

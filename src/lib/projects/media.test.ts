@@ -25,22 +25,37 @@ it('retourne seulement une image réellement présente dans public', () => {
   });
 });
 
-it('déclare les quatorze chemins de capture sous public/static/img/projects', () => {
-  const expected: Record<string, string[]> = {
-    'le-28': ['accueil.webp', 'admin-commandes.webp', 'alerte-commande.webp', 'exports-menu.webp'],
-    gestimmo: ['tableau-de-bord.webp', 'fiche-bail.webp', 'quittance-recu.webp', 'ventilation-paiement.webp'],
-    'dt-compagnie': ['accueil.webp', 'configurateur-textile.webp', 'livraison.webp'],
-    rave: ['accueil.webp'],
-    'galerie-photo': ['accueil.webp'],
-    'itunes-explorer': ['accueil.webp'],
+it('relie chaque capture WebP présente à sa fiche avec le bon format', () => {
+  const expected: Record<string, { path: string; shape: 'landscape' | 'portrait' }[]> = {
+    'le-28': [
+      { path: 'le28/homepage.webp', shape: 'landscape' },
+      { path: 'le28/orders-admin.webp', shape: 'landscape' },
+      { path: 'le28/admin-notif.webp', shape: 'landscape' },
+      { path: 'le28/menu-export-square.webp', shape: 'landscape' },
+      { path: 'le28/orders-portrait.webp', shape: 'landscape' },
+    ],
+    gestimmo: [
+      { path: 'gestimmo/dashboard.webp', shape: 'landscape' },
+      { path: 'gestimmo/lease.webp', shape: 'landscape' },
+      { path: 'gestimmo/receipt.webp', shape: 'portrait' },
+      { path: 'gestimmo/fifo.webp', shape: 'portrait' },
+    ],
+    'dt-compagnie': [
+      { path: 'dtco/homepage.webp', shape: 'landscape' },
+      { path: 'dtco/config-textile.webp', shape: 'landscape' },
+      { path: 'dtco/delivery-pt1.webp', shape: 'landscape' },
+      { path: 'dtco/delivery-pt2.webp', shape: 'portrait' },
+    ],
+    rave: [{ path: 'rave/audio-conversion.webp', shape: 'portrait' }],
+    'galerie-photo': [{ path: 'photo-gallery/gallery.webp', shape: 'portrait' }],
+    'itunes-explorer': [{ path: 'itunes-explorer/homepage.webp', shape: 'portrait' }],
   };
 
   for (const project of getPublicProjects()) {
     const media = [project.cover, ...getProjectContent(project.id).sections.flatMap((section) =>
       section.blocks.filter((block) => block.kind === 'media').map((block) => block.media))];
-    expect(media.map((item) => item?.src)).toEqual(expected[project.slug].map((filename) =>
-      `/static/img/projects/${project.slug}/${filename}`));
+    expect(media.map((item) => ({ path: item?.src?.replace('/static/img/projects/', ''), shape: item?.shape }))).toEqual(expected[project.slug]);
     expect(media.every((item) => item?.placement.trim() && item.alt?.trim())).toBe(true);
-    expect(media.every((item) => item?.shape === (project.platform === 'web' ? 'landscape' : 'portrait'))).toBe(true);
+    expect(media.every((item) => getAvailableProjectMedia(item) !== null)).toBe(true);
   }
 });
