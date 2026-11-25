@@ -2,7 +2,7 @@ import type { ProjectContent } from '../types';
 
 export const rave = {
   title: 'RAVE — transformation audio sur mobile',
-  summary: 'Projet de formation React Native : une application mobile qui enregistre ou importe un son, l’envoie à un serveur RAVE externe, puis permet d’écouter le résultat.',
+  summary: 'Application React Native développée seul dans le cadre d’un projet de formation : elle enregistre ou importe un son, l’envoie à un serveur RAVE externe, puis permet d’écouter le résultat.',
   lead: 'Une interface mobile pour choisir une source audio et un modèle, lancer un traitement sur un serveur local et comparer l’original au rendu transformé.',
   sections: [
     {

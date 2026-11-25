@@ -11,7 +11,7 @@ export default function Home() {
                 <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
                     <div className="max-w-4xl text-center mx-auto flex flex-col gap-6">
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white">
-                            Safouane AFFANE <br /> 
+                            Safouane AFFANE <br />
                             Développeur Fullstack
                         </h1>
 
@@ -29,8 +29,8 @@ export default function Home() {
                 <section id="about">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Qui suis je ?</h2>
                     <p className="text-gray-600 dark:text-gray-400 max-w-3xl">
-                        Je me présente je suis un étudiant en Licence Professionnelle projet Web et Mobile, à la Sorbonne Université, et je souhaite devenir développeur d&apos;application en freelance. <br /> 
-                        Après avoir obtenu mon baccalauréat générale avec spécialité Mathématiques et Anglais, je pris la décision d&apos;effectuer une année de césure au Canada afin de pouvoir perfectionner mon anglais. C&apos;est durant ce voyage que mon intérêt pour l&apos;informatique a vraiment commencé. J&apos;ai alors décider d&apos;apprendre le html ainsi que le css et développer un site web en autodidacte. Suite à cela je me suis inscrit en BTS SIO option SLAM afin de développer mes compétences et élargir mon champs d&apos;expertise. <br />  
+                        Je me présente je suis un étudiant en Licence Professionnelle projet Web et Mobile, à la Sorbonne Université, et je souhaite devenir développeur d&apos;application en freelance. <br />
+                        Après avoir obtenu mon baccalauréat générale avec spécialité Mathématiques et Anglais, je pris la décision d&apos;effectuer une année de césure au Canada afin de pouvoir perfectionner mon anglais. C&apos;est durant ce voyage que mon intérêt pour l&apos;informatique a vraiment commencé. J&apos;ai alors décider d&apos;apprendre le html ainsi que le css et développer un site web en autodidacte. Suite à cela je me suis inscrit en BTS SIO option SLAM afin de développer mes compétences et élargir mon champs d&apos;expertise. <br />
                         Mon intérêt pour l&apos;informatique vient de la liberté géographique offerte par le domaine ainsi que la demande importante dans le marché de l&apos;emploi.
                     </p>
                 </section>

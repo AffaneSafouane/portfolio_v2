@@ -8,18 +8,19 @@ const frameClass = {
   square: 'aspect-square',
 } as const;
 
-export function ProjectFigure({ media }: { media?: ProjectMedia }) {
+export function ProjectFigure({ media, compact = false }: { media?: ProjectMedia; compact?: boolean }) {
   const available = getAvailableProjectMedia(media);
   if (!available) return null;
+  const portraitDetail = !compact && available.shape === 'portrait';
 
   return (
-    <figure className="min-w-0">
-      <div className={`relative w-full overflow-hidden rounded-lg bg-gray-900 ${frameClass[available.shape]}`}>
+    <figure className={portraitDetail ? 'mx-auto w-full max-w-sm' : 'min-w-0'}>
+      <div className={`relative w-full overflow-hidden rounded-lg bg-gray-900 ${compact ? 'h-56' : frameClass[available.shape]}`}>
         <Image
           src={available.src}
           alt={available.alt}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes={portraitDetail ? '(max-width: 640px) 100vw, 384px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
           className="object-contain"
         />
       </div>

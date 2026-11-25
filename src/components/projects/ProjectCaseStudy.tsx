@@ -29,7 +29,7 @@ export function ProjectCaseStudy({ project, content }: { project: Project; conte
   ].filter((link): link is { label: string; href: string } => Boolean(link.href?.trim()));
 
   return (
-    <main className="container mx-auto px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-18">
+    <div className="container mx-auto px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-18">
       <article className="mx-auto max-w-4xl">
         <nav aria-label="Fil d’Ariane" className="mb-8 text-sm text-gray-300">
           <Link href="/projects" className="text-blue-300 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Projets</Link>
@@ -41,6 +41,7 @@ export function ProjectCaseStudy({ project, content }: { project: Project; conte
           <p className="text-sm font-semibold uppercase tracking-wider text-blue-300">Étude de cas · {project.platform === 'web' ? 'Web' : 'Mobile'}</p>
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">{content.title}</h1>
           <p className="max-w-3xl text-lg leading-8 text-gray-200">{content.lead}</p>
+          <p className="max-w-3xl border-l-2 border-primary pl-4 leading-7 text-gray-300"><span className="font-semibold text-white">Cadre et contribution : </span>{content.summary}</p>
           <div className="flex flex-wrap gap-2 text-xs font-semibold">
             {project.technologies.map((technology) => <span key={technology} className="rounded-full border border-gray-600 px-3 py-1 text-gray-300">{technology}</span>)}
           </div>
@@ -76,6 +77,6 @@ export function ProjectCaseStudy({ project, content }: { project: Project; conte
           <Link href="/projects" className="font-semibold text-blue-300 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">← Retour aux projets</Link>
         </p>
       </article>
-    </main>
+    </div>
   );
 }

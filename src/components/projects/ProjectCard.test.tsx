@@ -24,3 +24,22 @@ it('omet totalement la figure avant dépôt du fichier', () => {
     placement: 'Capture à faire', shape: 'portrait', src: '/static/img/absent.png', alt: 'Écran mobile',
   }} />)).toBe('');
 });
+
+it('conserve entièrement le cadre portrait quand un fichier existe', () => {
+  const project = getProjectBySlug('rave')!;
+  const withImage = {
+    ...project,
+    cover: { placement: 'Image locale de vérification', shape: 'portrait' as const, src: '/static/img/logo.png' as const, alt: 'Logo de vérification' },
+  };
+  const html = renderToStaticMarkup(<ProjectCard project={withImage} content={getProjectContent(project.id)} />);
+  expect(html).toContain('alt="Logo de vérification"');
+  expect(html).toContain('h-56');
+  expect(html).not.toContain('max-h-64');
+});
+
+it('limite la largeur d’un portrait dans une fiche sur grand écran', () => {
+  const html = renderToStaticMarkup(<ProjectFigure media={{
+    placement: 'Vue mobile', shape: 'portrait', src: '/static/img/logo.png', alt: 'Vue de contrôle',
+  }} />);
+  expect(html).toContain('max-w-sm');
+});
