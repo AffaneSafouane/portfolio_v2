@@ -5,7 +5,7 @@ import { getProjectContent } from './content';
 
 afterEach(() => vi.unstubAllEnvs());
 
-const image = { placement: 'Vue interne pour la prise de vue', shape: 'landscape' as const, alt: 'Logo du portfolio' };
+const image = { placement: 'Vue interne pour la prise de vue', shape: 'landscape' as const, alt: 'Logo du portfolio', width: 1024, height: 1024 };
 
 it('omet un média sans chemin ou sans texte alternatif', () => {
   expect(getAvailableProjectMedia(undefined)).toBeNull();
@@ -23,6 +23,11 @@ it('retourne seulement une image réellement présente dans public', () => {
     src: '/static/img/logo.png',
     alt: 'Logo du portfolio',
   });
+});
+
+it('omet une image sans dimensions intrinsèques renseignées', () => {
+  expect(getAvailableProjectMedia({ ...image, src: '/static/img/logo.png', width: undefined })).toBeNull();
+  expect(getAvailableProjectMedia({ ...image, src: '/static/img/logo.png', height: 0 })).toBeNull();
 });
 
 it('relie chaque capture WebP présente à sa fiche avec le bon format', () => {

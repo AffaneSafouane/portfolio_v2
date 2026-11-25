@@ -2,11 +2,11 @@ import { statSync } from 'node:fs';
 import path from 'node:path';
 import type { ProjectMedia } from './types';
 
-export type AvailableProjectMedia = ProjectMedia & { src: `/static/img/${string}`; alt: string };
+export type AvailableProjectMedia = ProjectMedia & { src: `/static/img/${string}`; alt: string; width: number; height: number };
 
 export function getAvailableProjectMedia(media?: ProjectMedia): AvailableProjectMedia | null {
   const alt = media?.alt?.trim();
-  if (!media?.src || !alt) return null;
+  if (!media?.src || !alt || !media.width || !media.height || media.width <= 0 || media.height <= 0) return null;
 
   const imageRoot = path.resolve(process.cwd(), 'public/static/img');
   const file = path.resolve(process.cwd(), 'public', media.src.slice(1));
@@ -18,5 +18,5 @@ export function getAvailableProjectMedia(media?: ProjectMedia): AvailableProject
     return null;
   }
 
-  return { ...media, src: media.src, alt };
+  return { ...media, src: media.src, alt, width: media.width, height: media.height };
 }

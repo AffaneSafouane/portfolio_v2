@@ -35,7 +35,7 @@ it('affiche toutes les captures disponibles du 28 en développement', () => {
 });
 
 it('garde les liens facultatifs absents du rendu', () => {
-  const project = getProjectBySlug('rave')!;
+  const project = { ...getProjectBySlug('rave')!, links: { site: null, source: null, document: null } };
   const html = renderToStaticMarkup(<ProjectCaseStudy project={project} content={getProjectContent(project.id)} />);
   expect(html.split('</header>')[0]).toContain('développée seul');
   expect(html).toContain('href="/projects"');

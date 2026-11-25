@@ -58,7 +58,7 @@ it('conserve entièrement le cadre portrait quand un fichier existe', () => {
   const project = getProjectBySlug('rave')!;
   const withImage = {
     ...project,
-    cover: { placement: 'Image locale de vérification', shape: 'portrait' as const, src: '/static/img/logo.png' as const, alt: 'Logo de vérification' },
+    cover: { placement: 'Image locale de vérification', shape: 'portrait' as const, src: '/static/img/logo.png' as const, alt: 'Logo de vérification', width: 1024, height: 1024 },
   };
   const html = renderToStaticMarkup(<ProjectCard project={withImage} content={getProjectContent(project.id)} />);
   expect(html).toContain('alt="Logo de vérification"');
@@ -68,7 +68,7 @@ it('conserve entièrement le cadre portrait quand un fichier existe', () => {
 
 it('limite la largeur d’un portrait dans une fiche sur grand écran', () => {
   const html = renderToStaticMarkup(<ProjectFigure media={{
-    placement: 'Vue mobile', shape: 'portrait', src: '/static/img/logo.png', alt: 'Vue de contrôle',
+    placement: 'Vue mobile', shape: 'portrait', src: '/static/img/logo.png', alt: 'Vue de contrôle', width: 1024, height: 1024,
   }} />);
   expect(html).toContain('max-w-sm');
 });

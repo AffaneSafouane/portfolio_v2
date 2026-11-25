@@ -25,6 +25,8 @@ describe('études de cas web', () => {
       media: {
         src: '/static/img/projects/gestimmo/receipt.webp',
         shape: 'portrait',
+        width: 958,
+        height: 972,
         placement: 'Aperçu d’une quittance de loyer générée pour un terme soldé, avec bailleur, locataire et montants fictifs.',
         alt: 'Quittance de loyer GestImmo avec détail du loyer, des charges et du règlement',
       },

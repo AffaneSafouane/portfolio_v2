@@ -11,6 +11,10 @@ const frameClass = {
   square: 'aspect-square',
 } as const;
 
+const cardSizes = '(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) calc((100vw - 72px) / 2), 384px';
+const detailSizes = '(max-width: 639px) calc(100vw - 32px), (max-width: 943px) calc(100vw - 48px), 896px';
+const portraitSizes = '(max-width: 415px) calc(100vw - 32px), 384px';
+
 function figureClass(shape: ProjectMedia['shape'], compact: boolean) {
   return !compact && shape === 'portrait' ? 'mx-auto w-full max-w-sm' : 'min-w-0';
 }
@@ -40,13 +44,15 @@ export function ProjectImage({ media, compact = false }: { media: AvailableProje
 
   return (
     <figure className={figureClass(media.shape, compact)}>
-      <div className={`relative w-full overflow-hidden rounded-lg bg-gray-900 ${frameSize(media.shape, compact)}`}>
+      <div className={`w-full overflow-hidden rounded-lg bg-gray-900 ${compact ? 'h-56' : ''}`}>
         <Image
           src={media.src}
           alt={media.alt}
-          fill
-          sizes={portraitDetail ? '(max-width: 640px) 100vw, 384px' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-          className="object-contain"
+          width={media.width}
+          height={media.height}
+          sizes={compact ? cardSizes : portraitDetail ? portraitSizes : detailSizes}
+          quality={95}
+          className={compact ? 'h-full w-full object-contain' : 'h-auto w-full object-contain'}
           onError={() => setFailed(true)}
         />
       </div>
