@@ -34,4 +34,10 @@ describe('catalogue des projets publics', () => {
       }
     }
   });
+
+  it('laisse les trois liens à renseigner explicitement pour chaque projet', () => {
+    for (const project of getPublicProjects()) {
+      expect(project.links).toEqual({ site: null, source: null, document: null });
+    }
+  });
 });

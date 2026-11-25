@@ -21,7 +21,7 @@ export type Project = {
   themeId: ProjectThemeId;
   technologies: readonly string[];
   cover?: ProjectMedia;
-  links?: { site?: string; source?: string; document?: string };
+  links: { site: string | null; source: string | null; document: string | null };
 };
 
 export type ProjectBlock =
