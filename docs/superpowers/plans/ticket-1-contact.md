@@ -4,7 +4,7 @@
 
 **Goal:** Migrer `/contact` vers une API Vercel avec Zod, Turnstile et Resend, tout en retirant les coordonnées personnelles publiées.
 
-**Architecture:** Formulaire français client dans une page serveur ; route Node.js `POST /api/contact` qui valide JSON → Zod → Siteverify → Resend. Le contrat de réponse porte des codes stables pour la traduction du Ticket 5.
+**Architecture:** Formulaire français client dans une page serveur ; route Node.js `POST /api/contact` qui valide JSON → Zod → Siteverify → Resend. Le contrat de réponse porte des codes stables pour la traduction du Ticket 6.
 
 **Tech Stack:** Next.js 15, React 19, Zod 4, Resend, Turnstile, Vitest.
 
@@ -16,7 +16,7 @@
 - Bornes : `fullName` 2–70, `email` 5–254, `subject` 3–150, `message` 10–500.
 - Aucun Resend avant un `success` Siteverify et un hostname accepté ; secrets jamais dans `NEXT_PUBLIC_*`.
 - Retirer le PDF CV non assaini de `public/` dès ce ticket, ainsi que son lien.
-- Ne déployer en production qu'après la page de confidentialité complète et les faits vérifiés du Ticket 4 ; la recette du Ticket 1 peut se faire en préproduction.
+- Ne déployer en production qu'après la page de confidentialité complète et les faits vérifiés du Ticket 5 ; la recette du Ticket 1 peut se faire en préproduction.
 - Lire `.agents/skills/vercel-react-best-practices`; conclure avec tests, lint, build et recette navigateur/mobile/desktop.
 
 ## Contrat stable pour les tickets suivants
@@ -62,11 +62,11 @@ type ContactResponse =
 
 ### Task 4: Coordonnées et recette
 
-**Files:** Create `src/components/ContactEmailReveal.tsx`; modify `src/components/Footer.tsx`, `src/app/page.tsx`, tout composant avec coordonnées personnelles ; delete `public/static/ressources/CV_AFFANE_Safouane.pdf` jusqu'au Ticket 4.
+**Files:** Create `src/components/ContactEmailReveal.tsx`; modify `src/components/Footer.tsx`, `src/app/page.tsx`, tout composant avec coordonnées personnelles ; delete `public/static/ressources/CV_AFFANE_Safouane.pdf` jusqu'au Ticket 5.
 
 **Interfaces:** Le contrôle révèle `contact@safouane-affane.fr` après activation et fournit alors un `mailto:` accessible.
 
-- [ ] Chercher téléphone et emails personnels dans les pages, composants et PDF publics ; retirer les coordonnées du HTML. Retirer le lien CV et le fichier PDF contenant le téléphone, dépublier tout autre PDF suspect jusqu'à l'audit complet du Ticket 4, puis contrôler qu'aucune URL servie ne référence un document retiré.
+- [ ] Chercher téléphone et emails personnels dans les pages, composants et PDF publics ; retirer les coordonnées du HTML. Retirer le lien CV et le fichier PDF contenant le téléphone, dépublier tout autre PDF suspect jusqu'à l'audit complet du Ticket 5, puis contrôler qu'aucune URL servie ne référence un document retiré.
 - [ ] Ajouter la révélation d'email au Footer/contact et une notice courte de confidentialité en français sous le formulaire, sans lien vers une page encore absente.
 - [ ] Avec clés et domaine de test, essayer succès et réception chez Resend, validation invalide, refus Turnstile, script indisponible, réseau coupé et double clic. Inspecter `/contact` en mobile et desktop.
 - [ ] Exécuter `npm run test`, `npm run lint`, `npm run build`, `npx tsc --noEmit --incremental false`; consigner tout essai fournisseur impossible puis committer.

@@ -49,7 +49,7 @@ type ProjectContent = {
 };
 ```
 
-Les identifiants, slugs et IDs de rubriques sont stables pour les Tickets 5 et 7. La plateforme `Web`/`Mobile` et quelques technologies sont les seuls badges sur les cartes. Le cadre du projet se lit dans `summary` et dans la rubrique `context`, sans badge « Pro »/« Académique » ni filtre. Les six projets sont publics dans cette version ; `visibility` permet d'exclure un brouillon futur des listes, des paramètres statiques et du sitemap du Ticket 7. Les trois `featuredOrder` sont Le 28, GestImmo, RAVE, dans cet ordre. `themeId` prépare le Ticket 6 sans dessiner ni animer ces motifs dans le Ticket 3.
+Les identifiants, slugs et IDs de rubriques sont stables pour les Tickets 6 et 8. La plateforme `Web`/`Mobile` et quelques technologies sont les seuls badges sur les cartes. Le cadre du projet se lit dans `summary` et dans la rubrique `context`, sans badge « Pro »/« Académique » ni filtre. Les six projets sont publics dans cette version ; `visibility` permet d'exclure un brouillon futur des listes, des paramètres statiques et du sitemap du Ticket 8. Les trois `featuredOrder` sont Le 28, GestImmo, RAVE, dans cet ordre. `themeId` prépare le Ticket 7 sans dessiner ni animer ces motifs dans le Ticket 3.
 
 Les rubriques communes sont présentes dans les six contenus, mais leur longueur varie. Pour les trois applications mobiles, `context` décrit un **projet de formation**, sans prétendre à un contexte professionnel ; l'architecture et les défis restent proportionnés à leur taille. Les projets pro détaillent les contraintes client et le rôle réel : Le 28 est un projet client commencé en équipe puis repris seul ; GestImmo est issu d'un stage et d'une commande client ; DT Compagnie est un projet mené en entreprise dans le cadre de la Licence Professionnelle. Le bilan comprend acquis et recul critique pour chaque projet, plus court pour Mobile.
 
@@ -76,11 +76,11 @@ Plan de prises de vue interne, à réaliser plus tard avec des données **seed o
 | Galerie Photo | Galerie ou caméra, portrait | Une vue de dossier si utile |
 | iTunes Explorer | Recherche ou détail d'une piste, portrait | Favoris si utile |
 
-Les liens `site`, `source` et `document` sont facultatifs. Un champ vide/absent ne rend aucun élément. Un lien n'est renseigné et affiché qu'après vérification de sa destination ; bannir `#`, les URL relatives ambiguës et les liens qui ne fonctionnent plus. Les pages n'inventent ni démo mobile, ni dépôt public, ni document téléchargeable. Les PDF hérités restent hors des cartes de ce ticket ; leur audit relève du Ticket 4.
+Les liens `site`, `source` et `document` sont facultatifs. Un champ vide/absent ne rend aucun élément. Un lien n'est renseigné et affiché qu'après vérification de sa destination ; bannir `#`, les URL relatives ambiguës et les liens qui ne fonctionnent plus. Les pages n'inventent ni démo mobile, ni dépôt public, ni document téléchargeable. Les PDF hérités restent hors des cartes de ce ticket ; leur audit relève du Ticket 5.
 
 ## Routage, métadonnées et intégration future
 
-`src/app/projects/[slug]/page.tsx` génère les six slugs publics via `generateStaticParams()`, avec `dynamicParams = false`. Un slug inconnu ou non public répond 404 ; les cartes ne pointent que vers des slugs publics. Les pages sont pré-rendues au build. `generateMetadata` produit un titre et une description français propres à chaque fiche. Le Ticket 5 pourra créer le registre anglais sous le même `ProjectId` et conserver les slugs ; le Ticket 7 consommera les sélecteurs publics pour le sitemap et complétera canonical/hreflang/JSON-LD. Les conventions de `generateStaticParams` et `dynamicParams` suivent la [documentation Next.js 15](https://nextjs.org/docs/15/app/api-reference/functions/generate-static-params).
+`src/app/projects/[slug]/page.tsx` génère les six slugs publics via `generateStaticParams()`, avec `dynamicParams = false`. Un slug inconnu ou non public répond 404 ; les cartes ne pointent que vers des slugs publics. Les pages sont pré-rendues au build. `generateMetadata` produit un titre et une description français propres à chaque fiche. Le Ticket 6 pourra créer le registre anglais sous le même `ProjectId` et conserver les slugs ; le Ticket 8 consommera les sélecteurs publics pour le sitemap et complétera canonical/hreflang/JSON-LD. Les conventions de `generateStaticParams` et `dynamicParams` suivent la [documentation Next.js 15](https://nextjs.org/docs/15/app/api-reference/functions/generate-static-params).
 
 ## Vérification et critères d'acceptation
 

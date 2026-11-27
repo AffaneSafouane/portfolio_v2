@@ -1,8 +1,8 @@
-# Ticket 6 — Refonte Clean Pixel Art : spécification
+# Ticket 7 — Direction artistique Clean Pixel Art & polish final : spécification
 
 ## Point de départ et intention
 
-Les Tickets 1–5 ont créé toutes les pages et fiches FR/EN, le formulaire, les deux pages légales par langue et les flux RSS. Ce ticket applique le design à **l'ensemble de ces routes HTML**, y compris `/projects/[slug]`, `/en/projects/[slug]`, `/mentions-legales`, `/en/legal`, `/confidentialite` et `/en/privacy`. Les routes XML `/feed.xml` et `/en/feed.xml` gardent leur format et ne reçoivent aucun style HTML. Direction validée : interface moderne et lisible à environ 80 %, accents arcade à environ 20 %.
+Les Tickets 1–6 ont créé toutes les pages et fiches FR/EN, le formulaire, les deux pages légales par langue et les flux RSS. Ce ticket applique le design à **l'ensemble de ces routes HTML**, y compris `/projects/[slug]`, `/en/projects/[slug]`, `/mentions-legales`, `/en/legal`, `/confidentialite` et `/en/privacy`. Les routes XML `/feed.xml` et `/en/feed.xml` gardent leur format et ne reçoivent aucun style HTML. Direction validée : interface moderne et lisible à environ 80 %, accents arcade à environ 20 %.
 
 ## Tokens, polices et primitives
 

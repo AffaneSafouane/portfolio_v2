@@ -1,4 +1,4 @@
-# Ticket 7 — SEO & Documentation Implementation Plan
+# Ticket 8 — SEO & Documentation Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,14 +8,14 @@
 
 **Tech Stack:** Next.js 15 Metadata API, TypeScript strict, Vitest, Schema.org.
 
-**Spec:** `docs/superpowers/specs/ticket-7-seo-docs-design.md`
+**Spec:** `docs/superpowers/specs/ticket-8-seo-docs-design.md`
 
 ## Global Constraints
 
 - Sitemap = 14 pages statiques + deux fiches par projet `public`; aucun draft, API ou URL 404.
 - `NEXT_PUBLIC_SITE_URL` HTTPS public valide en production ; canonical et alternates correspondent aux routes réellement servies.
 - Hreflang `fr`, `en`, `x-default` sur pages et fiches, slugs stables du Ticket 3.
-- RSS FR/EN reste accessible ; blog MDX et JSON-LD Article sont au Ticket 8.
+- RSS FR/EN reste accessible ; blog MDX et JSON-LD Article sont au Ticket 9.
 - Utiliser `.agents/skills/seo` et `.agents/skills/vercel-react-best-practices`; finir par tests, lint, build et contrôle mobile/desktop.
 
 ## Contrats SEO
@@ -64,6 +64,6 @@ function buildProjectMetadata(locale: Locale, project: Project): Metadata;
 **Interfaces:** README documente les commandes et variables exactes sans valeurs de secrets.
 
 - [ ] Remplacer le texte create-next-app par les commandes npm/TypeScript réelles, la structure des routes FR/EN/fiches, l'agrégation RSS horaire et les flux natifs.
-- [ ] Documenter Vercel, configuration Resend/Turnstile, `NEXT_PUBLIC_SITE_URL`, différence variables publiques/privées, recette navigateur du contact et des RSS, ajout d'un projet public vérifié et future extension MDX Ticket 8.
+- [ ] Documenter Vercel, configuration Resend/Turnstile, `NEXT_PUBLIC_SITE_URL`, différence variables publiques/privées, recette navigateur du contact et des RSS, ajout d'un projet public vérifié et future extension MDX Ticket 9.
 - [ ] Vérifier à 375/1440 px les pages et fiches, faire un crawl du sitemap pour exclure 404/drafts, et tester flux/contact réels. Exécuter `npm run test`, `npm run lint`, `npm run build`, `npx tsc --noEmit --incremental false` ; consigner les sorties.
-- [ ] Confirmer que les faits juridiques du Ticket 4 et les fiches React Native/Java du Ticket 3 sont publiables ; sinon signaler la gate non satisfaite. Committer seulement la documentation et les corrections vérifiées.
+- [ ] Confirmer que les faits juridiques du Ticket 5 et les fiches React Native/Java du Ticket 3 sont publiables ; sinon signaler la gate non satisfaite. Committer seulement la documentation et les corrections vérifiées.

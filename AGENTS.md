@@ -63,7 +63,7 @@ Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, vei
 
 ## 7. Roadmap : Tickets 1–3 réalisés, Tickets 4–9 à traiter
 
-La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiches → Expériences → Légal/PDF → i18n → Pixel Art/polish → SEO/documentation. Le Ticket 9, blog MDX bilingue, constitue la Phase 2. Les Tickets 1 à 4 travaillent dans l'arborescence française actuelle `src/app/`. Le Ticket 6 déplace les pages françaises dans `src/app/(fr)/`, crée les pages anglaises dans `src/app/(en)/en/` et conserve l'API ainsi que `/feed.xml` à la racine de `src/app/`. La roadmap de pilotage est `docs/superpowers/plans/roadmap.md` ; les anciens fichiers de spec/plan des tickets décalés portent encore leur ancienne numérotation jusqu'à leur mise à jour.
+La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiches → Expériences → Légal/PDF → i18n → Pixel Art/polish → SEO/documentation. Le Ticket 9, blog MDX bilingue, constitue la Phase 2. Les Tickets 1 à 5 travaillent dans l'arborescence française actuelle `src/app/`. Le Ticket 6 déplace les pages françaises dans `src/app/(fr)/`, crée les pages anglaises dans `src/app/(en)/en/` et conserve l'API ainsi que `/feed.xml` à la racine de `src/app/`. La roadmap de pilotage et les specs/plans renumérotés sont dans `docs/superpowers/`.
 
 ### Ticket 1 — Contact & Confidentialité (`ticket-1-contact`)
 
@@ -81,10 +81,10 @@ La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiche
 - Le catalogue typé `src/lib/projects/` alimente les projets mis en avant sur `/`, les cartes de `/projects` et les fiches publiques `/projects/[slug]`. Il contient des projets clients, en entreprise et React Native, sans champ de catégorie `professional`/`academic-lab` ; aucun projet Java n'est actuellement publié.
 - Les fiches pré-rendues couvrent contexte, architecture, développement technique et apports ; les slugs publics sont stables et les projets non publiés restent exclus des listes.
 
-### Ticket 4 — Expériences professionnelles (`ticket-4-experiences`, spec en revue)
+### Ticket 4 — Expériences professionnelles (`ticket-4-experiences`, plan en revue)
 
 - Repenser `/experiences` en français : deux cartes d'ouverture pour les interventions clients et la maintenance en production (Le 28 depuis octobre 2026, DT Compagnie depuis septembre 2026), puis une timeline antéchronologique des stages : SCI DINE (13 juillet–4 septembre 2026), DT Compagnie (23 février–29 mai 2026), SARL JAMES (27 janvier–21 mars 2025), SPIE ICS (3–28 juin 2024). Les stages de Licence Pro sont plus détaillés que ceux de BTS.
-- Centrer le récit sur contexte professionnel, responsabilités, méthodes et impact opérationnel, sans dupliquer les études de cas techniques. Distinguer l'API backend autonome de SARL JAMES du MVP complet GestImmo réalisé chez SCI DINE ; ne pas relier SARL JAMES à GestImmo. Aligner l'aperçu sur `/` avec la même source typée et ajouter des liens discrets vers les fiches publiques `le-28`, `dt-compagnie` et `gestimmo`. La spec `docs/superpowers/specs/ticket-4-experiences-design.md` attend la revue de l'utilisateur avant le plan.
+- Centrer le récit sur contexte professionnel, responsabilités, méthodes et impact opérationnel, sans dupliquer les études de cas techniques. Distinguer l'API backend autonome de SARL JAMES du MVP complet GestImmo réalisé chez SCI DINE ; ne pas relier SARL JAMES à GestImmo. Aligner l'aperçu sur `/` avec la même source typée et ajouter des liens discrets vers les fiches publiques `le-28`, `dt-compagnie` et `gestimmo`. La spec `docs/superpowers/specs/ticket-4-experiences-design.md` est validée ; le plan `docs/superpowers/plans/ticket-4-experiences.md` attend sa revue avant toute modification applicative.
 
 ### Ticket 5 — Pages légales & Contrôle PDF (`ticket-5-legal`)
 

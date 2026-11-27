@@ -2,18 +2,18 @@
 
 La **Phase 1 comprend huit tickets dans l'ordre impératif** : contact/confidentialité → veille/RSS → projets/fiches → expériences professionnelles → légal/PDF → internationalisation → direction artistique Pixel Art/polish → SEO/documentation. Les Tickets 1 à 3 sont implémentés sur `feat/portfolio-v3`. Les Tickets 1 à 5 travaillent dans l'arborescence française actuelle `src/app/`. Le Ticket 6 introduit les groupes `(fr)` et `(en)` ; les Tickets 7 et 8 portent alors sur l'ensemble des routes FR/EN. Chaque ticket applicatif se termine par `npm run test`, `npm run lint`, `npm run build` et la vérification mobile/desktop des vues modifiées. Les pages sont des Server Components par défaut ; les opérations RSS restent côté serveur.
 
-Le cadrage du nouveau Ticket 4 est validé ; sa spec est en revue et son plan sera écrit **après validation de la spec**. Les fichiers déjà présents `ticket-4-legal`, `ticket-5-internationalisation`, `ticket-6-clean-pixel-art` et `ticket-7-seo-docs` portent encore l'ancienne numérotation : ce sont des documents de travail hérités, à renuméroter et corriger avant leur exécution. Cette roadmap fixe désormais la numérotation de référence.
+Le cadrage et la spec du nouveau Ticket 4 sont validés ; son plan est soumis à revue avant toute modification applicative. Les specs et plans des anciens Tickets 4 à 7 ont été renumérotés 5 à 8. Le Ticket 9 de Phase 2 n'avait pas encore de fichiers de spec ou de plan. Les documents hérités des futurs tickets doivent être relus contre l'état réel du dépôt avant leur exécution.
 
 | Ticket | Spec | Plan |
 |---|---|---|
 | 1 Contact & Confidentialité | `docs/superpowers/specs/ticket-1-contact-design.md` | `docs/superpowers/plans/ticket-1-contact.md` |
 | 2 Veille technologique & Flux RSS | `docs/superpowers/specs/ticket-2-veille-rss-design.md` | `docs/superpowers/plans/ticket-2-veille-rss.md` |
 | 3 Projets & Pages détaillées | `docs/superpowers/specs/ticket-3-projets-design.md` | `docs/superpowers/plans/ticket-3-projets.md` |
-| 4 Expériences professionnelles | `docs/superpowers/specs/ticket-4-experiences-design.md` (en revue) | À écrire après validation de la spec |
-| 5 Pages légales & Contrôle PDF | Ancien `docs/superpowers/specs/ticket-4-legal-design.md`, à renuméroter | Ancien `docs/superpowers/plans/ticket-4-legal.md`, à renuméroter |
-| 6 Internationalisation FR/EN | Ancien `docs/superpowers/specs/ticket-5-internationalisation-design.md`, à renuméroter | Ancien `docs/superpowers/plans/ticket-5-internationalisation.md`, à renuméroter |
-| 7 Direction artistique Pixel Art & polish final | Ancien `docs/superpowers/specs/ticket-6-clean-pixel-art-design.md`, à renuméroter | Ancien `docs/superpowers/plans/ticket-6-clean-pixel-art.md`, à renuméroter |
-| 8 SEO & Documentation | Ancien `docs/superpowers/specs/ticket-7-seo-docs-design.md`, à renuméroter | Ancien `docs/superpowers/plans/ticket-7-seo-docs.md`, à renuméroter |
+| 4 Expériences professionnelles | `docs/superpowers/specs/ticket-4-experiences-design.md` (validée) | `docs/superpowers/plans/ticket-4-experiences.md` (en revue) |
+| 5 Pages légales & Contrôle PDF | `docs/superpowers/specs/ticket-5-legal-design.md` | `docs/superpowers/plans/ticket-5-legal.md` |
+| 6 Internationalisation FR/EN | `docs/superpowers/specs/ticket-6-internationalisation-design.md` | `docs/superpowers/plans/ticket-6-internationalisation.md` |
+| 7 Direction artistique Pixel Art & polish final | `docs/superpowers/specs/ticket-7-clean-pixel-art-design.md` | `docs/superpowers/plans/ticket-7-clean-pixel-art.md` |
+| 8 SEO & Documentation | `docs/superpowers/specs/ticket-8-seo-docs-design.md` | `docs/superpowers/plans/ticket-8-seo-docs.md` |
 | 9 Blog SEO MDX bilingue (Phase 2) | À écrire après lancement | À écrire après lancement |
 
 ## Ticket 1 — Contact & Confidentialité

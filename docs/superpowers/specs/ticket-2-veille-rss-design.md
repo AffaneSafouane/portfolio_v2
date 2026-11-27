@@ -2,7 +2,7 @@
 
 ## Portée et séquence
 
-Après le Ticket 1, remplacer la page française `/tech-monitoring` consacrée aux microservices par une veille sur le **développement agentique (Agentic Software Engineering) et l'intégration des agents IA dans le génie logiciel moderne**. Ne citer aucun projet personnel : les projets relèvent du Ticket 3. Conserver l'arborescence française actuelle `src/app/`, les Server Components et le thème actuel. Le Ticket 5 traduira la page et ajoutera `/en/feed.xml` ; le Ticket 6 traitera le design pixel. Ce ticket crée aussi `/feed.xml` et agrège les flux externes uniquement côté serveur.
+Après le Ticket 1, remplacer la page française `/tech-monitoring` consacrée aux microservices par une veille sur le **développement agentique (Agentic Software Engineering) et l'intégration des agents IA dans le génie logiciel moderne**. Ne citer aucun projet personnel : les projets relèvent du Ticket 3. Conserver l'arborescence française actuelle `src/app/`, les Server Components et le thème actuel. Le Ticket 6 traduira la page et ajoutera `/en/feed.xml` ; le Ticket 7 traitera le design pixel. Ce ticket crée aussi `/feed.xml` et agrège les flux externes uniquement côté serveur.
 
 ## Contenu éditorial durable
 
@@ -32,7 +32,7 @@ Lancer les huit requêtes indépendantes avec `Promise.allSettled`. Une source l
 
 `src/lib/monitoring/content.ts` porte les trois parties, les références statiques et la date de revue. `src/components/monitoring/MonitoringPage.tsx` rend la page côté serveur. `src/app/tech-monitoring/page.tsx` récupère les articles et exporte `revalidate = 3600`.
 
-`src/app/feed.xml/route.ts` exporte `revalidate = 3600`, appelle le même agrégateur et renvoie un RSS 2.0 sérialisé par `src/lib/monitoring/feedXml.ts`, avec `Content-Type: application/rss+xml; charset=utf-8`. Le canal a un titre français centré sur le développement agentique, `language` à `fr`, une URL absolue vers `/tech-monitoring` et **au moins une entrée éditoriale propre au site**, même si les flux tiers sont vides. Les entrées externes comportent titre, date, lien vers l'original, `<source url="URL-du-flux">Nom</source>` et `<category>EN</category>` ou `<category>FR</category>` pour l'attribution ; ne pas republier leur corps. Les `guid` sont stables et uniques ; caractères XML, URLs et attributs sont échappés. Construire les URL propres au site à partir de `NEXT_PUBLIC_SITE_URL` valide, avec `http://localhost:3000` comme repli de développement déjà utilisé par le dépôt. Le Ticket 5 ajoutera le flux anglais sans déplacer `/feed.xml`.
+`src/app/feed.xml/route.ts` exporte `revalidate = 3600`, appelle le même agrégateur et renvoie un RSS 2.0 sérialisé par `src/lib/monitoring/feedXml.ts`, avec `Content-Type: application/rss+xml; charset=utf-8`. Le canal a un titre français centré sur le développement agentique, `language` à `fr`, une URL absolue vers `/tech-monitoring` et **au moins une entrée éditoriale propre au site**, même si les flux tiers sont vides. Les entrées externes comportent titre, date, lien vers l'original, `<source url="URL-du-flux">Nom</source>` et `<category>EN</category>` ou `<category>FR</category>` pour l'attribution ; ne pas republier leur corps. Les `guid` sont stables et uniques ; caractères XML, URLs et attributs sont échappés. Construire les URL propres au site à partir de `NEXT_PUBLIC_SITE_URL` valide, avec `http://localhost:3000` comme repli de développement déjà utilisé par le dépôt. Le Ticket 6 ajoutera le flux anglais sans déplacer `/feed.xml`.
 
 ## Vérification et critères d'acceptation
 

@@ -1,4 +1,4 @@
-# Ticket 6 — Refonte Clean Pixel Art Implementation Plan
+# Ticket 7 — Direction artistique Clean Pixel Art & polish final Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,13 +8,13 @@
 
 **Tech Stack:** Next.js 15, React 19, Tailwind CSS 4, next/font/google.
 
-**Spec:** `docs/superpowers/specs/ticket-6-clean-pixel-art-design.md`
+**Spec:** `docs/superpowers/specs/ticket-7-clean-pixel-art-design.md`
 
 ## Global Constraints
 
 - Sept tokens exacts ; `@theme inline` doit référencer leurs valeurs CSS.
 - Press Start 2P pour H1/H2, Silkscreen pour UI, VT323 pour métadonnées, Inter pour prose longue et pages légales.
-- Préserver les routes, slugs, dictionnaires, API contact et flux RSS des Tickets 1–5.
+- Préserver les routes, slugs, dictionnaires, API contact et flux RSS des Tickets 1–6.
 - Server Components par défaut ; respecter `.agents/skills/vercel-react-best-practices`.
 - Exécuter `.agents/skills/web-design-guidelines` après refonte, puis lint/build et inspections mobile/desktop.
 
@@ -57,7 +57,7 @@
 
 **Files:** Modify `src/components/{Header,Footer,LanguageSwitcher,ContactFormComponent,TurnstileContact,ContactEmailReveal}.tsx`, `src/components/pages/{HomePage,ProjectsPage,ExperiencesPage}.tsx`, `src/components/projects/{ProjectCard,ProjectDetailPage}.tsx`, `src/components/monitoring/MonitoringPage.tsx`, `src/components/legal/{LegalNoticePage,PrivacyPage}.tsx`, éventuellement `src/components/SiteShell.tsx`.
 
-**Interfaces:** Toutes les props `locale`, `Dictionary`, `ProjectCopy` et le contrat `/api/contact` restent ceux du Ticket 5.
+**Interfaces:** Toutes les props `locale`, `Dictionary`, `ProjectCopy` et le contrat `/api/contact` restent ceux du Ticket 6.
 
 - [ ] Migrer Header/Footer, menu mobile et sélecteur avec états actifs, focus visible et libellés FR/EN ; vérifier les noms longs anglais.
 - [ ] Migrer accueil, expériences, listing et fiches projet ; garder les sections techniques lisibles, médias cadrés et fil d'Ariane visible.

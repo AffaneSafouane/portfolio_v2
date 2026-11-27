@@ -12,13 +12,13 @@
 
 ## Global Constraints
 
-- Conserver `src/app/` français, le thème bleu/gris actuel et les Server Components ; aucune animation, route anglaise, dépendance MDX ou refonte du Ticket 6.
+- Conserver `src/app/` français, le thème bleu/gris actuel et les Server Components ; aucune animation, route anglaise, dépendance MDX ou refonte du Ticket 7.
 - Six projets publics, dans cet ordre sur `/projects` : Le 28, GestImmo, DT Compagnie, RAVE, Galerie Photo, iTunes Explorer. Une seule grille, aucun filtre et aucun badge « Pro » ou « Académique ».
 - Trois vedettes sur `/`, dans cet ordre : Le 28, GestImmo, RAVE. Les cartes affichent seulement `Web`/`Mobile` et les technologies principales comme badges ; le cadre réel est dans la description courte.
 - Une fiche contient objectif, contexte et rôle, architecture, méthodologie, défis techniques, bilan (acquis et recul critique). Les fiches mobiles sont plus courtes et ne prétendent pas à un contexte professionnel.
 - Un média est totalement omis si son `src` est vide ou si le fichier manque dans `public/`. Les notes de placement sont internes et jamais rendues. Aucun encadré d'attente, image générique ou espace média vide.
 - Les liens `site`, `source` et `document` sont facultatifs, omis du HTML tant que l'URL n'est pas renseignée et vérifiée. Aucun `#`, lien relatif ambigu ou démonstration inventée.
-- Chaque fiche publique est pré-rendue sur `/projects/[slug]` ; tout slug inconnu ou non public donne 404. Les IDs et slugs restent stables pour les Tickets 5 et 7.
+- Chaque fiche publique est pré-rendue sur `/projects/[slug]` ; tout slug inconnu ou non public donne 404. Les IDs et slugs restent stables pour les Tickets 6 et 8.
 - Aucun changement de `.env`, `.env.local` ou `.env.*` (hors `.exemple.env`, inutile ici). Aucun push, fusion vers `main` ou déploiement.
 
 ## Fichiers et interfaces

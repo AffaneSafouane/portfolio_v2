@@ -1,8 +1,8 @@
-# Ticket 4 — Pages légales & Contrôle PDF : spécification
+# Ticket 5 — Pages légales & Contrôle PDF : spécification
 
 ## Dépendances et portée
 
-Les Tickets 1–3 ont livré le formulaire interne, la veille/RSS et les fiches projets, tous en français dans l'arborescence d'origine. Ce ticket crée `src/app/mentions-legales/page.tsx` et `src/app/confidentialite/page.tsx` en **français uniquement**, ajoute leurs liens au Footer et au formulaire et contrôle les PDF publics. Le Ticket 5 traduira ces pages et les déplacera sous `(fr)`/`(en)` ; aucune route `/en` à créer ici.
+Les Tickets 1–4 ont livré le formulaire interne, la veille/RSS, les fiches projets et la refonte des expériences, tous en français dans l'arborescence d'origine. Ce ticket crée `src/app/mentions-legales/page.tsx` et `src/app/confidentialite/page.tsx` en **français uniquement**, ajoute leurs liens au Footer et au formulaire et contrôle les PDF publics. Le Ticket 6 traduira ces pages et les déplacera sous `(fr)`/`(en)` ; aucune route `/en` à créer ici.
 
 ## Qualification légale et source des faits
 
@@ -14,7 +14,7 @@ Le dépôt n'indique ni statut juridique vérifié, ni adresse légale/de domici
 
 `src/components/legal/PrivacyPage.tsx` donne une information complète distincte, conformément à `.agents/skills/rgpd` et à l'[information exigée lors d'un formulaire](https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence). Identifier responsable et contact ; décrire nom, email, sujet, message, token Turnstile et données techniques réellement traitées ; finalités de réponse et de lutte anti-spam ; base légale à confirmer pour chaque finalité (hypothèse : intérêt légitime article 6.1.f pour répondre à une prise de contact et protéger le formulaire), destinataires Vercel, Resend, Cloudflare, transferts hors EEE et garanties vérifiées, durée et droits (accès, rectification, effacement, limitation, opposition selon base, réclamation CNIL). Politique de conservation proposée : supprimer la correspondance contrôlée par l'éditeur douze mois après le dernier échange, sauf obligation/documentation d'un dossier contractuel ; vérifier la durée réelle des fournisseurs avant de l'affirmer. [Resend indique un traitement principal aux États-Unis](https://resend.com/security/gdpr) : ne pas déclarer « aucun transfert hors UE ». Contrôler le comportement réel de Turnstile en matière de traceurs avant de rédiger la section cookies ; ne pas ajouter un bandeau sans traceur non essentiel constaté.
 
-La notice courte sous `/contact` du Ticket 1 devient un lien vers `/confidentialite` et précise responsable, finalité, caractère obligatoire des champs et accès à l'information complète. Les mentions légales renvoient vers cette politique, sans recopier tout le RGPD. Les deux pages restent lisibles avec le thème courant ; leur adaptation visuelle arrive au Ticket 6.
+La notice courte sous `/contact` du Ticket 1 devient un lien vers `/confidentialite` et précise responsable, finalité, caractère obligatoire des champs et accès à l'information complète. Les mentions légales renvoient vers cette politique, sans recopier tout le RGPD. Les deux pages restent lisibles avec le thème courant ; leur adaptation visuelle arrive au Ticket 7.
 
 ## PDF publics
 

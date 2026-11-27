@@ -1,4 +1,4 @@
-# Ticket 4 — Pages légales & Contrôle PDF Implementation Plan
+# Ticket 5 — Pages légales & Contrôle PDF Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,7 +8,7 @@
 
 **Tech Stack:** Next.js 15 App Router, TypeScript, React Server Components, outils PDF (`pdftotext`, inspection visuelle).
 
-**Spec:** `docs/superpowers/specs/ticket-4-legal-design.md`
+**Spec:** `docs/superpowers/specs/ticket-5-legal-design.md`
 
 ## Global Constraints
 
@@ -18,7 +18,7 @@
 - Contrôler tous les PDF publics par texte extrait et visuellement ; restaurer le CV seulement s'il est réellement assaini.
 - Lire `.agents/skills/vercel-react-best-practices`; finir par lint, build, vue mobile/desktop et vérification du contact.
 
-## Interfaces pour le Ticket 5
+## Interfaces pour le Ticket 6
 
 ```ts
 type LegalIdentity = { editorStatus: 'individual-professional' | 'individual-nonprofessional' | 'company';

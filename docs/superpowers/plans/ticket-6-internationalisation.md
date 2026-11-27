@@ -1,18 +1,18 @@
-# Ticket 5 — Internationalisation FR/EN Implementation Plan
+# Ticket 6 — Internationalisation FR/EN Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Servir toutes les pages finales des Tickets 1–4, leurs fiches projets et le flux natif en FR/EN avec `html lang` correct.
+**Goal:** Servir toutes les pages finales des Tickets 1–5, leurs fiches projets et le flux natif en FR/EN avec `html lang` correct.
 
 **Architecture:** Deux layouts racine `(fr)` et `(en)`, pages adaptatrices minces, composants serveur partagés, dictionnaires typés et slugs de projets stables. L'API contact et le flux français restent aux URL existantes.
 
 **Tech Stack:** Next.js 15 App Router, React 19, TypeScript strict, Vitest.
 
-**Spec:** `docs/superpowers/specs/ticket-5-internationalisation-design.md`
+**Spec:** `docs/superpowers/specs/ticket-6-internationalisation-design.md`
 
 ## Global Constraints
 
-- Conserver les URL françaises et les contenus finaux des Tickets 1–4 ; ne déplacer ni `/api/contact` ni `/feed.xml`.
+- Conserver les URL françaises et les contenus finaux des Tickets 1–5 ; ne déplacer ni `/api/contact` ni `/feed.xml`.
 - Ajouter exactement sept pages statiques EN, les fiches `/en/projects/[slug]` publiques et `/en/feed.xml`.
 - Deux layouts racine rendent respectivement `<html lang="fr">` et `<html lang="en">` ; Server Components par défaut.
 - Une seule source de projet `src/lib/projects/catalog.ts` et deux `ProjectCopy` complètes ; mêmes slugs FR/EN.
@@ -48,16 +48,16 @@ function getLocalizedPath(pathname: string, targetLocale: Locale): string;
 
 - [ ] Écrire la table des quatorze URL statiques et des fiches publiques ; tester `/projects/cvven` ↔ `/en/projects/cvven`, les deux routes légales, route inconnue → accueil cible et draft inconnu → accueil cible.
 - [ ] Exécuter `npm run test -- src/lib/i18n/routing.test.ts` pour constater l'échec ; implémenter la table explicite et le parseur de chemins dynamiques en se limitant aux slugs de `getPublishedProjects()`.
-- [ ] Relancer tests et TypeScript ; committer le contrat, qui sera réutilisé au Ticket 7.
+- [ ] Relancer tests et TypeScript ; committer le contrat, qui sera réutilisé au Ticket 8.
 
 ### Task 2: Dictionnaires et copy finale
 
-**Files:** Create `src/lib/i18n/{fr,en,index}.ts`, `src/lib/i18n/dictionaries.test.ts`, `src/lib/projects/copy.en.ts`, `src/lib/content/experiences.ts`; modify `src/lib/i18n/types.ts`, `src/lib/monitoring/content.ts`; delete `src/app/data/experience.ts` après reprise vérifiée.
+**Files:** Create `src/lib/i18n/{fr,en,index}.ts`, `src/lib/i18n/dictionaries.test.ts`, `src/lib/projects/copy.en.ts`; modify `src/lib/i18n/types.ts`, `src/lib/monitoring/content.ts` et la copy de `src/lib/experiences/` livrée au Ticket 4. La source `src/app/data/experience.ts` a déjà été retirée au Ticket 4.
 
 **Interfaces:** `getDictionary(locale): Dictionary`; `projectCopyEn: Record<ProjectId, ProjectCopy>` avec les types de `src/lib/projects/catalog.ts` ; `Dictionary` contient `nav/footer/home/projects/projectDetail/experiences/monitoring/contact/legal/privacy/feed/metadata`.
 
 - [ ] Écrire un test de parité de clés et d'IDs de projets/expériences ; vérifier que chaque projet public a `ProjectCopy` complète dans les deux langues et que les labels contact couvrent tous les codes API. Constater l'échec initial.
-- [ ] Migrer la copy FR des pages, du contact, du Footer, des deux pages légales et de la veille vers `fr.ts` ; préserver `projectCopyFr` comme source des fiches. Extraire les deux stages réellement affichés en IDs/dates/médias et textes FR.
+- [ ] Migrer la copy FR des pages, du contact, du Footer, des deux pages légales et de la veille vers `fr.ts` ; préserver `projectCopyFr` comme source des fiches. Conserver les six IDs, dates, ordres, résumés d'accueil et liens projets du Ticket 4 dans `src/lib/experiences/` ; déplacer seulement les textes localisables et fournir leur traduction EN.
 - [ ] Rédiger `en.ts` et `copy.en.ts`, y compris architecture/développement/apports des fiches, droits RGPD, états Turnstile, veille et entrée de feed EN ; conserver titres externes RSS originaux.
 - [ ] Rejouer tests et types, chercher les chaînes visibles encore codées en dur ; corriger puis committer.
 
