@@ -17,7 +17,7 @@ export default function ExperiencesPage() {
         <p className="mt-4 mb-8 max-w-3xl text-gray-300 leading-7">
           Après la mise en ligne, j&apos;accompagne les équipes dans l&apos;usage quotidien de leurs outils et j&apos;arbitre les évolutions avec elles.
         </p>
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid items-start gap-6 md:grid-cols-2">
           {getClientInterventions().map((entry) => <ClientInterventionCard key={entry.id} entry={entry} />)}
         </div>
       </section>

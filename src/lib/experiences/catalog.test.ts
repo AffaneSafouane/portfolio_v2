@@ -35,4 +35,24 @@ describe('expériences professionnelles', () => {
     expect(getInternships().find((item) => item.id === 'sarl-james-stage')?.projectId).toBeUndefined();
     expect(getInternships().find((item) => item.id === 'spie-ics-stage')?.projectId).toBeUndefined();
   });
+
+  it('documente six parcours avec des faits professionnels concrets', () => {
+    const entries = [...getClientInterventions(), ...getInternships()];
+    expect(entries).toHaveLength(6);
+    expect(entries.every((entry) => entry.highlights.length >= 4)).toBe(true);
+    expect(entries.every((entry) => entry.highlights.every((highlight) => highlight.trim().length > 0))).toBe(true);
+
+    const le28 = entries.find((entry) => entry.id === 'le-28-production');
+    expect(le28?.responsibilityAndMethod).toContain('autonomie au gérant');
+    expect(le28?.responsibilityAndMethod).not.toContain('recentré');
+    expect(le28?.highlights.join(' ')).toContain('notifications web et mobile');
+
+    const dtProduction = entries.find((entry) => entry.id === 'dt-compagnie-production');
+    expect(dtProduction?.highlights.join(' ')).toContain('Mondial Relay');
+    expect(dtProduction?.highlights.join(' ')).toContain('remboursements Stripe');
+    expect(dtProduction?.highlights.join(' ')).toContain('non-régression');
+
+    const spie = entries.find((entry) => entry.id === 'spie-ics-stage');
+    expect(spie?.responsibilityAndMethod).toContain('élections européennes');
+  });
 });

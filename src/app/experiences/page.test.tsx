@@ -13,7 +13,7 @@ describe('/experiences', () => {
     const positions = organizations.map((organization) => stages.indexOf(organization));
     expect(positions.every((position) => position >= 0)).toBe(true);
     expect(positions).toEqual([...positions].sort((a, b) => a - b));
-    expect((stages.match(/<li\b/g) ?? []).length).toBe(4);
+    expect((stages.match(/<li\b[^>]*id="[^"]+-stage"/g) ?? []).length).toBe(4);
     expect(html).toContain('sprints hebdomadaires sur Linear');
     expect(html).toContain('première brique serveur');
   });
@@ -43,5 +43,22 @@ describe('/experiences', () => {
     expect((visibleText.match(/23 février/g) ?? []).length).toBe(1);
     expect((visibleText.match(/27 janvier/g) ?? []).length).toBe(1);
     expect((visibleText.match(/28 juin 2024/g) ?? []).length).toBe(1);
+  });
+
+  it('offre six cibles d’ancre et la même structure narrative à chaque expérience', () => {
+    const html = renderToStaticMarkup(<ExperiencesPage />);
+    const ids = [
+      'le-28-production', 'dt-compagnie-production', 'sci-dine-stage',
+      'dt-compagnie-stage', 'sarl-james-stage', 'spie-ics-stage',
+    ];
+    for (const id of ids) {
+      expect(html).toContain(`id="${id}"`);
+    }
+    expect((html.match(/scroll-mt-24/g) ?? []).length).toBe(6);
+    expect((html.match(/>Contexte</g) ?? []).length).toBe(6);
+    expect((html.match(/>Responsabilités et méthode</g) ?? []).length).toBe(6);
+    expect((html.match(/>Résultat</g) ?? []).length).toBe(6);
+    expect((html.match(/>Points clés</g) ?? []).length).toBe(6);
+    expect((html.match(/<ul\b/g) ?? []).length).toBe(6);
   });
 });

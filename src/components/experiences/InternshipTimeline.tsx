@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getCaseStudyPath } from '../../lib/experiences/catalog';
 import type { Internship } from '../../lib/experiences/types';
+import { ExperienceDetails } from './ExperienceDetails';
 
 const day = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', timeZone: 'UTC' });
 const dayMonth = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', timeZone: 'UTC' });
@@ -39,33 +40,13 @@ export function InternshipTimeline({ entries }: { entries: readonly Internship[]
       {entries.map((entry) => {
         const caseStudyPath = getCaseStudyPath(entry.projectId);
         return (
-          <li key={entry.id} className="relative">
+          <li key={entry.id} id={entry.id} className="relative scroll-mt-24">
             <span aria-hidden="true" className="absolute -left-[2.25rem] top-2 size-4 rounded-full border-4 border-background-dark bg-primary sm:-left-[3rem]" />
             <article className="rounded-xl border border-gray-700 bg-gray-800/30 p-6 sm:p-8">
               <h3 className="text-2xl font-bold text-white">{entry.organization}</h3>
               <p className="mt-2 font-medium text-primary">{entry.role}</p>
               <InternshipPeriod entry={entry} />
-              {entry.degree === 'licence-pro' ? (
-                <div className="mt-6 space-y-5 text-gray-300 leading-7">
-                  <div>
-                    <h4 className="mb-2 font-semibold text-white">Contexte</h4>
-                    <p>{entry.context}</p>
-                  </div>
-                  <div>
-                    <h4 className="mb-2 font-semibold text-white">Responsabilités et méthode</h4>
-                    <p>{entry.responsibilityAndMethod}</p>
-                  </div>
-                  <div>
-                    <h4 className="mb-2 font-semibold text-white">Résultat</h4>
-                    <p>{entry.outcome}</p>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-6 space-y-4 text-gray-300 leading-7">
-                  <p>{entry.context} {entry.responsibilityAndMethod}</p>
-                  <p>{entry.outcome}</p>
-                </div>
-              )}
+              <ExperienceDetails entry={entry} />
               {caseStudyPath && entry.projectLinkLabel ? (
                 <Link
                   href={caseStudyPath}

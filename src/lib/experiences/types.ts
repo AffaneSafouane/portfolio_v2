@@ -18,6 +18,7 @@ export type ExperienceBase = {
   context: string;
   responsibilityAndMethod: string;
   outcome: string;
+  highlights: readonly string[];
   homeSummary?: string;
   projectId?: CaseStudyProjectId;
   projectLinkLabel?: string;

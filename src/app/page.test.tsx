@@ -20,6 +20,10 @@ describe('aperçu des expériences sur /', () => {
     expect(section).toContain('Projet livré en équipe en juin 2026');
     expect(section).toContain('MVP GestImmo conçu de bout en bout en huit semaines');
     expect(section).toContain('href="/experiences"');
+    for (const id of ['le-28-production', 'dt-compagnie-production', 'sci-dine-stage', 'dt-compagnie-stage']) {
+      expect(section).toContain(`href="/experiences#${id}"`);
+    }
+    expect((section.match(/href="\/experiences#[^"]+"/g) ?? []).length).toBe(4);
   });
 
   it('garde un aperçu typographique et les autres sections de la page', () => {
