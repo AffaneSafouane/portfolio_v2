@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/ticket-4-experiences-design.md` (validée ; les textes français de cette spec font foi).
 
+**Évolution validée après livraison initiale :** l'inventaire éditorial approfondi est intégré à la spec. Les six expériences affichent désormais le même récit complet et une liste `highlights`; les quatre aperçus de l'accueil lient les ancres des fiches. Cette évolution remplace, dans les étapes historiques ci-dessous, la règle qui condensait les stages BTS et l'absence de liens sur les cartes d'accueil. Les faits datés et les textes exacts sont ceux de la spec mise à jour.
+
 ## Global Constraints
 
 - Travailler sur `feat/portfolio-v3` dans l'arborescence française actuelle `src/app/` et conserver le thème bleu/gris. Pas de route EN, de Pixel Art, de nouvelle dépendance ou de changement au formulaire/RSS.
@@ -20,6 +22,7 @@
 - Retirer les deux liens PDF de la page `/experiences` sans toucher aux fichiers PDF publics : l'audit et l'assainissement de `public/static/ressources/` relèvent du Ticket 5.
 - Aucune image ou logo d'entreprise sur `/experiences` ni dans son aperçu sur `/` : présentation typographique uniforme, sans fond blanc parasite. Les anciennes valeurs `image` de `src/app/data/experience.ts` ne sont pas migrées.
 - Dans la timeline, rendre les dates de début et de fin via `<time dateTime={...}>` dans **un seul libellé visuel de période** ; ne pas afficher `periodLabel` une seconde fois à côté des deux balises.
+- Chaque expérience porte `highlights: readonly string[]` et rend Contexte, Responsabilités et méthode, Résultat et Points clés. Les `<article>` d'intervention et `<li>` de stage portent `id={entry.id}` et `scroll-mt-24`. Chaque carte d'accueil lie `/experiences#${entry.id}` et le lien global reste présent.
 - Ne créer, modifier ou supprimer aucun `.env`, `.env.local` ou `.env.*` ; `.exemple.env` n'a pas de raison de changer. Ne pas pousser, fusionner vers `main` ou déclencher de déploiement. Préserver les suppressions de documents utilisateur déjà présentes dans `git status` ; chaque `git add` cible explicitement les fichiers de la tâche.
 - Utiliser `.agents/skills/vercel-react-best-practices` pour les composants : imports directs, aucune frontière client supplémentaire, pas de fetch, et données statiques non sérialisées inutilement vers le navigateur.
 
@@ -32,6 +35,7 @@
 | `src/lib/experiences/catalog.test.ts` | Dates/ordre, quatre aperçus, trois destinations et absence de passerelle JAMES/GestImmo |
 | `src/components/experiences/ClientInterventionCard.tsx` | Carte serveur d'une intervention, avec lien de fiche facultatif |
 | `src/components/experiences/InternshipTimeline.tsx` | Liste `<ol>` des quatre stages, avec détail proportionné et lien facultatif |
+| `src/components/experiences/ExperienceDetails.tsx` | Structure narrative et highlights partagés par les six expériences |
 | `src/components/experiences/HomeExperiencePreview.tsx` | Aperçu court réutilisant l'enregistrement typé |
 | `src/app/experiences/page.tsx` et `page.test.tsx` | Page complète et test de son ordre, de ses liens et du retrait des PDF |
 | `src/app/page.tsx` et `page.test.tsx` | Remplacement du seul bloc « Expériences » et test des quatre aperçus |
@@ -56,6 +60,7 @@ export type ExperienceBase = {
   context: string;
   responsibilityAndMethod: string;
   outcome: string;
+  highlights: readonly string[];
   homeSummary?: string;
   projectId?: CaseStudyProjectId;
   projectLinkLabel?: string;
@@ -187,7 +192,7 @@ it('présente les interventions puis les quatre stages datés', () => {
 ```
 
 - [ ] **Step 2 — Constater l'échec.** Lancer `npm run test -- src/app/experiences/page.test.tsx` ; vérifier que l'échec correspond au contenu ou aux liens attendus.
-- [ ] **Step 3 — Composants serveur.** `ClientInterventionCard` rend un `<article>` avec H3, organisation, rôle, période, trois paragraphes de données et lien de fiche si `getCaseStudyPath(entry.projectId)` renvoie une URL. `InternshipTimeline` rend `<ol>` puis quatre `<li>` avec un H3 chacun ; la ligne de période est composée d'un préfixe « Stage de Licence Pro », « Stage de fin de Licence Pro » ou « Stage BTS SIO », de `<time dateTime={entry.startDate}>` et `<time dateTime={entry.endDate}>`, et du suffixe « à distance » pour JAMES. Ne pas rendre `periodLabel` ailleurs dans cette entrée : les dates ne doivent apparaître qu'une fois visuellement. Trois paragraphes pour Licence Pro et deux pour BTS (`context` + `responsibilityAndMethod`, puis `outcome`). Le label du lien est `entry.projectLinkLabel`. N'ajouter ni `use client`, ni `href="#"`, ni PDF, ni logo/image.
+- [ ] **Step 3 — Composants serveur.** `ClientInterventionCard` rend un `<article id={entry.id}>` avec `scroll-mt-24`, H3, organisation, rôle, période et lien de fiche si `getCaseStudyPath(entry.projectId)` renvoie une URL. `InternshipTimeline` rend `<ol>` puis quatre `<li id={entry.id}>` avec `scroll-mt-24` et un H3 chacun ; la ligne de période est composée d'un préfixe « Stage de Licence Pro », « Stage de fin de Licence Pro » ou « Stage BTS SIO », de `<time dateTime={entry.startDate}>` et `<time dateTime={entry.endDate}>`, et du suffixe « à distance » pour JAMES. Ne pas rendre `periodLabel` ailleurs dans cette entrée : les dates ne doivent apparaître qu'une fois visuellement. `ExperienceDetails` rend pour les six entrées Contexte, Responsabilités et méthode, Résultat et une liste de Points clés. Le label du lien est `entry.projectLinkLabel`. N'ajouter ni `use client`, ni `href="#"`, ni lien PDF, ni logo/image.
 
 ```tsx
 // Exemple de garde de lien, identique dans les deux composants ciblés.
@@ -249,7 +254,7 @@ it('résume les quatre expériences récentes depuis le catalogue', () => {
 ```
 
 - [ ] **Step 2 — Constater l'échec.** Lancer `npm run test -- src/app/page.test.tsx` et vérifier que le test échoue sur l'ancien aperçu BTS.
-- [ ] **Step 3 — Remplacer le bloc.** `HomeExperiencePreview` rend un `<article>` avec H3, rôle, `periodLabel`, la qualification « Maintenance en production » pour `client-intervention` ou « Stage de Licence Pro » pour `internship`, puis `homeSummary`. Dans `src/app/page.tsx`, remplacer exclusivement la section `id="experiences"` par un H2 « Expériences récentes », l'introduction exacte de la spec, une grille responsive des quatre `getHomeExperiences()` et un `<Link href="/experiences">Voir toutes mes expériences</Link>` direct. Supprimer l'ancien `<button><Link /></button>` imbriqué.
+- [ ] **Step 3 — Remplacer le bloc.** `HomeExperiencePreview` rend un `<article>` cliquable via un lien parent vers `/experiences#${entry.id}`, avec H3, rôle, `periodLabel`, la qualification « Maintenance en production » pour `client-intervention` ou « Stage de Licence Pro » pour `internship`, puis `homeSummary`. Dans `src/app/page.tsx`, remplacer exclusivement la section `id="experiences"` par un H2 « Expériences récentes », l'introduction exacte de la spec, une grille responsive des quatre `getHomeExperiences()` et un `<Link href="/experiences">Voir toutes mes expériences</Link>` direct. Supprimer l'ancien `<button><Link /></button>` imbriqué.
 
 ```tsx
 <section id="experiences">
