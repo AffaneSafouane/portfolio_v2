@@ -15,6 +15,12 @@ const submit = () => fireEvent.submit(screen.getByRole('form', { name: 'Formulai
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 
 describe('ContactFormComponent', () => {
+  it('informe les visiteurs avant l’envoi et lie la politique de confidentialité', () => {
+    render(<ContactFormComponent captchaToken={null} onResetCaptcha={vi.fn()} />);
+    expect(screen.getByRole('link', { name: /confidentialité/i }).getAttribute('href')).toBe('/confidentialite');
+    expect(screen.getByText(/champs marqués \* sont nécessaires/i)).toBeTruthy();
+  });
+
   it('does not post without a Turnstile token', () => {
     const fetch = vi.fn();
     vi.stubGlobal('fetch', fetch);

@@ -2,61 +2,57 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Publier des mentions légales et une politique de confidentialité françaises exactes, avec des PDF publics assainis.
+**Goal:** Publier deux pages légales françaises exactes et retirer les cinq PDF actuellement publics.
 
-**Architecture:** Une source d'identité vérifiée alimente deux pages serveur distinctes ; le Footer et le formulaire pointent vers les URL françaises. Le CV retiré au Ticket 1 n'est restauré qu'après un réexport sûr.
+**Architecture:** Un module typé contient uniquement les faits publics validés ; deux pages serveur distinctes le lisent, et le Footer et le formulaire pointent vers elles. Le retrait des PDF est indépendant des conditions de publication des pages.
 
-**Tech Stack:** Next.js 15 App Router, TypeScript, React Server Components, outils PDF (`pdftotext`, inspection visuelle).
+**Tech Stack:** Next.js 15 App Router, React 19, TypeScript strict, Tailwind 4, Vitest.
 
 **Spec:** `docs/superpowers/specs/ticket-5-legal-design.md`
 
 ## Global Constraints
 
-- Créer `/mentions-legales` et `/confidentialite` dans `src/app/`, sans `/en` ni groupes i18n.
-- Appliquer `.agents/skills/mentions-legales` et `.agents/skills/rgpd` ; distinguer identification LCEN et information RGPD.
-- Ne publier aucune identité/coordonnée manquante, inventée ou issue du CV personnel ; confirmer les données obligatoires.
-- Contrôler tous les PDF publics par texte extrait et visuellement ; restaurer le CV seulement s'il est réellement assaini.
-- Lire `.agents/skills/vercel-react-best-practices`; finir par lint, build, vue mobile/desktop et vérification du contact.
+- Rester dans les routes françaises actuelles de `src/app/` ; ne pas créer `/en` ni de groupes i18n.
+- Suivre `.agents/skills/mentions-legales`, `.agents/skills/rgpd` et `.agents/skills/vercel-react-best-practices` ; garder les pages en Server Components.
+- Ne jamais publier l'adresse personnelle, le téléphone personnel, un substitut inventé ou un champ juridique vide. Ne toucher à aucun `.env*`.
+- Respecter les faits déclarés : Safouane Affane EI, SIRET `13113083300018`, RNE, franchise en base de TVA, prestations informatiques exclusivement B2B, `contact@safouane-affane.fr` ; Vercel Hobby, `cdg1` seulement prévu ; Resend Free ; réception Cloudflare Email Routing puis Proton Mail ; Upstash `eu-west-1` (Irlande) en production.
+- Préparer et tester le code des pages sans afficher l'adresse ou le téléphone personnels. Signaler les écarts LCEN et Vercel Hobby non résolus ; l'agent ne pousse ni ne déploie.
+- Le CV et son lien restent absents. Supprimer les cinq PDF existants, sans réexport dans ce ticket.
 
-## Interfaces pour le Ticket 6
+---
 
-```ts
-type LegalIdentity = { editorStatus: 'individual-professional' | 'individual-nonprofessional' | 'company';
-  editorName: string; publicationDirector: string; contactEmail: string;
-  legalAddress?: string; legalPhone?: string; registration?: string;
-  hostName: string; hostAddress: string; hostPhone: string };
-// Les champs optionnels en type ne rendent pas leur absence légalement acceptable.
-```
+## Task 1: Centraliser les faits publics et consigner les écarts
 
-### Task 1: Vérifier le profil et les faits
+**Files:** Create `src/lib/legal/config.ts` ; inspect `AGENTS.md`, la spec et les sources officielles.
 
-**Files:** Create `src/lib/legal/identity.ts` uniquement après vérification ; inspect `AGENTS.md`, Footer, configuration Vercel et sources officielles.
+- [ ] Écrire un test du module typé exigeant identité, EI, SIREN/SIRET, RNE, franchise TVA, contact, hébergeur et région Upstash déclarés, avec `address` et `phone` absents ; le faire échouer avant de créer le module.
+- [ ] Créer `config.ts` avec `address?: string` et `phone?: string` non renseignés, et uniquement les faits publics confirmés. Réutiliser son export dans les pages et le Footer ; ne pas exposer d'adresse ou de téléphone personnels.
+- [ ] Conserver dans le compte rendu, sans prétendre les résoudre par le code, la différence entre l'absence des coordonnées et l'article 1-1 LCEN, ainsi que l'usage freelance sur Vercel Hobby. Citer les sources de la spec.
+- [ ] Vérifier en lecture seule les paramètres accessibles de Turnstile et Email Routing, la région Vercel réellement déployée et l'éventuelle réplication Upstash ; ne pas affirmer que `cdg1` est déjà actif. Le DPA Vercel public ne doit pas être présenté comme couvrant Hobby.
 
-**Interfaces:** `legalIdentity` contient les faits confirmés que `LegalNoticePage` et `PrivacyPage` consomment.
+## Task 2: Retirer les cinq PDF publics
 
-- [ ] Appliquer le questionnaire `.agents/skills/mentions-legales/assets/questionnaire-collecte.md` : statut réel, adresse de domiciliation, téléphone professionnel si exigé, immatriculation éventuelle, directeur de publication, coordonnées officielles Vercel.
-- [ ] Comparer les obligations du profil confirmé dans les références du skill, [Service public](https://entreprendre.service-public.gouv.fr/vosdroits/F37351?lang=fr) et la LCEN. Consigner les pièces/source et date de vérification, sans publier de placeholder.
-- [ ] Vérifier DPA, transferts et durées de Vercel/Resend/Cloudflare ainsi que traceurs effectifs du widget ; fixer la base légale et le processus de suppression à douze mois pour les messages contrôlés.
-- [ ] Si un fait indispensable manque, ne pas rendre la page publique ; continuer les tâches PDF/structure et signaler le critère non clos. Avec les faits complets, créer `identity.ts` et committer.
+**Files:** Delete `public/static/ressources/compte_rendu_stage_bts1.pdf`, `compte_rendu_stage_bts2.pdf`, `README_Biblios.pdf`, `README_CVVEN.pdf`, `compte_rendu_qui_est_ce.pdf`.
 
-### Task 2: Deux pages distinctes et liens
+- [ ] Vérifier le statut Git et répertorier les cinq noms ; préserver toute modification préexistante de l'utilisateur.
+- [ ] Supprimer les cinq fichiers demandés, sans créer de CV ni restaurer son lien.
+- [ ] Rechercher avec `rg` leurs noms et `/static/ressources/` dans `src/` ; distinguer les assertions de tests qui vérifient l'absence de lien des liens réellement rendus. Ajuster uniquement un test devenu incohérent avec le retrait.
+- [ ] Vérifier que `rg --files public | rg -i '\.pdf$'` ne retourne aucun PDF et qu'aucun lien actif ne pointe vers un fichier retiré. Après un déploiement effectué par l'utilisateur, contrôler les cinq anciennes URL sur le nouveau déploiement ; l'effacement des anciens déploiements ou caches est une question distincte.
 
-**Files:** Create `src/components/legal/LegalNoticePage.tsx`, `src/components/legal/PrivacyPage.tsx`, `src/app/mentions-legales/page.tsx`, `src/app/confidentialite/page.tsx`; modify `src/components/Footer.tsx`, `src/components/ContactFormComponent.tsx`.
+## Task 3: Créer les pages légales et leurs liens
 
-**Interfaces:** `LegalNoticePage()` et `PrivacyPage()` reçoivent `legalIdentity`; les routes sont `/mentions-legales` et `/confidentialite`.
+**Files:** Create `src/app/mentions-legales/page.tsx`, `src/app/confidentialite/page.tsx` et, si la séparation sert la lisibilité, `src/components/legal/LegalNoticePage.tsx`, `src/components/legal/PrivacyPage.tsx` ; modify `src/components/Footer.tsx`, `src/components/ContactFormComponent.tsx`.
 
-- [ ] Rédiger les mentions avec H1, date réelle, sommaire numéroté et ancres stables ; inclure les sections conditionnelles seulement si le profil les exige. Vérifier la concordance sommaire/H2.
-- [ ] Rédiger séparément la confidentialité : responsable, données, finalités/bases, destinataires, transferts et garanties, conservation, droits, CNIL, Turnstile/cookies. Ne pas reprendre un modèle brut.
-- [ ] Ajouter les deux liens au Footer et la notice courte liée sous le formulaire. Vérifier au clavier les ancres et liens sur toutes les routes françaises, à 375/1440 px.
-- [ ] Relire selon `.agents/skills/mentions-legales/assets/checklist-audit.md` et le modèle RGPD adapté au traitement réel ; committer les pages seulement après validation des faits.
+- [ ] Écrire des tests de rendu utiles : identité et hébergeur concordants avec `config.ts`, sommaire/ancres, liens Footer/formulaire, informations RGPD couvrant Vercel, Cloudflare Turnstile et Email Routing, Upstash, Resend et Proton Mail ; vérifier qu'aucune ancienne URL PDF n'est rendue. Faire constater leur échec avant l'implémentation.
+- [ ] Rédiger `/mentions-legales` avec H1, date réelle, sommaire cliquable, identification EI/RNE/SIRET, franchise TVA, directeur, Vercel Inc. avec adresse et page de contact, contact professionnel et lien vers la confidentialité. Omettre les blocs adresse/téléphone de l'éditeur tant qu'ils sont absents du module ; aucun médiateur B2C. Ajouter la section propriété intellectuelle avec réserves sur contrats, licences, droits de tiers et exceptions légales ; inspecter les sources des images avant d'affirmer une attribution ou une titularité.
+- [ ] Rédiger `/confidentialite` avec les données et flux de la spec, finalités et bases validées, destinataires, pays et garanties réellement applicables, durée Proton de douze mois après dernier contact, durée Resend Free de 30 jours, données techniques et TTL Upstash en `eu-west-1` (Irlande), droits et réclamation CNIL. Distinguer Email Routing du widget Turnstile ; vérifier les traceurs réels avant toute affirmation sur les cookies.
+- [ ] Ajouter les deux liens au Footer et une notice courte liée à `/confidentialite` sous le formulaire. Rejouer les tests ciblés, puis relire les pages avec la checklist du skill `mentions-legales` et l'information de l'article 13 RGPD.
 
-### Task 3: PDF et CV assaini
+## Task 4: Vérifier et préparer la remise à l'utilisateur
 
-**Files:** Inspect all `public/static/ressources/*.pdf`; modify `public/static/ressources/CV_AFFANE_Safouane.pdf` et `src/app/page.tsx` seulement si un CV sûr peut être restauré ; remove tout autre PDF non assainissable.
+**Files:** Only files changed by Tasks 1–3.
 
-**Interfaces:** Aucun lien HTML ne pointe vers un PDF absent ; tout PDF servi est exempt de coordonnées personnelles sensibles.
-
-- [ ] Extraire le texte de chaque PDF avec `pdftotext`, chercher téléphone/adresse/email personnel, puis inspecter visuellement pages, liens et métadonnées. Le CV retiré au Ticket 1 est la première cible.
-- [ ] Réexporter le CV depuis sa source éditable sans téléphone/adresse personnelle et sans calque extractible ; contrôler le nouveau PDF par extraction et lecture visuelle. Si la source manque, garder CV et lien absents.
-- [ ] Supprimer définitivement `public/static/ressources/compte_rendu_stage_bts1.pdf` et `public/static/ressources/compte_rendu_stage_bts2.pdf` ; retirer tous leurs liens et vérifier que leurs URL ne servent plus de fichier. Contrôler les autres PDF publics et ouvrir chaque lien conservé en navigateur pour exclure les 404.
-- [ ] Exécuter `npm run lint`, `npm run build`, `npx tsc --noEmit --incremental false` et l'essai de contact du Ticket 1 ; committer. Ne clôturer le ticket que si les pages légales ont leurs faits confirmés.
+- [ ] Tester les pages et ancres au clavier, à 375 et 1440 px ; vérifier toutes les routes françaises via le Footer et le formulaire de contact avec les services de test configurés. Un build seul ne prouve pas la livraison Resend/Cloudflare/Proton.
+- [ ] Exécuter `npm run test`, `npm run lint`, `npm run build` et, si utile, `npx tsc --noEmit --incremental false` ; consigner les sorties et corriger les défauts du ticket.
+- [ ] Contrôler le diff pour les valeurs fictives, coordonnées personnelles, secrets et liens PDF ; vérifier le statut Git et préparer des commits locaux seulement sur `feat/portfolio-v3`. Ne jamais pousser, fusionner vers `main` ou déclencher Vercel.
+- [ ] Rapporter distinctement la complétude technique du Ticket 5 et les écarts juridiques/contractuels encore ouverts. Les anciennes URL seront contrôlées sur le déploiement réalisé par l'utilisateur.

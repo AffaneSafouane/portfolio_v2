@@ -1,4 +1,6 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link';
+import { legalConfig } from '../lib/legal/config';
 import ContactEmailReveal from './ContactEmailReveal';
 
 export default function Footer() {
@@ -51,9 +53,12 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Copyright */}
-                <div className="text-center pt-4 dark:border-gray-800">
-                    <p>&copy; {currentYear} AFFANE Safouane</p>
+                <div className="flex flex-col items-center gap-3 border-t border-gray-200 pt-5 text-center dark:border-gray-800 sm:flex-row sm:justify-between">
+                    <p>&copy; {currentYear} {legalConfig.editor.name}</p>
+                    <nav aria-label="Informations légales" className="flex flex-wrap justify-center gap-x-5 gap-y-2">
+                        <Link href="/mentions-legales" className="hover:text-primary hover:underline focus-visible:underline">Mentions légales</Link>
+                        <Link href="/confidentialite" className="hover:text-primary hover:underline focus-visible:underline">Confidentialité</Link>
+                    </nav>
                 </div>
             </div>
         </footer>

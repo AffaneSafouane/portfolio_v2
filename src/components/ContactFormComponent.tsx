@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { contactFormSchema, type ContactRequest } from '../lib/validation';
 
@@ -104,7 +105,7 @@ export default function ContactFormComponent({ captchaToken, onResetCaptcha, cap
           {success && <p role="status" className="text-green-400">{success}</p>}
           {pending && <p role="status">Envoi en cours…</p>}
           <button type="submit" disabled={pending} className="w-full sm:w-auto px-6 py-3 bg-primary text-white rounded-lg text-base font-bold shadow-lg hover:bg-primary/90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-60 disabled:cursor-not-allowed">{pending ? 'Envoi…' : 'Envoyer le message'}</button>
-          <p className="text-sm text-gray-600 dark:text-gray-400">Les données saisies servent uniquement à répondre à votre demande. Cloudflare Turnstile protège ce formulaire contre le spam. Vous pouvez aussi utiliser l’adresse professionnelle indiquée en bas de page.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">Les champs marqués * sont nécessaires pour envoyer votre demande à Safouane Affane et y répondre. Cloudflare Turnstile protège ce formulaire contre le spam. Consultez la <Link href="/confidentialite" className="text-primary hover:underline focus-visible:underline">politique de confidentialité</Link> pour connaître les prestataires, les durées de conservation et vos droits.</p>
         </form>
       </div>
     </section>

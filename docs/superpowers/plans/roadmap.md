@@ -41,9 +41,9 @@ Le cadrage, la spec et le plan du Ticket 4 sont validés et implémentés. Les s
 
 ## Ticket 5 — Pages légales & Contrôle PDF
 
-- **Livrables :** `/mentions-legales` et `/confidentialite` en français, liens Footer/formulaire, identification de l'éditeur et de Vercel vérifiée, information RGPD sur Resend/Turnstile. Auditer tous les PDF publics, **supprimer définitivement** `public/static/ressources/compte_rendu_stage_bts1.pdf` et `public/static/ressources/compte_rendu_stage_bts2.pdf`, puis remettre en ligne seulement un CV exempt de téléphone/adresse personnelle sensible si sa publication est justifiée.
-- **Vigilance :** appliquer `.agents/skills/mentions-legales` et `.agents/skills/rgpd`. Le statut et les coordonnées légalement requis ne sont pas établis par le dépôt ; aucune page avec donnée inventée ou placeholder ne doit être publiée.
-- **Terminé quand :** les pages sont complètes et vérifiées, leurs liens fonctionnent, et les PDF visibles ont été inspectés visuellement et par extraction texte.
+- **Livrables :** `/mentions-legales` et `/confidentialite` en français, liens Footer/formulaire, informations publiques de l'EI centralisées, information RGPD sur Vercel, Cloudflare, Upstash, Resend et Proton Mail. Supprimer définitivement les cinq PDF de `public/static/ressources/` ; le CV et son lien restent absents jusqu'à la préparation d'une version assainie.
+- **Vigilance :** appliquer `.agents/skills/mentions-legales` et `.agents/skills/rgpd`. L'adresse et le téléphone personnels ne sont pas publiés ; les écarts LCEN et Vercel Hobby ainsi que les réglages réels des sous-traitants restent à traiter avant mise en production.
+- **Terminé côté code quand :** les pages et liens fonctionnent, les cinq PDF ont disparu de `public/`, les vues ont été contrôlées et les tests, le lint et le build passent. Cette clôture technique ne vaut pas validation juridique.
 
 ## Ticket 6 — Internationalisation FR/EN
 
