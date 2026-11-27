@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ProjectCard } from "../components/projects/ProjectCard";
 import { getFeaturedProjects } from "../lib/projects/catalog";
 import { getProjectContent } from "../lib/projects/content";
+import { HomeExperiencePreview } from "../components/experiences/HomeExperiencePreview";
+import { getHomeExperiences } from "../lib/experiences/catalog";
 
 export default function Home() {
     return (
@@ -68,52 +70,18 @@ export default function Home() {
                     </Link>
                 </section>
                 <section id="experiences">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-8">Expériences</h2>
-                    <div className="relative border-l border-gray-200 dark:border-gray-700 ml-4">
-                        {/* <div className="ml-8">
-                            <span
-                                className="absolute flex items-center justify-center w-8 h-8 bg-primary/20 rounded-full -left-4 ring-8 ring-background-light dark:ring-background-dark">
-                                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 256 256"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z">
-                                    </path>
-                                </svg>
-                            </span>
-                            <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Junior Developer at Startup Co.</h3>
-                            <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">10/2025 - Now</time>
-                        </div> */}
-                        <div className="mb-10 ml-8">
-                            <span
-                                className="absolute flex items-center justify-center w-8 h-8 bg-primary/20 rounded-full -left-4 ring-8 ring-background-light dark:ring-background-dark">
-                                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 256 256"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z">
-                                    </path>
-                                </svg>
-                            </span>
-                            <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">Stage Développeur Backend</h3>
-                            <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">01/2025 - 03/2025</time>
-                        </div>
-                        <div className="mb-10 ml-8">
-                            <span
-                                className="absolute flex items-center justify-center w-8 h-8 bg-primary/20 rounded-full -left-4 ring-8 ring-background-light dark:ring-background-dark">
-                                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 256 256"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z">
-                                    </path>
-                                </svg>
-                            </span>
-                            <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">Stage Technicien de Support de Proximité</h3>
-                            <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">06/2024</time>
-                        </div>
+                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">Expériences récentes</h2>
+                    <p className="mb-8 max-w-3xl text-gray-600 dark:text-gray-300">
+                        Des projets clients suivis en production et deux stages de Licence Pro où j&apos;ai piloté des solutions métier de leur cadrage à leur livraison.
+                    </p>
+                    <div className="grid gap-6 sm:grid-cols-2">
+                        {getHomeExperiences().map((entry) => (
+                            <HomeExperiencePreview key={entry.id} entry={entry} />
+                        ))}
                     </div>
-                    <button
-                        className="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-primary/90 transition-all duration-300 mt-6">
-                        <Link href="/experiences">Voir Expériences</Link>
-                    </button>
+                    <Link href="/experiences" className="mt-8 inline-block rounded-lg bg-primary px-6 py-3 font-bold text-white transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                        Voir toutes mes expériences
+                    </Link>
                 </section>
             </div>
         </>
