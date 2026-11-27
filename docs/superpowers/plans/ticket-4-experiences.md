@@ -18,6 +18,8 @@
 - Les quatre expériences Le 28, DT Compagnie en production, SCI DINE et DT Compagnie en stage peuvent renvoyer aux **trois** fiches publiques `le-28`, `dt-compagnie`, `gestimmo`. SARL JAMES et SPIE ICS n'ont aucun lien de projet. Une fiche devenue non publique ne doit pas créer de lien mort.
 - Aucun nom complet de tiers, donnée personnelle client ou information interne confidentielle des cinq documents hors dépôt. Aucun résultat commercial chiffré nouveau. Ne pas copier les documents bruts dans le dépôt.
 - Retirer les deux liens PDF de la page `/experiences` sans toucher aux fichiers PDF publics : l'audit et l'assainissement de `public/static/ressources/` relèvent du Ticket 5.
+- Aucune image ou logo d'entreprise sur `/experiences` ni dans son aperçu sur `/` : présentation typographique uniforme, sans fond blanc parasite. Les anciennes valeurs `image` de `src/app/data/experience.ts` ne sont pas migrées.
+- Dans la timeline, rendre les dates de début et de fin via `<time dateTime={...}>` dans **un seul libellé visuel de période** ; ne pas afficher `periodLabel` une seconde fois à côté des deux balises.
 - Ne créer, modifier ou supprimer aucun `.env`, `.env.local` ou `.env.*` ; `.exemple.env` n'a pas de raison de changer. Ne pas pousser, fusionner vers `main` ou déclencher de déploiement. Préserver les suppressions de documents utilisateur déjà présentes dans `git status` ; chaque `git add` cible explicitement les fichiers de la tâche.
 - Utiliser `.agents/skills/vercel-react-best-practices` pour les composants : imports directs, aucune frontière client supplémentaire, pas de fetch, et données statiques non sérialisées inutilement vers le navigateur.
 
@@ -159,7 +161,7 @@ export function getCaseStudyPath(projectId?: CaseStudyProjectId): string | null 
 
 **Interfaces:** Consume `getClientInterventions()`, `getInternships()` et `getCaseStudyPath()` de la Task 1. `ClientInterventionCard({ entry }: { entry: ClientIntervention })` et `InternshipTimeline({ entries }: { entries: readonly Internship[] })` sont des Server Components sans état client.
 
-- [ ] **Step 1 — Test rouge du rendu.** Créer `src/app/experiences/page.test.tsx` et vérifier le H1 français, l'ordre des deux sections, l'ordre des quatre stages, les quatre liens internes (DT Compagnie apparaît deux fois), l'absence de lien JAMES/GestImmo et l'absence des anciens liens PDF. L'ancien JSX doit faire échouer le test.
+- [ ] **Step 1 — Test rouge du rendu.** Créer `src/app/experiences/page.test.tsx` et vérifier le H1 français, l'ordre des deux sections, l'ordre des quatre stages, les quatre liens internes (DT Compagnie apparaît deux fois), l'absence de lien JAMES/GestImmo, des anciens liens PDF et de logos/images d'entreprise. Vérifier un seul libellé de dates visuel par stage, porté par deux balises `<time datetime>`. L'ancien JSX doit faire échouer le test.
 
 ```tsx
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -185,7 +187,7 @@ it('présente les interventions puis les quatre stages datés', () => {
 ```
 
 - [ ] **Step 2 — Constater l'échec.** Lancer `npm run test -- src/app/experiences/page.test.tsx` ; vérifier que l'échec correspond au contenu ou aux liens attendus.
-- [ ] **Step 3 — Composants serveur.** `ClientInterventionCard` rend un `<article>` avec H3, organisation, rôle, période, trois paragraphes de données et lien de fiche si `getCaseStudyPath(entry.projectId)` renvoie une URL. `InternshipTimeline` rend `<ol>` puis quatre `<li>` avec un H3 chacun, les dates `<time dateTime={entry.startDate}>` et `<time dateTime={entry.endDate}>`, trois paragraphes pour Licence Pro et deux pour BTS (`context` + `responsibilityAndMethod`, puis `outcome`). Le label du lien est `entry.projectLinkLabel`. N'ajouter ni `use client`, ni `href="#"`, ni PDF.
+- [ ] **Step 3 — Composants serveur.** `ClientInterventionCard` rend un `<article>` avec H3, organisation, rôle, période, trois paragraphes de données et lien de fiche si `getCaseStudyPath(entry.projectId)` renvoie une URL. `InternshipTimeline` rend `<ol>` puis quatre `<li>` avec un H3 chacun ; la ligne de période est composée d'un préfixe « Stage de Licence Pro », « Stage de fin de Licence Pro » ou « Stage BTS SIO », de `<time dateTime={entry.startDate}>` et `<time dateTime={entry.endDate}>`, et du suffixe « à distance » pour JAMES. Ne pas rendre `periodLabel` ailleurs dans cette entrée : les dates ne doivent apparaître qu'une fois visuellement. Trois paragraphes pour Licence Pro et deux pour BTS (`context` + `responsibilityAndMethod`, puis `outcome`). Le label du lien est `entry.projectLinkLabel`. N'ajouter ni `use client`, ni `href="#"`, ni PDF, ni logo/image.
 
 ```tsx
 // Exemple de garde de lien, identique dans les deux composants ciblés.
@@ -226,7 +228,7 @@ export default function ExperiencesPage() {
 
 **Interfaces:** Consume `getHomeExperiences()` de la Task 1. `HomeExperiencePreview({ entry }: { entry: HomeExperience })` rend organisation, rôle, période, qualification du `kind` et `homeSummary`. Les projets vedettes, le héros, les autres sections et les intégrations restent inchangés.
 
-- [ ] **Step 1 — Test rouge de l'accueil.** Écrire un test qui extrait la section `id="experiences"`, exige quatre `<article>` dans l'ordre validé, deux libellés de maintenance, deux libellés de stage, les résumés de la source et un lien direct vers `/experiences`. Vérifier que les autres sections de l'accueil sont toujours rendues. L'ancien bloc BTS doit échouer.
+- [ ] **Step 1 — Test rouge de l'accueil.** Écrire un test qui extrait la section `id="experiences"`, exige quatre `<article>` dans l'ordre validé, deux libellés de maintenance, deux libellés de stage, les résumés de la source et un lien direct vers `/experiences`. Vérifier l'absence de tout logo/image dans ce bloc et que les autres sections de l'accueil sont toujours rendues. L'ancien bloc BTS doit échouer.
 
 ```tsx
 import { renderToStaticMarkup } from 'react-dom/server';

@@ -2,7 +2,7 @@
 
 ## 1. État du projet
 
-Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, veille technologique et contact. Les Tickets 1 à 3 sont implémentés sur `feat/portfolio-v3` ; la page expériences et les Tickets 4 à 9 restent à traiter. Ce document distingue **la codebase actuelle** de la roadmap en section 7.
+Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, veille technologique et contact. Les Tickets 1 à 4 sont implémentés sur `feat/portfolio-v3` ; les Tickets 5 à 9 restent à traiter. Ce document distingue **la codebase actuelle** de la roadmap en section 7.
 
 ## 2. Tech Stack & Commands
 
@@ -21,12 +21,12 @@ Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, vei
 ## 3. Arborescence et conventions existantes
 
 - `src/app/layout.tsx` : layout partagé, `Header`, `Footer`, metadata SEO et police Inter ; `src/app/globals.css` : thème Tailwind et styles globaux.
-- `src/app/page.tsx`, `projects/page.tsx`, `projects/[slug]/page.tsx`, `experiences/page.tsx`, `tech-monitoring/page.tsx`, `contact/page.tsx` : routes françaises `/`, `/projects`, `/projects/[slug]`, `/experiences`, `/tech-monitoring`, `/contact` ; l'accueil et les pages projets consomment le catalogue typé `src/lib/projects/`.
+- `src/app/page.tsx`, `projects/page.tsx`, `projects/[slug]/page.tsx`, `experiences/page.tsx`, `tech-monitoring/page.tsx`, `contact/page.tsx` : routes françaises `/`, `/projects`, `/projects/[slug]`, `/experiences`, `/tech-monitoring`, `/contact` ; l'accueil et les pages projets consomment `src/lib/projects/`, tandis que l'accueil et la page expériences consomment `src/lib/experiences/`.
 - `src/app/api/contact/route.ts` : validation serveur, vérification Turnstile, limitation et déduplication optionnelles via Upstash, puis envoi Resend ; `src/app/feed.xml/route.ts` : flux RSS de la veille. `src/lib/monitoring/` contient l'agrégation RSS côté serveur.
 - `src/components/` : navigation, pied de page, formulaire, veille et vues projets. `Header` et les composants interactifs du contact sont clients ; les pages sont des Server Components par défaut.
-- `src/app/data/experience.ts` est un ancien tableau **non importé** ; `/experiences` et son aperçu sur `/` contiennent encore du JSX en dur. Le catalogue projets actuel se trouve dans `src/lib/projects/`, pas dans `src/app/data/`.
+- `src/lib/experiences/` contient une source typée unique pour deux interventions clients, quatre stages et les quatre aperçus récents de l'accueil. L'ancien tableau `src/app/data/experience.ts` a été retiré.
 - `src/lib/validation.ts` : schémas Zod partagés entre formulaire et API contact ; les limites sont 2–70, 5–254, 3–150 et 10–500 caractères pour nom, email, objet et message.
-- `public/static/img/` et `public/static/ressources/` : images et PDF servis sous `/static/...`. Les médias du catalogue projets utilisent des chemins absolus ; les deux liens PDF des stages BTS restent directement exposés sur `/experiences`. Alias d'import TypeScript : `@/*` → `./src/*`.
+- `public/static/img/` et `public/static/ressources/` : images et PDF servis sous `/static/...`. Les médias du catalogue projets utilisent des chemins absolus ; `/experiences` n'affiche plus de logo d'entreprise ni de lien PDF de stage. Les deux fichiers PDF BTS restent cependant servis directement tant qu'ils ne sont pas supprimés au Ticket 5. Alias d'import TypeScript : `@/*` → `./src/*`.
 - Nommage Next.js des routes (`page.tsx`, `layout.tsx`), composants React en PascalCase et données utilitaires en camelCase. La base mélange guillemets, indentations et fins de ligne ; respecter le style local lors d'une modification ciblée.
 
 ## 4. Critical Integrations (Do Not Break)
@@ -52,16 +52,16 @@ Portfolio personnel de Safouane Affane, avec accueil, projets, expériences, vei
 
 - Le thème existant est une interface moderne bleu/gris avec coins arrondis. Couleurs déclarées dans `src/app/globals.css` : `--color-primary: #1173d4`, `--color-background-light: #f6f7f8`, `--color-background-dark: #101922`. Le layout force la classe `dark`, sans bascule de thème. Les polices pixel et variables `--bg-console`, `--accent-red`, etc. de l'ancien guide ne sont pas définies.
 - Le contenu est surtout en français, avec quelques textes anglais. Aucun dictionnaire, routage `/en`, paramètre `?lang=en` ou sélecteur `FR | EN` n'existe. Le document HTML indique pourtant `lang="en"` et les metadata sont en français. Ne pas annoncer une i18n complète tant qu'elle n'est pas implémentée.
-- `/projects` présente les projets publics du catalogue `src/lib/projects/` et leurs fiches `/projects/[slug]` ; le catalogue ne possède pas de champ de catégorie explicite. La veille `/tech-monitoring` traite des LLM et du développement agentique. `/experiences` et son aperçu sur `/` restent limités aux stages BTS, avec un contenu écrit en JSX.
+- `/projects` présente les projets publics du catalogue `src/lib/projects/` et leurs fiches `/projects/[slug]` ; le catalogue ne possède pas de champ de catégorie explicite. La veille `/tech-monitoring` traite des LLM et du développement agentique. `/experiences` présente les interventions clients puis quatre stages, avec un aperçu des quatre expériences récentes sur `/`.
 
 ## 6. Points de vigilance repérés pendant l'audit
 
-- Les deux stages visibles sur `/experiences` lient directement des PDF publics. Ne pas ajouter de lien PDF sans audit des données personnelles ; le contrôle exhaustif des PDF relève du Ticket 5.
-- Le résumé des expériences sur `/` et la page `/experiences` divergent potentiellement car leurs contenus sont écrits séparément ; `src/app/data/experience.ts` est obsolète et non utilisé.
-- Les fiches projets couvrent déjà les détails techniques ; `/experiences` doit rester centrée sur contexte professionnel, responsabilités, méthodes et impact, avec passerelles vers les trois études de cas existantes.
+- Les deux rapports PDF des stages BTS restent accessibles par URL directe bien que la page ne les lie plus ; leur suppression définitive et le contrôle exhaustif des autres PDF relèvent du Ticket 5.
+- Les vues `/` et `/experiences` lisent la même source `src/lib/experiences/`. Préserver leurs quatre aperçus et les dates exactes lors de la future i18n.
+- Les fiches projets couvrent les détails techniques ; `/experiences` reste centrée sur contexte professionnel, responsabilités, méthodes et impact, avec passerelles vers les trois études de cas existantes.
 - `README.md` contient encore des instructions de template ; les tests automatisés et un build vert ne prouvent ni la livraison d'email réelle ni le rendu responsive.
 
-## 7. Roadmap : Tickets 1–3 réalisés, Tickets 4–9 à traiter
+## 7. Roadmap : Tickets 1–4 réalisés, Tickets 5–9 à traiter
 
 La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiches → Expériences → Légal/PDF → i18n → Pixel Art/polish → SEO/documentation. Le Ticket 9, blog MDX bilingue, constitue la Phase 2. Les Tickets 1 à 5 travaillent dans l'arborescence française actuelle `src/app/`. Le Ticket 6 déplace les pages françaises dans `src/app/(fr)/`, crée les pages anglaises dans `src/app/(en)/en/` et conserve l'API ainsi que `/feed.xml` à la racine de `src/app/`. La roadmap de pilotage et les specs/plans renumérotés sont dans `docs/superpowers/`.
 
@@ -81,15 +81,15 @@ La **Phase 1 suit strictement** l'ordre Contact → Veille/RSS → Projets/fiche
 - Le catalogue typé `src/lib/projects/` alimente les projets mis en avant sur `/`, les cartes de `/projects` et les fiches publiques `/projects/[slug]`. Il contient des projets clients, en entreprise et React Native, sans champ de catégorie `professional`/`academic-lab` ; aucun projet Java n'est actuellement publié.
 - Les fiches pré-rendues couvrent contexte, architecture, développement technique et apports ; les slugs publics sont stables et les projets non publiés restent exclus des listes.
 
-### Ticket 4 — Expériences professionnelles (`ticket-4-experiences`, plan en revue)
+### Ticket 4 — Expériences professionnelles (`ticket-4-experiences`)
 
-- Repenser `/experiences` en français : deux cartes d'ouverture pour les interventions clients et la maintenance en production (Le 28 depuis octobre 2026, DT Compagnie depuis septembre 2026), puis une timeline antéchronologique des stages : SCI DINE (13 juillet–4 septembre 2026), DT Compagnie (23 février–29 mai 2026), SARL JAMES (27 janvier–21 mars 2025), SPIE ICS (3–28 juin 2024). Les stages de Licence Pro sont plus détaillés que ceux de BTS.
-- Centrer le récit sur contexte professionnel, responsabilités, méthodes et impact opérationnel, sans dupliquer les études de cas techniques. Distinguer l'API backend autonome de SARL JAMES du MVP complet GestImmo réalisé chez SCI DINE ; ne pas relier SARL JAMES à GestImmo. Aligner l'aperçu sur `/` avec la même source typée et ajouter des liens discrets vers les fiches publiques `le-28`, `dt-compagnie` et `gestimmo`. La spec `docs/superpowers/specs/ticket-4-experiences-design.md` est validée ; le plan `docs/superpowers/plans/ticket-4-experiences.md` attend sa revue avant toute modification applicative.
+- `/experiences` présente deux cartes d'interventions clients et de maintenance en production (Le 28 depuis octobre 2026, DT Compagnie depuis septembre 2026), puis une timeline antéchronologique des stages : SCI DINE (13 juillet–4 septembre 2026), DT Compagnie (23 février–29 mai 2026), SARL JAMES (27 janvier–21 mars 2025), SPIE ICS (3–28 juin 2024). Les stages de Licence Pro sont plus détaillés que ceux de BTS ; leurs dates utilisent `<time dateTime>`.
+- Le récit couvre contexte professionnel, responsabilités, méthodes et impact opérationnel, avec liens discrets vers les trois études de cas publiques. SARL JAMES reste une première brique backend autonome sans lien vers GestImmo. L'aperçu sur `/` lit la même source typée et montre les deux interventions puis les deux stages de Licence Pro. Aucun logo d'entreprise ni lien PDF de stage ne figure dans ces vues.
 
 ### Ticket 5 — Pages légales & Contrôle PDF (`ticket-5-legal`)
 
 - Créer les pages françaises `/mentions-legales` et `/confidentialite`, reliées dans `Footer` et depuis le formulaire. Suivre `.agents/skills/mentions-legales` et `.agents/skills/rgpd` pour identifier l'éditeur, l'hébergeur Vercel, le traitement du formulaire par Resend et Turnstile, les droits et transferts. Ne publier aucune identification inventée ou incomplète ; les faits légaux doivent être confirmés avant publication.
-- Auditer tous les PDF de `public/static/ressources/`, retirer téléphone et adresse personnelle sensible, puis remettre en ligne un CV assaini ou laisser le lien absent. Le Ticket 6 traduira ces pages sans changer leurs faits.
+- Auditer tous les PDF de `public/static/ressources/`, supprimer définitivement `compte_rendu_stage_bts1.pdf` et `compte_rendu_stage_bts2.pdf`, retirer téléphone et adresse personnelle sensible des autres documents, puis remettre en ligne un CV assaini ou laisser le lien absent. Le Ticket 6 traduira ces pages sans changer leurs faits.
 
 ### Ticket 6 — Internationalisation FR/EN (`ticket-6-internationalisation`)
 

@@ -58,5 +58,5 @@ type LegalIdentity = { editorStatus: 'individual-professional' | 'individual-non
 
 - [ ] Extraire le texte de chaque PDF avec `pdftotext`, chercher téléphone/adresse/email personnel, puis inspecter visuellement pages, liens et métadonnées. Le CV retiré au Ticket 1 est la première cible.
 - [ ] Réexporter le CV depuis sa source éditable sans téléphone/adresse personnelle et sans calque extractible ; contrôler le nouveau PDF par extraction et lecture visuelle. Si la source manque, garder CV et lien absents.
-- [ ] Contrôler les rapports et README PDF ; retirer ou assainir tout document à risque, puis ouvrir chaque lien public en navigateur pour exclure les 404.
+- [ ] Supprimer définitivement `public/static/ressources/compte_rendu_stage_bts1.pdf` et `public/static/ressources/compte_rendu_stage_bts2.pdf` ; retirer tous leurs liens et vérifier que leurs URL ne servent plus de fichier. Contrôler les autres PDF publics et ouvrir chaque lien conservé en navigateur pour exclure les 404.
 - [ ] Exécuter `npm run lint`, `npm run build`, `npx tsc --noEmit --incremental false` et l'essai de contact du Ticket 1 ; committer. Ne clôturer le ticket que si les pages légales ont leurs faits confirmés.

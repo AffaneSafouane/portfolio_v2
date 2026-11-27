@@ -18,7 +18,7 @@ La notice courte sous `/contact` du Ticket 1 devient un lien vers `/confidential
 
 ## PDF publics
 
-Le Ticket 1 a retiré `CV_AFFANE_Safouane.pdf` de `public/` parce qu'il contenait un téléphone. Examiner **tous** les PDF présents dans `public/static/ressources/` et la version source du CV par extraction `pdftotext` et lecture visuelle : numéro, adresse personnelle, métadonnées, texte masqué et liens. Réexporter le CV depuis une source éditable en retirant les coordonnées personnelles, puis vérifier le PDF généré avant de restaurer le téléchargement sur `/` ; si aucune source fiable n'existe, garder le CV hors `public/` et le lien absent. Ne pas « masquer » avec un rectangle qui laisse le texte extractible. Les rapports de stage doivent aussi être contrôlés avant maintien en ligne.
+Le Ticket 1 a retiré `CV_AFFANE_Safouane.pdf` de `public/` parce qu'il contenait un téléphone. Examiner **tous** les PDF présents dans `public/static/ressources/` et la version source du CV par extraction `pdftotext` et lecture visuelle : numéro, adresse personnelle, métadonnées, texte masqué et liens. Réexporter le CV depuis une source éditable en retirant les coordonnées personnelles, puis vérifier le PDF généré avant de restaurer le téléchargement sur `/` ; si aucune source fiable n'existe, garder le CV hors `public/` et le lien absent. Ne pas « masquer » avec un rectangle qui laisse le texte extractible. Supprimer définitivement `public/static/ressources/compte_rendu_stage_bts1.pdf` et `public/static/ressources/compte_rendu_stage_bts2.pdf`, puis vérifier qu'aucun lien public ne pointe vers eux.
 
 ## Critères de clôture
 

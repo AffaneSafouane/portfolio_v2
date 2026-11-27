@@ -17,7 +17,7 @@ Le récit porte sur le contexte de l'entreprise, le besoin initial, le niveau de
 
 La page est lisible sur mobile sans décalage horizontal ; la ligne de timeline reste à gauche du contenu et ne compresse pas le texte. Sur desktop, les deux cartes d'interventions peuvent partager une ligne, tandis que la timeline conserve un ordre de lecture de haut en bas. Aucun accordéon, carrousel, animation ou dépendance client n'est nécessaire. Les liens utilisent `next/link`, un intitulé compréhensible hors contexte et un état de focus visible. Les titres suivent une hiérarchie H1 → H2 (sections) → H3 (expériences). Les dates de stages peuvent utiliser `<time dateTime="YYYY-MM-DD">` pour début et fin ; les mentions « depuis septembre/octobre 2026 » gardent une granularité mensuelle et ne créent pas de faux jour précis.
 
-Les liens actuels vers les deux rapports de stage PDF ne sont pas repris dans la nouvelle interface avant l'audit du Ticket 5. Cela **ne dépublie pas** les fichiers déjà présents sous `public/static/ressources/` ; leur inventaire, assainissement et éventuelle suppression relèvent du Ticket 5.
+Les liens actuels vers les deux rapports de stage PDF ne sont pas repris dans la nouvelle interface. Cela **ne dépublie pas** les fichiers déjà présents sous `public/static/ressources/` ; leur suppression définitive relève du Ticket 5.
 
 ## Contrat de données partagé
 
