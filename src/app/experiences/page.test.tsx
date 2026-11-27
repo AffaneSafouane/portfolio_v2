@@ -29,6 +29,18 @@ describe('/experiences', () => {
     expect(html).not.toContain('<img');
   });
 
+  it('ouvre les quatre études de cas dans un nouvel onglet et utilise des tirets simples', () => {
+    const html = renderToStaticMarkup(<ExperiencesPage />);
+    const links = (html.match(/<a\b[^>]*href="\/projects\/[^\"]+"[^>]*>/g) ?? []);
+
+    expect(links).toHaveLength(4);
+    for (const link of links) {
+      expect(link).toContain('target="_blank"');
+      expect(link).toContain('rel="noopener noreferrer"');
+    }
+    expect(html).not.toMatch(/[—–]/);
+  });
+
   it('associe les huit dates de stage à time sans répéter la période visible', () => {
     const html = renderToStaticMarkup(<ExperiencesPage />);
     const timeDates = [...html.matchAll(/datetime="(\d{4}-\d{2}-\d{2})"/gi)].map((match) => match[1]);

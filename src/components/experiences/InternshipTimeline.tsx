@@ -27,7 +27,7 @@ function InternshipPeriod({ entry }: { entry: Internship }) {
       <time dateTime={entry.startDate} aria-label={fullDate.format(start)}>
         {sameMonth ? day.format(start) : dayMonth.format(start)}
       </time>
-      {' – '}
+      {' - '}
       <time dateTime={entry.endDate}>{fullDate.format(end)}</time>
       {entry.id === 'sarl-james-stage' ? ' · à distance' : null}
     </p>
@@ -50,6 +50,8 @@ export function InternshipTimeline({ entries }: { entries: readonly Internship[]
               {caseStudyPath && entry.projectLinkLabel ? (
                 <Link
                   href={caseStudyPath}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 inline-block text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
                   {entry.projectLinkLabel}

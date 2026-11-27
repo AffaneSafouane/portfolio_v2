@@ -35,7 +35,7 @@ export default function LegalNoticePage() {
         <section id="editeur" className="scroll-mt-24">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[0].label}</h2>
           <dl className="mt-4 grid gap-2 sm:grid-cols-[12rem_1fr]">
-            <dt>Éditeur</dt><dd>{editor.name} — {editor.status} (micro-entreprise)</dd>
+            <dt>Éditeur</dt><dd>{editor.name} - {editor.status} (micro-entreprise)</dd>
             <dt>Immatriculation</dt><dd>Activité libérale immatriculée au Registre national des entreprises (RNE), dispensée d’immatriculation au RCS.</dd>
             <dt>SIREN</dt><dd>{editor.siren}</dd>
             <dt>SIRET</dt><dd>{editor.siret}</dd>
@@ -53,7 +53,7 @@ export default function LegalNoticePage() {
 
         <section id="hebergement" className="scroll-mt-24">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[2].label}</h2>
-          <p className="mt-4">Le site est hébergé par {host.name}, {host.address}. <a className="text-primary hover:underline focus-visible:underline" href={host.contactUrl}>Contacter Vercel</a>.</p>
+          <p className="mt-4">Le site est hébergé par {host.name}, {host.address}. <a className="text-primary hover:underline focus-visible:underline" href={host.contactUrl} target="_blank" rel="noopener noreferrer">Contacter Vercel</a>.</p>
         </section>
 
         <section id="contact" className="scroll-mt-24">
@@ -70,7 +70,7 @@ export default function LegalNoticePage() {
 
         <section id="donnees-personnelles" className="scroll-mt-24">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[5].label}</h2>
-          <p className="mt-4">Le formulaire de contact utilise Cloudflare Turnstile pour limiter le spam. Les traitements des données, les prestataires, les durées de conservation, les droits et les informations relatives aux traceurs sont détaillés dans la <Link className="text-primary hover:underline focus-visible:underline" href="/confidentialite">politique de confidentialité</Link>.</p>
+          <p className="mt-4">Le formulaire de contact utilise Cloudflare Turnstile pour limiter le spam. Les traitements des données, les prestataires, les durées de conservation, les droits et les informations relatives aux traceurs sont détaillés dans la <Link className="text-primary hover:underline focus-visible:underline" href="/confidentialite" target="_blank" rel="noopener noreferrer">politique de confidentialité</Link>.</p>
         </section>
       </div>
     </article>

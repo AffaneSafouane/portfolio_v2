@@ -27,6 +27,13 @@ describe('expériences professionnelles', () => {
     expect(new Set(entries.map((item) => item.id)).size).toBe(4);
   });
 
+  it('conserve des séparateurs simples dans les libellés des expériences', () => {
+    const entries = [...getClientInterventions(), ...getInternships()];
+    for (const entry of entries) {
+      expect(`${entry.organization} ${entry.role} ${entry.periodLabel}`).not.toMatch(/[—–]/);
+    }
+  });
+
   it('résout seulement les études de cas publiques associées', () => {
     expect(getCaseStudyPath('le-28')).toBe('/projects/le-28');
     expect(getCaseStudyPath('dt-compagnie')).toBe('/projects/dt-compagnie');

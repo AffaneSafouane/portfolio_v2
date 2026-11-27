@@ -22,7 +22,7 @@ export default function PrivacyPage() {
       <div className="mt-10 space-y-10">
         <section aria-labelledby="responsable">
           <h2 id="responsable" className={headingClass}>Responsable du traitement</h2>
-          <p className="mt-4">{editor.name}, {editor.status}, SIRET {editor.siret}. Pour une question ou l’exercice de vos droits : <a className={`${linkClass} break-all`} href={`mailto:${editor.email}`}>{editor.email}</a>. Les autres informations d’identification figurent dans les <Link className={linkClass} href="/mentions-legales">mentions légales</Link>.</p>
+          <p className="mt-4">{editor.name}, {editor.status}, SIRET {editor.siret}. Pour une question ou l’exercice de vos droits : <a className={`${linkClass} break-all`} href={`mailto:${editor.email}`}>{editor.email}</a>. Les autres informations d’identification figurent dans les <Link className={linkClass} href="/mentions-legales" target="_blank" rel="noopener noreferrer">mentions légales</Link>.</p>
         </section>
 
         <section aria-labelledby="donnees">
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="transferts">
           <h2 id="transferts" className={headingClass}>Localisation et transferts</h2>
-          <p className="mt-4">La région Redis déclarée est située en Irlande, mais Upstash est une société américaine et d’autres traitements techniques peuvent intervenir hors de l’Espace économique européen. Vercel, Cloudflare et Resend sont également des sociétés américaines. Leurs documents publics décrivent, selon le prestataire et le service, une adhésion au cadre UE–États-Unis de protection des données (Data Privacy Framework) et des clauses contractuelles types : <a className={linkClass} href="https://vercel.com/security">Vercel</a>, <a className={linkClass} href="https://www.cloudflare.com/trust-hub/gdpr/">Cloudflare</a>, <a className={linkClass} href="https://upstash.com/trust/dpa.pdf">Upstash</a> et <a className={linkClass} href="https://resend.com/security/gdpr">Resend</a>. L’application de ces garanties dépend des entités et des offres concernées.</p>
+          <p className="mt-4">La région Redis déclarée est située en Irlande, mais Upstash est une société américaine et d’autres traitements techniques peuvent intervenir hors de l’Espace économique européen. Vercel, Cloudflare et Resend sont également des sociétés américaines. Leurs documents publics décrivent, selon le prestataire et le service, une adhésion au cadre UE-États-Unis de protection des données (Data Privacy Framework) et des clauses contractuelles types : <a className={linkClass} href="https://vercel.com/security" target="_blank" rel="noopener noreferrer">Vercel</a>, <a className={linkClass} href="https://www.cloudflare.com/trust-hub/gdpr/" target="_blank" rel="noopener noreferrer">Cloudflare</a>, <a className={linkClass} href="https://upstash.com/trust/dpa.pdf" target="_blank" rel="noopener noreferrer">Upstash</a> et <a className={linkClass} href="https://resend.com/security/gdpr" target="_blank" rel="noopener noreferrer">Resend</a>. L’application de ces garanties dépend des entités et des offres concernées.</p>
           <p className="mt-4">La Suisse, où se trouve Proton AG, bénéficie d’une décision d’adéquation de la Commission européenne. Vous pouvez demander des précisions sur les garanties applicables à <a className={`${linkClass} break-all`} href={`mailto:${editor.email}`}>{editor.email}</a>.</p>
         </section>
 
@@ -71,13 +71,13 @@ export default function PrivacyPage() {
 
         <section aria-labelledby="traceurs">
           <h2 id="traceurs" className={headingClass}>Traceurs et contrôle anti-spam</h2>
-          <p className="mt-4">Le site n’intègre pas de traceur publicitaire. Sur la page de contact, Turnstile analyse des signaux techniques nécessaires à la détection des abus et délivre un jeton temporaire. Cloudflare indique que son widget émet par défaut un jeton à usage unique ; un cookie de prévalidation <code>cf_clearance</code> n’est ajouté que si cette option est activée dans la configuration Cloudflare. Les paramètres effectifs du widget doivent être vérifiés dans le tableau de bord et en navigateur. Consultez les informations de Cloudflare sur <a className={linkClass} href="https://www.cloudflare.com/turnstile-privacy-policy/">Turnstile</a> et sur la <a className={linkClass} href="https://developers.cloudflare.com/cloudflare-challenges/concepts/clearance/">prévalidation</a>.</p>
+          <p className="mt-4">Le site n’intègre pas de traceur publicitaire. Sur la page de contact, Turnstile analyse des signaux techniques nécessaires à la détection des abus et délivre un jeton temporaire. Cloudflare indique que son widget émet par défaut un jeton à usage unique ; un cookie de prévalidation <code>cf_clearance</code> n’est ajouté que si cette option est activée dans la configuration Cloudflare. Les paramètres effectifs du widget doivent être vérifiés dans le tableau de bord et en navigateur. Consultez les informations de Cloudflare sur <a className={linkClass} href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener noreferrer">Turnstile</a> et sur la <a className={linkClass} href="https://developers.cloudflare.com/cloudflare-challenges/concepts/clearance/" target="_blank" rel="noopener noreferrer">prévalidation</a>.</p>
         </section>
 
         <section aria-labelledby="droits">
           <h2 id="droits" className={headingClass}>Vos droits</h2>
           <p className="mt-4">Vous pouvez demander l’accès à vos données, leur rectification, leur effacement dans les cas prévus par le RGPD, la limitation du traitement et, lorsque les conditions sont remplies, leur portabilité. Vous pouvez vous opposer aux traitements fondés sur l’intérêt légitime. Écrivez à <a className={`${linkClass} break-all`} href={`mailto:${editor.email}`}>{editor.email}</a>. Une réponse est apportée en principe dans un mois, sous réserve des prolongations prévues par le RGPD.</p>
-          <p className="mt-4">Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la <a className={linkClass} href="https://www.cnil.fr/fr/plaintes">CNIL</a>.</p>
+          <p className="mt-4">Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une réclamation auprès de la <a className={linkClass} href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">CNIL</a>.</p>
         </section>
       </div>
     </article>

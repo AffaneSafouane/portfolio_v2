@@ -1,10 +1,10 @@
-# Ticket 4 — Expériences professionnelles : spécification
+# Ticket 4 - Expériences professionnelles : spécification
 
 ## Décisions, périmètre et frontières
 
 Ce ticket refond les textes et la présentation de `/experiences` et du seul bloc « Expériences » de `/`, en français, sur `feat/portfolio-v3`. Il conserve les URL françaises, le thème bleu/gris actuel et les Server Components par défaut. L'internationalisation est prévue au Ticket 6, la direction artistique Pixel Art au Ticket 7 et le SEO global au Ticket 8. Aucun changement au formulaire, au flux RSS, aux fiches projets, à leurs contenus ou aux fichiers d'environnement n'entre dans ce ticket.
 
-La page ouvre sur **deux cartes d'interventions clients et de maintenance en production**, Le 28 puis DT Compagnie. Elle poursuit avec une **timeline verticale de quatre stages** dans l'ordre des dates de fin : SCI DINE (13 juillet–4 septembre 2026), DT Compagnie (23 février–29 mai 2026), SARL JAMES (27 janvier–21 mars 2025), SPIE ICS (3–28 juin 2024). Les six expériences utilisent la même structure complète : récit en trois parties et liste de points clés concrets. Les stages de Licence Pro peuvent rester plus développés dans leur contenu. L'accueil affiche les deux interventions puis les deux stages de Licence Pro, en aperçu court. Les méthodes sont expliquées dans chaque expérience avec leur pertinence concrète, sans rubrique générique de compétences.
+La page ouvre sur **deux cartes d'interventions clients et de maintenance en production**, Le 28 puis DT Compagnie. Elle poursuit avec une **timeline verticale de quatre stages** dans l'ordre des dates de fin : SCI DINE (13 juillet-4 septembre 2026), DT Compagnie (23 février-29 mai 2026), SARL JAMES (27 janvier-21 mars 2025), SPIE ICS (3-28 juin 2024). Les six expériences utilisent la même structure complète : récit en trois parties et liste de points clés concrets. Les stages de Licence Pro peuvent rester plus développés dans leur contenu. L'accueil affiche les deux interventions puis les deux stages de Licence Pro, en aperçu court. Les méthodes sont expliquées dans chaque expérience avec leur pertinence concrète, sans rubrique générique de compétences.
 
 Le récit porte sur le contexte de l'entreprise, le besoin initial, le niveau de responsabilité, la collaboration, les méthodes et l'effet opérationnel **attesté**. Les études de cas `/projects/[slug]` conservent l'architecture logicielle, les algorithmes, les détails de stack et les captures. Ne publier aucun nom complet de tiers, donnée personnelle de client ou information interne confidentielle issue des cinq documents de travail hors dépôt. Ces documents ne sont ni copiés dans le dépôt ni lus par l'application. Ne pas inventer de hausse du chiffre d'affaires, de taux de conversion, de gains chiffrés après livraison ni de statut de commercialisation de GestImmo.
 
@@ -72,13 +72,13 @@ Deux listes ordonnées `clientInterventions` et `internships` contiennent les si
 
 La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, mais le sens, les périodes, les responsabilités et les limites de ces textes doivent rester identiques.
 
-**Introduction** — « Du support informatique à la conduite de projets web pour des clients, j'ai progressivement pris en charge le cadrage, la livraison et le suivi de produits en production. »
+**Introduction** - « Du support informatique à la conduite de projets web pour des clients, j'ai progressivement pris en charge le cadrage, la livraison et le suivi de produits en production. »
 
-**Introduction de section, interventions** — « Après la mise en ligne, j'accompagne les équipes dans l'usage quotidien de leurs outils et j'arbitre les évolutions avec elles. »
+**Introduction de section, interventions** - « Après la mise en ligne, j'accompagne les équipes dans l'usage quotidien de leurs outils et j'arbitre les évolutions avec elles. »
 
-### Le 28 — intervention client
+### Le 28 - intervention client
 
-- **Organisation :** « Le 28 » ; **rôle :** « Développeur web — livraison et maintenance client » ; **période :** « Projet en juin 2026 · maintenance depuis octobre 2026 » ; **fiche :** `le-28`, lien « Voir l'étude de cas Le 28 ».
+- **Organisation :** « Le 28 » ; **rôle :** « Développeur web - livraison et maintenance client » ; **période :** « Projet en juin 2026 · maintenance depuis octobre 2026 » ; **fiche :** `le-28`, lien « Voir l'étude de cas Le 28 ».
 - **Contexte :** « Le 28, snack et traiteur à Villejuif, voulait présenter son offre, faciliter les commandes à emporter et recevoir des demandes de devis traiteur. Le projet a été conçu et développé en juin 2026 dans une équipe de trois. »
 - **Responsabilités et méthode :** « En équipe de trois, j'ai participé au cadrage, au planning et aux maquettes, réalisé les pages Traiteur et Contact avec un formulaire de devis protégé contre le spam, préparé les contenus SEO et contribué à la recette du formulaire, du paiement et des points RGPD. Les jalons, les relectures croisées et les échanges avec le gérant ont structuré la livraison. Avant la mise en ligne mi-juillet, je l'ai accompagné dans l'ouverture et la configuration de ses comptes de production, notamment Stripe et Cloudflare, puis dans la prise en main du site. Depuis octobre, j'assure seul la maintenance pour donner davantage d'autonomie au gérant et fiabiliser l'exploitation ; les retours du gérant et de la cuisine guident les priorités. »
 - **Résultat :** « Le site a été livré puis mis en ligne pour le restaurant. Le suivi autonome donne au gérant davantage de moyens pour gérer les commandes et les menus, avec des contrôles sur les parcours existants. »
@@ -92,9 +92,9 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
   - « Ajout d’un menu traiteur PDF hébergé et géré via Cloudflare R2. »
 - **Résumé accueil :** « Projet livré en équipe en juin 2026, mis en ligne mi-juillet, puis suivi seul depuis octobre pour renforcer l’autonomie du gérant et fiabiliser les commandes et les menus. »
 
-### DT Compagnie — intervention en production
+### DT Compagnie - intervention en production
 
-- **Organisation :** « DT Compagnie » ; **rôle :** « Développeur full-stack — maintenance e-commerce » ; **période :** « Depuis septembre 2026 » ; **fiche :** `dt-compagnie`, lien « Voir l'étude de cas DT Compagnie ».
+- **Organisation :** « DT Compagnie » ; **rôle :** « Développeur full-stack - maintenance e-commerce » ; **période :** « Depuis septembre 2026 » ; **fiche :** `dt-compagnie`, lien « Voir l'étude de cas DT Compagnie ».
 - **Contexte :** « Après mon stage de février à mai 2026, la plateforme e-commerce de DT Compagnie a été mise en production en septembre. L'équipe de marquage textile et d'impression DTF avait besoin d'un outil adapté à ses commandes et à l'activité de l'atelier. »
 - **Responsabilités et méthode :** « Depuis la mise en production de septembre, j'accompagne le client sur le parcours après commande et je suis le SEO, la logistique Mondial Relay et les besoins de l'atelier. La maintenance applicative comprend les mises à jour des extensions : lors de l'évolution du configurateur produit, je réapplique les correctifs métier et contrôle la non-régression du parcours de commande. La documentation et les tests établis pendant le stage soutiennent ces interventions. »
 - **Résultat :** « Le suivi maintient la boutique exploitable pour le client et l'atelier et accompagne ses évolutions opérationnelles. »
@@ -107,9 +107,9 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
   - « Réapplication des correctifs métier et contrôle de non-régression du parcours de commande. »
 - **Résumé accueil :** « Depuis la mise en production de septembre 2026, j'accompagne le client sur l'après-commande, la logistique et les mises à jour de la boutique. »
 
-### SCI DINE — stage de Licence Pro
+### SCI DINE - stage de Licence Pro
 
-- **Organisation :** « SCI DINE » ; **rôle :** « Ingénieur logiciel et chef de projet technique » ; **période :** « Stage de Licence Pro · 13 juillet – 4 septembre 2026 » ; **fiche :** `gestimmo`, lien « Voir l'étude de cas GestImmo ».
+- **Organisation :** « SCI DINE » ; **rôle :** « Ingénieur logiciel et chef de projet technique » ; **période :** « Stage de Licence Pro · 13 juillet - 4 septembre 2026 » ; **fiche :** `gestimmo`, lien « Voir l'étude de cas GestImmo ».
 - **Contexte :** « La SCI DINE suivait manuellement des biens, baux, règlements et impayés répartis entre plusieurs structures et statuts de bailleurs, dont SCI, SARL, SAS et LMNP. L'émission des quittances et des reçus pour paiements partiels ajoutait une charge administrative, avec des règles à respecter pour les baux concernés par la loi du 6 juillet 1989. »
 - **Responsabilités et méthode :** « En huit semaines, j'ai cadré et développé de bout en bout le MVP GestImmo, des maquettes Figma à la recette avec le gérant, client pilote du produit. J'ai écrit les spécifications et le plan (SPECS.md, PLAN.md), découpé le travail en sprints hebdomadaires sur Linear et travaillé en TDD pour sécuriser les règles comptables et documentaires. Les échanges réguliers avec le gérant guidaient les priorités et les validations ; les contributions d'agents de code étaient relues et vérifiées par les tests. »
 - **Résultat :** « Le MVP a été mis en ligne en Private Alpha pour la recette du gérant. Il centralise la gestion locative multi-profils et fiabilise le suivi des règlements ainsi que l'émission des documents. Cette première version sert aussi de base à un projet de commercialisation SaaS. »
@@ -122,9 +122,9 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
   - « Mise en ligne en Private Alpha à accès restreint ; commercialisation SaaS encore envisagée. »
 - **Résumé accueil :** « MVP GestImmo conçu de bout en bout en huit semaines, avec specs, TDD, sprints Linear et recette du gérant en Private Alpha. »
 
-### DT Compagnie — stage de Licence Pro
+### DT Compagnie - stage de Licence Pro
 
-- **Organisation :** « DT Compagnie » ; **rôle :** « Développeur full-stack et DevOps » ; **période :** « Stage de fin de Licence Pro · 23 février – 29 mai 2026 » ; **fiche :** `dt-compagnie`, lien « Voir l'étude de cas DT Compagnie ».
+- **Organisation :** « DT Compagnie » ; **rôle :** « Développeur full-stack et DevOps » ; **période :** « Stage de fin de Licence Pro · 23 février - 29 mai 2026 » ; **fiche :** `dt-compagnie`, lien « Voir l'étude de cas DT Compagnie ».
 - **Contexte :** « Dans le marquage textile et l'impression DTF, le chiffrage manuel limitait le traitement à trois ou quatre demandes de devis sur dix. Le budget imposait de reprendre une base WooCommerce inachevée pour avancer rapidement sans repartir de zéro. »
 - **Responsabilités et méthode :** « Développeur full-stack unique, j'ai repris la boutique inachevée et ses comptes de service, puis automatisé la préparation du catalogue et plusieurs tâches de production, de livraison et de vente aux professionnels. Les contraintes de budget, les données fournisseur changeantes et un risque découvert dans un outil tiers m'ont conduit à adapter les choix initiaux. J'ai ensuite structuré le socle avec Roots Bedrock et Docker, couvert les règles métier critiques par des tests TDD sous PestPHP et utilisé un outillage IA via MCP sous contrôle. J'ai documenté les choix, réalisé un tutoriel vidéo et formé l'équipe d'atelier avant la mise en production de septembre. »
 - **Résultat :** « L'équipe dispose d'un parcours e-commerce et d'outils de production plus structurés, ainsi que des supports nécessaires pour les utiliser. »
@@ -137,9 +137,9 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
   - « Documentation technique, tutoriel vidéo et formation de l’équipe d’atelier avant la production de septembre. »
 - **Résumé accueil :** « Reprise pragmatique d'une boutique textile, automatisation des opérations, tests et transmission à l'atelier avant la production de septembre. »
 
-### SARL JAMES — stage BTS SIO 2e année
+### SARL JAMES - stage BTS SIO 2e année
 
-- **Organisation :** « SARL JAMES » ; **rôle :** « Développeur backend » ; **période :** « Stage BTS SIO · 27 janvier – 21 mars 2025 · à distance » ; **aucune fiche projet associée**.
+- **Organisation :** « SARL JAMES » ; **rôle :** « Développeur backend » ; **période :** « Stage BTS SIO · 27 janvier - 21 mars 2025 · à distance » ; **aucune fiche projet associée**.
 - **Contexte :** « Pour une activité de gestion locative, l'agence avait besoin d'une première brique serveur capable de centraliser bailleurs, locataires et documents en vue de futures interfaces. »
 - **Responsabilités et méthode :** « En stage entièrement à distance, j'ai conçu en autonomie une API REST avec Node.js, Express et PostgreSQL. J'ai validé les données entrantes, sécurisé les accès par JWT selon les rôles, limité les requêtes abusives et automatisé la génération de baux et quittances PDF. Docker Compose rendait l'environnement de développement reproductible. Le périmètre restait exclusivement backend, comme socle pour de futures interfaces mobiles et bureau. »
 - **Résultat :** « L'API constituait une première base technique pour de futures interfaces de gestion locative. »
@@ -150,9 +150,9 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
   - « Limitation des requêtes et gestion de documents côté serveur. »
   - « Génération de baux et quittances PDF dans un environnement Docker Compose reproductible. »
 
-### SPIE ICS — stage BTS SIO 1re année
+### SPIE ICS - stage BTS SIO 1re année
 
-- **Organisation :** « SPIE ICS — Ministère des Affaires étrangères » ; **rôle :** « Technicien support et déploiement » ; **période :** « Stage BTS SIO · 3 – 28 juin 2024 » ; **aucune fiche projet associée**.
+- **Organisation :** « SPIE ICS - Ministère des Affaires étrangères » ; **rôle :** « Technicien support et déploiement » ; **période :** « Stage BTS SIO · 3 - 28 juin 2024 » ; **aucune fiche projet associée**.
 - **Contexte :** « Au sein d'une ESN intervenant pour le ministère sur plusieurs sites, dont le Quai d'Orsay, La Courneuve et les Invalides, le support de proximité devait répondre aux incidents des agents et préparer les postes pour les opérations du service. »
 - **Responsabilités et méthode :** « Au sein de l'équipe de support, j'ai traité des tickets utilisateurs depuis leur attribution jusqu'au compte rendu d'intervention, préparé et configuré des postes et leurs périphériques, puis aidé les agents sur site. J'ai participé au déploiement puis au retrait de 150 postes pour les élections européennes, lors du scrutin des Français de l'étranger. Le travail avec les techniciens et les utilisateurs demandait précision, ponctualité et explications claires. »
 - **Résultat :** « Cette première expérience m'a apporté la rigueur, la traçabilité et le sens du service nécessaires au support informatique en environnement institutionnel. »
@@ -172,11 +172,11 @@ La ponctuation typographique et les apostrophes peuvent être adaptées au JSX, 
 
 ## Vérification et critères d'acceptation
 
-- `/experiences` affiche exactement deux interventions, puis quatre stages dans l'ordre fixé. Les dates complètes des stages sont exactes ; juin et juillet 2026, puis octobre 2026, restent distincts pour Le 28 ; février–mai et septembre 2026 restent distincts pour DT Compagnie.
+- `/experiences` affiche exactement deux interventions, puis quatre stages dans l'ordre fixé. Les dates complètes des stages sont exactes ; juin et juillet 2026, puis octobre 2026, restent distincts pour Le 28 ; février-mai et septembre 2026 restent distincts pour DT Compagnie.
 - Les six expériences affichent chacune Contexte, Responsabilités et méthode, Résultat et une liste de Points clés non vide. Les deux stages BTS ne sont pas réduits à une simple mention. Le 28 vise l'autonomie du gérant et la fiabilité de l'exploitation, sans prétendre que la boutique a été dépriorisée. DT Compagnie décrit les interventions après septembre ; SPIE ICS nomme les élections européennes.
 - L'accueil affiche exactement les quatre IDs validés dans l'ordre prévu. Changer un rôle, une période ou un résumé dans la source partagée se reflète dans les deux vues concernées ; l'ancien tableau `src/app/data/experience.ts` et le JSX d'expériences codé en dur ne servent plus au rendu.
 - Chaque aperçu est cliquable et mène à un ID stable de `/experiences`. Les deux `<article>` d'intervention et les quatre `<li>` de stage portent `id={entry.id}` et `scroll-mt-24` ; le lien global vers `/experiences` reste présent.
-- Les seuls liens d'étude de cas pointent vers les trois projets publics `le-28`, `dt-compagnie` et `gestimmo`. SCI DINE mène à GestImmo ; SARL JAMES n'y mène jamais. Les liens existants vers les rapports PDF des stages ne figurent plus sur cette page ; leur disponibilité directe sous `public/` est explicitement renvoyée au Ticket 5.
+- Les seuls liens d'étude de cas pointent vers les trois projets publics `le-28`, `dt-compagnie` et `gestimmo`. Ils s'ouvrent dans un nouvel onglet avec `target="_blank"` et `rel="noopener noreferrer"`. SCI DINE mène à GestImmo ; SARL JAMES n'y mène jamais. Les liens existants vers les rapports PDF des stages ne figurent plus sur cette page ; leur disponibilité directe sous `public/` est explicitement renvoyée au Ticket 5. Les ancres des aperçus de l'accueil gardent leur navigation dans l'onglet courant.
 - Le contenu respecte la frontière éditoriale : contexte, méthode et impact professionnel ici ; détails de réalisation dans `/projects`. Aucun nom complet de tiers, donnée interne sensible, résultat quantifié non attesté ou prétention à une commercialisation déjà lancée n'apparaît dans le HTML.
 - Vérifier les deux routes à 375 px et 1440 px, le retour à la ligne, l'ordre de lecture, les titres, les dates, les liens au clavier et les états de focus. Les éléments décoratifs de timeline n'ajoutent pas de bruit au lecteur d'écran ; aucune interaction JavaScript n'est requise.
 - Ajouter des tests utiles pour l'ordre, la sélection des quatre aperçus et la résolution des trois passerelles ; vérifier le rendu des deux pages. Exécuter ensuite `npm run test`, `npm run lint` et `npm run build` avant de conclure l'implémentation. Le build vérifie le pré-rendu, pas la qualité visuelle : l'inspection mobile/desktop reste nécessaire. Aucun changement de `.env`, `.env.local` ou `.env.*` n'est autorisé, hormis `.exemple.env` si un besoin documenté apparaît ; aucun n'est prévu ici.

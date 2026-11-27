@@ -9,7 +9,7 @@ export function HomeExperiencePreview({ entry }: { entry: HomeExperience }) {
   return (
     <Link
       href={`/experiences#${entry.id}`}
-      aria-label={`Voir l'expérience ${entry.organization} — ${category.toLowerCase()}`}
+      aria-label={`Voir l'expérience ${entry.organization} - ${category.toLowerCase()}`}
       className="group block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
     >
       <article className="h-full rounded-xl border border-gray-700 bg-gray-800/30 p-6 transition-colors group-hover:border-primary/60">

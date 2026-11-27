@@ -15,6 +15,8 @@ export function ClientInterventionCard({ entry }: { entry: ClientIntervention })
       {caseStudyPath && entry.projectLinkLabel ? (
         <Link
           href={caseStudyPath}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 self-start text-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {entry.projectLinkLabel}

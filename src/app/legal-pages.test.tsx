@@ -5,6 +5,33 @@ import LegalNoticePage from './mentions-legales/page';
 import PrivacyPage from './confidentialite/page';
 
 describe('pages légales françaises', () => {
+  it('ouvre les destinations des mentions dans un nouvel onglet, tout en gardant le sommaire local', () => {
+    const html = renderToStaticMarkup(<LegalNoticePage />);
+    const anchors = html.match(/<a\b[^>]*>/g) ?? [];
+    const destination = anchors.filter((anchor) => /href="(?:https?:|\/confidentialite)/.test(anchor));
+
+    expect(destination).toHaveLength(2);
+    for (const anchor of destination) {
+      expect(anchor).toContain('target="_blank"');
+      expect(anchor).toContain('rel="noopener noreferrer"');
+    }
+    expect(anchors.find((anchor) => anchor.includes('href="#editeur"'))).not.toContain('target="_blank"');
+    expect(html).not.toMatch(/[—–]/);
+  });
+
+  it('ouvre les sources et le renvoi vers les mentions dans un nouvel onglet', () => {
+    const html = renderToStaticMarkup(<PrivacyPage />);
+    const anchors = html.match(/<a\b[^>]*>/g) ?? [];
+    const destination = anchors.filter((anchor) => /href="(?:https?:|\/mentions-legales)/.test(anchor));
+
+    expect(destination.length).toBeGreaterThan(0);
+    for (const anchor of destination) {
+      expect(anchor).toContain('target="_blank"');
+      expect(anchor).toContain('rel="noopener noreferrer"');
+    }
+    expect(html).not.toMatch(/[—–]/);
+  });
+
   it('rend l’identité professionnelle et un sommaire navigable sans coordonnées personnelles', () => {
     const html = renderToStaticMarkup(<LegalNoticePage />);
 

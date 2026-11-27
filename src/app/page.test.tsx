@@ -24,6 +24,9 @@ describe('aperçu des expériences sur /', () => {
       expect(section).toContain(`href="/experiences#${id}"`);
     }
     expect((section.match(/href="\/experiences#[^"]+"/g) ?? []).length).toBe(4);
+    expect(section).not.toMatch(/[—–]/);
+    const previewLinks = section.match(/<a\b[^>]*href="\/experiences#[^"]+"[^>]*>/g) ?? [];
+    expect(previewLinks.every((link) => !link.includes('target="_blank"'))).toBe(true);
   });
 
   it('garde un aperçu typographique et les autres sections de la page', () => {
